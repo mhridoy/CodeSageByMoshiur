@@ -89,22 +89,23 @@ st.markdown("""
 # Main Title
 st.markdown('<div class="main"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
-# Schedule Template
-st.markdown('## Class Schedule for Dreamers Academy')
+# Corrected Schedule Data
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
     'Schedule': [
         "Fri & Sat: 10am, 11am, 2:50pm, 4:30pm, 5:50pm, 7pm, 8pm",
         "Sun & Tue: 5:50pm, 7pm, 8pm",
-        # ... Add all your schedules here
+        "Mon & Thu: 5:50pm, 7pm, 8pm",
+        # ... make sure you have 13 schedules here, one for each batch
+        # If some batches share the same schedule, repeat the schedule string for those batches
     ]
 }
+
+# Make sure both lists are of the same length
+assert len(schedule_data['Batch Number']) == len(schedule_data['Schedule']), "Each batch must have a corresponding schedule."
+
+# Now create the DataFrame
 schedule_df = pd.DataFrame(schedule_data)
-st.table(schedule_df.style.set_table_styles([
-    {'selector': 'th', 'props': [('background-color', 'var(--secondary-color)'), ('color', 'var(--light-bg)')]},
-    {'selector': 'td', 'props': [('color', 'var(--primary-color)')]},
-    {'selector': 'td:hover', 'props': [('background-color', 'var(--secondary-color)'), ('color', 'var(--light-bg)')]},
-], overwrite=False))
 
 # Dreamers Academy Mention
 st.markdown("""
