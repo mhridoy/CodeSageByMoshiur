@@ -100,4 +100,7 @@ st.image("https://via.placeholder.com/800x400?text=Student's+Best+Homework", cap
 # YouTube Link and Cool Information about Python for Kids
 st.markdown("## Learn More About Python for Kids")
 st.markdown("[Check out our Python tutorials on YouTube](https://www.youtube.com)", unsafe_allow_html=True)
-st.markdown("<div class='cool-info'>Python is an excellent language for kids to
+st.markdown("<div class='cool-info'>Python is an excellent language for kids to begin their coding journey. It's versatile and widely used in many exciting fields like web development, data science, and machine learning!</div>", unsafe_allow_html=True)
+
+# Footer
+st.markdown("<div class='footer'>© 2023 CodeSage By Moshiur. All Rights Reserved.</div>", unsafe_allow_html=True)
