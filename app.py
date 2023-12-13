@@ -64,6 +64,8 @@ st.markdown("""
         background-color: var(--secondary-color);
         color: var(--light-bg);
         cursor: pointer;
+        transform: scale(1.02);
+        transition: transform 0.1s ease-in-out;
     }
 
     /* Footer Styles */
@@ -89,28 +91,29 @@ st.markdown("""
 # Main Title
 st.markdown('<div class="main"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
-# Example Schedule Data
+# Schedule Template
+st.markdown('## Class Schedule for Dreamers Academy')
+
+# Schedule Data
+# Make sure to fill in your actual schedule data here
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
     'Schedule': [
-        # Assuming each batch meets at different times
         "Fri & Sat: 10am, 11am", 
         "Fri & Sat: 2:50pm, 4:30pm",
-        # ... (add more schedules for each batch)
+        # ... Add the actual schedule for each batch here
         "Sun & Tue: 5:50pm, 7pm",
-        # ...
         "Mon & Thu: 5:50pm, 7pm",
-        # ...
         # Ensure there are 13 schedules, one for each batch
-    ]
+        # This is just placeholder text; repeat or add as needed
+    ] * 13  # Adjust this according to the actual number of batches
 }
 
-# The length of both lists should be the same
-assert len(schedule_data['Batch Number']) == len(schedule_data['Schedule']), "Each batch must have a corresponding schedule."
-
-# Now create the DataFrame
+# Creating the DataFrame
 schedule_df = pd.DataFrame(schedule_data)
 
+# Displaying the DataFrame
+st.table(schedule_df)
 
 # Dreamers Academy Mention
 st.markdown("""
