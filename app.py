@@ -108,7 +108,7 @@ st.markdown(f'<a href="{youtube_url}" target="_blank" class="youtube-link">🎥 
 # Best Homework of the Month Section
 st.markdown('## 🌟 Best Homework Showcase')
 # Assuming you have a function to fetch the best homework image
-best_homework_img = 'path_to_best_homework_image.jpg'  # Replace with the path to your best homework image
+best_homework_img = 'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg'  # Replace with the path to your best homework image
 st.image(best_homework_img, caption='Incredible work by our star coder this month!', use_column_width=True)
 
 # Dreamers Academy Mention
