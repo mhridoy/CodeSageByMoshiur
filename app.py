@@ -89,23 +89,28 @@ st.markdown("""
 # Main Title
 st.markdown('<div class="main"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
-# Corrected Schedule Data
+# Example Schedule Data
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
     'Schedule': [
-        "Fri & Sat: 10am, 11am, 2:50pm, 4:30pm, 5:50pm, 7pm, 8pm",
-        "Sun & Tue: 5:50pm, 7pm, 8pm",
-        "Mon & Thu: 5:50pm, 7pm, 8pm",
-        # ... make sure you have 13 schedules here, one for each batch
-        # If some batches share the same schedule, repeat the schedule string for those batches
+        # Assuming each batch meets at different times
+        "Fri & Sat: 10am, 11am", 
+        "Fri & Sat: 2:50pm, 4:30pm",
+        # ... (add more schedules for each batch)
+        "Sun & Tue: 5:50pm, 7pm",
+        # ...
+        "Mon & Thu: 5:50pm, 7pm",
+        # ...
+        # Ensure there are 13 schedules, one for each batch
     ]
 }
 
-# Make sure both lists are of the same length
+# The length of both lists should be the same
 assert len(schedule_data['Batch Number']) == len(schedule_data['Schedule']), "Each batch must have a corresponding schedule."
 
 # Now create the DataFrame
 schedule_df = pd.DataFrame(schedule_data)
+
 
 # Dreamers Academy Mention
 st.markdown("""
