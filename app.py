@@ -99,14 +99,13 @@ st.markdown('## Class Schedule for Dreamers Academy')
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
     'Schedule': [
-        "Fri & Sat: 10am, 11am", 
-        "Fri & Sat: 2:50pm, 4:30pm",
+        # Replace the following strings with the actual schedule for each batch
+        "Fri & Sat: 10am, 11am",  # Batch 1
+        "Fri & Sat: 2:50pm, 4:30pm",  # Batch 2
         # ... Add the actual schedule for each batch here
-        "Sun & Tue: 5:50pm, 7pm",
-        "Mon & Thu: 5:50pm, 7pm",
-        # Ensure there are 13 schedules, one for each batch
-        # This is just placeholder text; repeat or add as needed
-    ] * 13  # Adjust this according to the actual number of batches
+        "Sun & Tue: 5:50pm, 7pm",  # Batch n-1
+        "Mon & Thu: 5:50pm, 7pm",  # Batch n
+    ] + ["TBD"] * (13 - 4)  # Replace 4 with the actual number of schedules you've defined
 }
 
 # Creating the DataFrame
