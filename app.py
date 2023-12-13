@@ -2,143 +2,96 @@ import streamlit as st
 import pandas as pd
 
 # Page Configuration
-st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon="🧙‍♂️")
+st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon="🚀")
 
-# Custom CSS for Styling and Animations
+# Custom CSS for Styling
 st.markdown("""
 <style>
-    /* Variables */
-    :root {
-        --primary-color: #21a9ff;  /* Electric blue for primary interactions */
-        --secondary-color: #ff4d6d; /* Soft red for secondary accents */
-        --accent-color: #21ff7a;   /* Neon green for highlights */
-        --dark-bg: #000000;        /* True black background */
-        --light-text: #f5f5f5;     /* Off-white for most text */
-        --dark-text: #333333;      /* Darker text color for contrast against light backgrounds */
-        --font-family: 'Poppins', sans-serif;
-    }
-    
     /* Global Styles */
     body {
-        font-family: var(--font-family);
-        background-color: var(--dark-bg); /* Ensures the background is black */
-        color: var(--light-text);
+        background-color: #000; /* Black background for high contrast */
+        color: #fff; /* White text for readability */
+        font-family: 'Poppins', sans-serif;
     }
-    .main {
+
+    /* Main Header Style */
+    .header {
+        color: #0f9b0f; /* Neon Green */
         text-align: center;
-        padding: 50px;
+        padding: 2rem 0;
     }
-    .main h1 {
-        font-size: 4rem;
-        color: var(--primary-color);
-        text-shadow: 2px 2px var(--secondary-color);
-        margin-bottom: 2rem;
+    .header h1 {
+        font-size: 3rem;
+        animation: pulse 2s infinite ease-in-out;
     }
-    
-    /* Breathe animation for the main title */
-    @keyframes breathe {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.05); opacity: 0.85; }
-    }
-    .main h1 {
-        animation: breathe 10s ease-in-out infinite;
+
+    /* Keyframe Animations */
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
     }
 
     /* Table Styles */
-    .batch-table {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .stTable {
+        overflow-x: auto;
     }
-    .batch-table th {
-        background-color: var(--secondary-color);
-        color: var(--light-text);
-        padding: 15px 0;
-        font-size: 1.2rem;
-        letter-spacing: 1px;
+    table {
+        border-collapse: separate;
+        border-spacing: 0 15px; /* Space between rows */
     }
-    .batch-table td {
-        padding: 15px 0;
-        color: var(--primary-color);
-        border-bottom: 2px solid var(--dark-bg);
-        transition: background-color 0.3s ease;
+    th {
+        background-color: #17a2b8; /* Bootstrap info color */
+        color: #fff;
+        font-size: 1.1rem;
     }
-    .batch-table tr:last-child td {
-        border-bottom: none;
-    }
-    .batch-table td:hover {
-        background-color: var(--secondary-color);
-        color: var(--dark-text);
-        cursor: pointer;
-        transform: scale(1.02);
-        transition: transform 0.1s ease-in-out;
+    td {
+        background-color: #2c3e50; /* Dark slate */
+        color: #17a2b8; /* Matching the header color */
+        font-weight: bold;
     }
 
-    /* Footer Styles */
-    .footer {
-        margin-top: 50px;
-        padding: 20px;
-        background-color: var(--dark-bg);
-        color: var(--secondary-color);
-        font-size: 1rem;
-        text-shadow: 1px 1px var(--dark-text);
-    }
-    
     /* Dreamers Academy Mention */
     .dreamers-mention {
-        margin-top: 40px;
-        padding: 15px;
-        background-color: var(--dark-text);  /* Slight contrast for the mention */
-        color: var(--secondary-color);
-        border: 2px dashed var(--secondary-color);
+        background-color: #2c3e50; /* Dark slate */
+        border: 2px solid #17a2b8; /* Border color */
         border-radius: 10px;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 8px rgba(255, 77, 109, 0.2);
+        padding: 1rem;
+        margin: 2rem 0;
+        text-align: center;
     }
-    
-    /* Link Styles */
-    a {
-        color: var(--accent-color);
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-    a:hover {
-        color: var(--primary-color);
-        text-decoration: underline;
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #343a40; /* Dark gray */
+        color: #adb5bd; /* Light gray */
+        font-size: 0.9rem;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # Main Title
-st.markdown('<div class="main"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
+st.markdown('<div class="header"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
-# Schedule Template
-st.markdown('## Class Schedule')
+# Class Schedule
+st.markdown('## 📅 Class Schedule')
 
 # Schedule Data
-# Make sure to fill in your actual schedule data here
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
-    'Schedule': [
-        # Replace the following strings with the actual schedule for each batch
-        "Fri & Sat: 10am, 11am",  # Batch 1
-        "Fri & Sat: 2:50pm, 4:30pm",  # Batch 2
-        # ... Add the actual schedule for each batch here
-        "Sun & Tue: 5:50pm, 7pm",  # Batch n-1
-        "Mon & Thu: 5:50pm, 7pm",  # Batch n
-    ] + ["TBD"] * (13 - 4)  # Replace 4 with the actual number of schedules you've defined
+    'Schedule': ["TBD" for _ in range(13)]  # Replace 'TBD' with actual schedules
 }
 
-# Creating the DataFrame
+# DataFrame for Schedule
 schedule_df = pd.DataFrame(schedule_data)
-
-# Displaying the DataFrame
 st.table(schedule_df)
 
 # Dreamers Academy Mention
 st.markdown("""
 <div class="dreamers-mention">
-As a passionate Python instructor at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a>, I dedicate myself to inspiring and educating the next generation of young programmers. Our curriculum is designed to ignite a love for coding in a fun and engaging environment.
+    <p>🌟 Proudly teaching Python programming at <a href="https://dreamersacademy.com.bd/" target="_blank" style="color: #17a2b8; text-decoration: none;">Dreamers Academy</a>. Our mission is to inspire and enable the next generation of coders.</p>
 </div>
 """, unsafe_allow_html=True)
 
