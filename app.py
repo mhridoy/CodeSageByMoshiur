@@ -84,7 +84,7 @@ st.markdown(f'<a href="{youtube_url}" target="_blank" class="youtube-link">Visit
 
 # Best Homework Section
 st.markdown('## Best Homework of the Month')
-st.image("path_to_homework_image.jpg", caption='Great job on this project!', use_column_width=True)  # Replace with the path to your image
+st.image("https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg", caption='Great job on this project!', use_column_width=True)  # Replace with the path to your image
 
 # Dreamers Academy Mention
 st.markdown("""
