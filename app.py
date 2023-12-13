@@ -9,11 +9,12 @@ st.markdown("""
 <style>
     /* Variables */
     :root {
-        --primary-color: #21a9ff;
-        --secondary-color: #ff4d6d;
-        --accent-color: #21ff7a;
-        --dark-bg: #000000; /* Changed background color to black */
-        --light-bg: #ffffff;
+        --primary-color: #21a9ff;  /* Electric blue for primary interactions */
+        --secondary-color: #ff4d6d; /* Soft red for secondary accents */
+        --accent-color: #21ff7a;   /* Neon green for highlights */
+        --dark-bg: #000000;        /* True black background */
+        --light-text: #f5f5f5;     /* Off-white for most text */
+        --dark-text: #333333;      /* Darker text color for contrast against light backgrounds */
         --font-family: 'Poppins', sans-serif;
     }
     
@@ -21,21 +22,26 @@ st.markdown("""
     body {
         font-family: var(--font-family);
         background-color: var(--dark-bg); /* Ensures the background is black */
+        color: var(--light-text);
     }
     .main {
-        color: var(--light-bg);
         text-align: center;
         padding: 50px;
     }
     .main h1 {
-        font-size: 3.5rem;
-        animation: color-change 5s infinite alternate;
+        font-size: 4rem;
+        color: var(--primary-color);
+        text-shadow: 2px 2px var(--secondary-color);
+        margin-bottom: 2rem;
     }
     
-    /* Keyframes for animations */
-    @keyframes color-change {
-        from { color: var(--primary-color); }
-        to { color: var(--accent-color); }
+    /* Breathe animation for the main title */
+    @keyframes breathe {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.85; }
+    }
+    .main h1 {
+        animation: breathe 10s ease-in-out infinite;
     }
 
     /* Table Styles */
@@ -46,9 +52,10 @@ st.markdown("""
     }
     .batch-table th {
         background-color: var(--secondary-color);
-        color: var(--light-bg);
+        color: var(--light-text);
         padding: 15px 0;
         font-size: 1.2rem;
+        letter-spacing: 1px;
     }
     .batch-table td {
         padding: 15px 0;
@@ -61,7 +68,7 @@ st.markdown("""
     }
     .batch-table td:hover {
         background-color: var(--secondary-color);
-        color: var(--light-bg);
+        color: var(--dark-text);
         cursor: pointer;
         transform: scale(1.02);
         transition: transform 0.1s ease-in-out;
@@ -71,17 +78,33 @@ st.markdown("""
     .footer {
         margin-top: 50px;
         padding: 20px;
-        color: var(--light-bg);
+        background-color: var(--dark-bg);
+        color: var(--secondary-color);
+        font-size: 1rem;
+        text-shadow: 1px 1px var(--dark-text);
     }
     
     /* Dreamers Academy Mention */
     .dreamers-mention {
         margin-top: 40px;
         padding: 15px;
+        background-color: var(--dark-text);  /* Slight contrast for the mention */
+        color: var(--secondary-color);
         border: 2px dashed var(--secondary-color);
         border-radius: 10px;
-        color: var(--secondary-color);
         font-size: 1.2rem;
+        box-shadow: 0 4px 8px rgba(255, 77, 109, 0.2);
+    }
+    
+    /* Link Styles */
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: var(--primary-color);
+        text-decoration: underline;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -115,9 +138,9 @@ st.table(schedule_df)
 # Dreamers Academy Mention
 st.markdown("""
 <div class="dreamers-mention">
-As a coding instructor at <a href="https://dreamersacademy.com.bd/" target="_blank" style="color: var(--secondary-color); text-decoration: none;">Dreamers Academy</a>, I specialize in teaching Python programming to kids, helping them to unlock their potential through the power of coding.
+As a passionate Python instructor at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a>, I dedicate myself to inspiring and educating the next generation of young programmers. Our curriculum is designed to ignite a love for coding in a fun and engaging environment.
 </div>
 """, unsafe_allow_html=True)
 
 # Footer
-st.markdown('<div class="footer">© 2023 CodeSage By Moshiur. All Rights Reserved. Powered by Dreamers Academy.</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">© 2023 CodeSage By Moshiur. All Rights Reserved. In collaboration with Dreamers Academy.</div>', unsafe_allow_html=True)
