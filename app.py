@@ -12,7 +12,7 @@ st.markdown("""
         --primary-color: #21a9ff;
         --secondary-color: #ff4d6d;
         --accent-color: #21ff7a;
-        --dark-bg: #202123;
+        --dark-bg: #000000; /* Changed background color to black */
         --light-bg: #ffffff;
         --font-family: 'Poppins', sans-serif;
     }
@@ -20,9 +20,9 @@ st.markdown("""
     /* Global Styles */
     body {
         font-family: var(--font-family);
+        background-color: var(--dark-bg); /* Ensures the background is black */
     }
     .main {
-        background-color: var(--dark-bg);
         color: var(--light-bg);
         text-align: center;
         padding: 50px;
@@ -40,7 +40,6 @@ st.markdown("""
 
     /* Table Styles */
     .batch-table {
-        background-color: var(--dark-bg);
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -72,7 +71,6 @@ st.markdown("""
     .footer {
         margin-top: 50px;
         padding: 20px;
-        background-color: var(--dark-bg);
         color: var(--light-bg);
     }
     
@@ -92,7 +90,7 @@ st.markdown("""
 st.markdown('<div class="main"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
 # Schedule Template
-st.markdown('## Class Schedule for Dreamers Academy')
+st.markdown('## Class Schedule')
 
 # Schedule Data
 # Make sure to fill in your actual schedule data here
@@ -117,7 +115,7 @@ st.table(schedule_df)
 # Dreamers Academy Mention
 st.markdown("""
 <div class="dreamers-mention">
-Dreamers Academy is proud to support CodeSage by Moshiur, a platform dedicated to teaching kids the joy of programming.
+As a coding instructor at <a href="https://dreamersacademy.com.bd/" target="_blank" style="color: var(--secondary-color); text-decoration: none;">Dreamers Academy</a>, I specialize in teaching Python programming to kids, helping them to unlock their potential through the power of coding.
 </div>
 """, unsafe_allow_html=True)
 
