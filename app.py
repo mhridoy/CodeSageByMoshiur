@@ -9,12 +9,12 @@ st.markdown("""
 <style>
     /* Global Styles */
     body {
-        background-color: #000; /* Black background for high contrast */
-        color: #fff; /* White text for readability */
+        background-color: #000; /* Black background */
+        color: #fff; /* White text */
         font-family: 'Poppins', sans-serif;
     }
 
-    /* Main Header Style */
+    /* Header Style */
     .header {
         color: #0f9b0f; /* Neon Green */
         text-align: center;
@@ -27,9 +27,8 @@ st.markdown("""
 
     /* Keyframe Animations */
     @keyframes pulse {
-        0% { transform: scale(1); opacity: 1; }
+        0%, 100% { transform: scale(1); opacity: 1; }
         50% { transform: scale(1.1); opacity: 0.7; }
-        100% { transform: scale(1); opacity: 1; }
     }
 
     /* Table Styles */
@@ -38,7 +37,7 @@ st.markdown("""
     }
     table {
         border-collapse: separate;
-        border-spacing: 0 15px; /* Space between rows */
+        border-spacing: 0 15px;
     }
     th {
         background-color: #17a2b8; /* Bootstrap info color */
@@ -50,11 +49,18 @@ st.markdown("""
         color: #17a2b8; /* Matching the header color */
         font-weight: bold;
     }
+    a {
+        color: #f0ad4e; /* Bootstrap warning color for links */
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
 
     /* Dreamers Academy Mention */
     .dreamers-mention {
-        background-color: #2c3e50; /* Dark slate */
-        border: 2px solid #17a2b8; /* Border color */
+        background-color: #2c3e50;
+        border: 2px solid #17a2b8;
         border-radius: 10px;
         padding: 1rem;
         margin: 2rem 0;
@@ -75,13 +81,14 @@ st.markdown("""
 # Main Title
 st.markdown('<div class="header"><h1>CodeSage By Moshiur</h1></div>', unsafe_allow_html=True)
 
-# Class Schedule
+# Class Schedule with Google Colab Links
 st.markdown('## 📅 Class Schedule')
 
-# Schedule Data
+# Schedule Data with Google Colab Links (example links used here)
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
-    'Schedule': ["TBD" for _ in range(13)]  # Replace 'TBD' with actual schedules
+    'Schedule': ["TBD" for _ in range(13)],  # Replace 'TBD' with actual schedules
+    'Google Colab Link': [f'[Link to Colab](https://colab.research.google.com/batch{i+1})' for i in range(13)]
 }
 
 # DataFrame for Schedule
