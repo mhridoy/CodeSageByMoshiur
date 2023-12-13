@@ -2,79 +2,73 @@ import streamlit as st
 import pandas as pd
 
 # Page Configuration
-st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon="🚀")
+st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon=":rocket:")
+
+# Assuming the primary color is a shade of blue and the background is white
+# with shades of gray for containers based on the image provided.
+primary_color = "#1d91d0"  # Example primary color (Streamlit blue)
+background_color = "#ffffff"  # White background
+container_color = "#f1f3f6"  # Light gray background for containers
+text_color = "#000000"  # Black text for contrast
+font_family = "Arial, sans-serif"  # Arial as a fallback
 
 # Custom CSS for Styling
-st.markdown("""
+st.markdown(f"""
 <style>
-    /* Global Styles */
-    body {
-        background-color: #000; /* Black background */
-        color: #fff; /* White text */
-        font-family: 'Poppins', sans-serif;
-    }
+    body {{
+        font-family: {font_family};
+        background-color: {background_color};
+        color: {text_color};
+    }}
 
-    /* Header Style */
-    .header {
-        color: #0f9b0f; /* Neon Green */
+    .st-ae {{
+        color: {primary_color};
+    }}
+
+    .st-cx {{
+        background-color: {container_color};
+    }}
+
+    .header {{
         text-align: center;
-        padding: 2rem 0;
-    }
-    .header h1 {
+        color: {primary_color};
+    }}
+
+    .header h1 {{
         font-size: 3rem;
-        animation: pulse 2s infinite ease-in-out;
-    }
+    }}
 
-    /* Keyframe Animations */
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.1); opacity: 0.7; }
-    }
+    .batch-table {{
+        width: 100%;
+        margin-bottom: 2rem;
+    }}
 
-    /* Table Styles */
-    .stTable {
-        overflow-x: auto;
-    }
-    table {
-        border-collapse: separate;
-        border-spacing: 0 15px;
-    }
-    th {
-        background-color: #17a2b8; /* Bootstrap info color */
-        color: #fff;
-        font-size: 1.1rem;
-    }
-    td {
-        background-color: #2c3e50; /* Dark slate */
-        color: #17a2b8; /* Matching the header color */
-        font-weight: bold;
-    }
-    a {
-        color: #f0ad4e; /* Bootstrap warning color for links */
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
+    .batch-table th {{
+        background-color: {primary_color};
+        color: {background_color};
+    }}
 
-    /* Dreamers Academy Mention */
-    .dreamers-mention {
-        background-color: #2c3e50;
-        border: 2px solid #17a2b8;
+    .batch-table td {{
+        background-color: {container_color};
+        color: {text_color};
+    }}
+
+    .dreamers-mention {{
+        background-color: {container_color};
+        border: 2px solid {primary_color};
         border-radius: 10px;
         padding: 1rem;
         margin: 2rem 0;
         text-align: center;
-    }
+    }}
 
-    /* Footer */
-    .footer {
+    .footer {{
         text-align: center;
         padding: 1rem;
-        background-color: #343a40; /* Dark gray */
-        color: #adb5bd; /* Light gray */
-        font-size: 0.9rem;
-    }
+        background-color: {container_color};
+        color: {text_color};
+        border-top: 3px solid {primary_color};
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -88,7 +82,7 @@ st.markdown('## 📅 Class Schedule')
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(13)],
     'Schedule': ["TBD" for _ in range(13)],  # Replace 'TBD' with actual schedules
-    'Google Colab Link': [f'[Link to Colab](https://colab.research.google.com/batch{i+1})' for i in range(13)]
+    'Google Colab Link': [f'[Open Colab](https://colab.research.google.com/batch{i+1})' for i in range(13)]
 }
 
 # DataFrame for Schedule
@@ -96,9 +90,9 @@ schedule_df = pd.DataFrame(schedule_data)
 st.table(schedule_df)
 
 # Dreamers Academy Mention
-st.markdown("""
+st.markdown(f"""
 <div class="dreamers-mention">
-    <p>🌟 Proudly teaching Python programming at <a href="https://dreamersacademy.com.bd/" target="_blank" style="color: #17a2b8; text-decoration: none;">Dreamers Academy</a>. Our mission is to inspire and enable the next generation of coders.</p>
+    <p>🌟 I teach Python programming at <a href="https://dreamersacademy.com.bd/" target="_blank" style="color: {primary_color};">Dreamers Academy</a>. Our curriculum is crafted to kindle a lifelong passion for coding in our students.</p>
 </div>
 """, unsafe_allow_html=True)
 
