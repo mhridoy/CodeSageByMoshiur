@@ -2,63 +2,79 @@ import streamlit as st
 import pandas as pd
 
 # Page Configuration
-st.set_page_config(page_title='CodeSage By Moshiur', layout='wide')
+st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon=":mage:")
 
 # Custom CSS for Styling
 st.markdown("""
 <style>
+    /* Primary Color Variable */
+    :root {
+        --primary-color: #4B8BF4;
+    }
     body {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #fff;
+        background-color: #0E1117;
     }
-    .main-title {
-        color: #4B8BF4;
-        text-align: center;
-        margin-bottom: 50px;
+    h1 {
+        color: var(--primary-color);
     }
-    .batch-table {
-        margin: auto;
-        border-collapse: collapse;
-        width: 90%;
-        font-size: 18px;
+    .block-container {
+        padding-top: 5rem;
     }
-    .batch-table td, .batch-table th {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: center;
+    .schedule-table {
+        width: 100%;
+        margin-bottom: 2rem;
     }
-    .batch-table tr {
-        transition: background-color 0.3s ease;
+    .schedule-table th {
+        background-color: #222730;
+        color: #fff;
     }
-    .batch-table tr:nth-child(even) {
-        background-color: #f8f9fa;
+    .schedule-table td {
+        background-color: #222730;
+        color: #fff;
+        border-top: 1px solid #4B8BF4;
     }
-    .batch-table tr:hover {
-        background-color: #e9ecef;
+    a {
+        color: var(--primary-color);
     }
-    .batch-table th {
-        background-color: #6c757d;
-        color: white;
+    .cool-info {
+        background-color: #222730;
+        border-radius: 10px;
+        padding: 2rem;
+        margin-bottom: 2rem;
     }
-    .colab-link {
-        color: #28a745;
-        text-decoration: none;
+    /* For responsive design */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-top: 2rem;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Title
-st.markdown("<h1 class='main-title'>CodeSage By Moshiur</h1>", unsafe_allow_html=True)
+# Title and Header
+st.markdown("<h1 style='text-align: center;'>CodeSage By Moshiur</h1>", unsafe_allow_html=True)
 
-# Data for the Table
-data = {
-    'Batch': [f'Batch {i+1}' for i in range(13)],
-    'Google Colab Link': [f'<a href="http://colab.link/batch{i+1}" class="colab-link" target="_blank">Open Link</a>' for i in range(13)]
+# Class Schedule
+st.markdown("## Class Schedule")
+schedule_data = {
+    'Day': ["FriSat", "SunTue", "MonThus"],
+    'Times': ["10am, 11am, 2:50pm, 4:30pm, 5:50pm, 7pm, 8pm", "5:50pm, 7pm, 8pm", "5:50pm, 7pm, 8pm"]
 }
-df = pd.DataFrame(data)
+schedule_df = pd.DataFrame(schedule_data)
+st.table(schedule_df.style.applymap(lambda x: "background-color: #222730; color: #fff;"))
 
-# Display the Table with Enhanced Styling
-st.markdown(df.to_html(classes='batch-table', escape=False, index=False), unsafe_allow_html=True)
+# Best Homework of the Month
+st.markdown("## Best Homework This Month")
+# Assuming you have a function that fetches the best homework, you can display it here
+# For now, we'll just display a placeholder
+st.image("https://via.placeholder.com/800x400?text=Student's+Best+Homework", caption='Homework by Student A')
 
-# Footer or Additional Information
+# YouTube Link and Cool Information about Python for Kids
+st.markdown("## Learn More About Python for Kids")
+st.markdown("[Watch our Python tutorials on YouTube](https://www.youtube.com)")
+st.markdown("<div class='cool-info'>Python is a great first language for kids to learn due to its simple syntax and powerful capabilities. It's used in many areas of technology, from web development to artificial intelligence, making it a valuable skill for the future.</div>", unsafe_allow_html=True)
+
+# Footer
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>© 2023 CodeSage By Moshiur. All Rights Reserved.</p>", unsafe_allow_html=True)
