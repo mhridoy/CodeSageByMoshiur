@@ -7,53 +7,58 @@ st.set_page_config(page_title='CodeSage By Moshiur', layout='wide')
 # Custom CSS for Styling
 st.markdown("""
 <style>
-    h1 {
-        color: #ff6347;
-        text-align: center;
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
-    .table {
-        margin-left: auto; 
-        margin-right: auto;
+    .main-title {
+        color: #4B8BF4;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .batch-table {
+        margin: auto;
         border-collapse: collapse;
-        width: 80%;
-        font-size: 20px;
+        width: 90%;
+        font-size: 18px;
     }
-    .table td, .table th {
+    .batch-table td, .batch-table th {
         border: 1px solid #ddd;
-        padding: 8px;
-    }
-    .table tr:nth-child(even){background-color: #f2f2f2;}
-    .table tr:hover {background-color: #ddd;}
-    .table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding: 12px;
         text-align: center;
-        background-color: #4CAF50;
+    }
+    .batch-table tr {
+        transition: background-color 0.3s ease;
+    }
+    .batch-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    .batch-table tr:hover {
+        background-color: #e9ecef;
+    }
+    .batch-table th {
+        background-color: #6c757d;
         color: white;
+    }
+    .colab-link {
+        color: #28a745;
+        text-decoration: none;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # Title
-st.markdown("<h1>CodeSage By Moshiur</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>CodeSage By Moshiur</h1>", unsafe_allow_html=True)
 
 # Data for the Table
 data = {
     'Batch': [f'Batch {i+1}' for i in range(13)],
-    'Google Colab Link': [f'http://colab.link/batch{i+1}' for i in range(13)]  # Example links
+    'Google Colab Link': [f'<a href="http://colab.link/batch{i+1}" class="colab-link" target="_blank">Open Link</a>' for i in range(13)]
 }
 df = pd.DataFrame(data)
 
-# Display the Table with Custom Styling
-st.markdown(df.to_html(classes='table', escape=False, index=False), unsafe_allow_html=True)
+# Display the Table with Enhanced Styling
+st.markdown(df.to_html(classes='batch-table', escape=False, index=False), unsafe_allow_html=True)
 
-# Additional Interactive Elements (Optional)
-st.sidebar.title("Navigation")
-selected_batch = st.sidebar.selectbox("Choose a Batch", df['Batch'])
-st.sidebar.markdown(f"You selected: {selected_batch}")
-
-# Display Batch Information
-st.write(f"Selected Batch: {selected_batch}")
-colab_link = df[df['Batch'] == selected_batch]['Google Colab Link'].iloc[0]
-st.markdown(f"[Go to Google Colab]({colab_link})")
-
+# Footer or Additional Information
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>© 2023 CodeSage By Moshiur. All Rights Reserved.</p>", unsafe_allow_html=True)
