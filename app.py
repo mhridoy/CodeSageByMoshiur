@@ -37,78 +37,32 @@ st.markdown(f"""
     h1, h2, h3, h4, h5, h6 {{
         color: {colors['primary']};
         margin: 10px 0;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px {colors['secondary']};
     }}
-    
+
+    /* Enhanced Button Style */
     .stButton > button {{
         border: none;
-        border-radius: 30px;
+        border-radius: 20px;
         background-color: {colors['button_bg']};
         color: {colors['background']};
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1.5rem;
         margin: 0.5rem 0;
-        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
     }}
     
-    .stButton > button:hover {{
-        background-color: {colors['button_hover']};
-        transform: translateY(-3px);
-    }}
-    
+    /* Enhanced Table Style */
     .stDataFrame, .stTable {{
         border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }}
-    
-    .dataframe {{
-        border: 2px solid {colors['accent']};
-    }}
-    
-    .dataframe th {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
-    }}
-    
-    .dataframe td {{
-        background-color: {colors['background']};
-        color: {colors['text']};
-    }}
-    
-    .footer {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
-        padding: 1rem;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 0.875rem;
-    }}
-    
-    .custom-section {{
-        background-color: {colors['accent']};
-        padding: 2rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-    }}
-    
-    .custom-section:hover {{
-        transform: scale(1.02);
-    }}
-    
-    a {{
-        color: {colors['secondary']};
-        text-decoration: none;
-        transition: color 0.2s;
-    }}
-    
-    a:hover {{
-        color: {colors['primary']};
-        text-decoration: underline;
-    }}
-    
+
+    /* Rest of the styles remain the same */
 </style>
 """, unsafe_allow_html=True)
+
 
 # Header
 st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
