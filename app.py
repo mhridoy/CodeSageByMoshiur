@@ -127,7 +127,8 @@ with col1:
 with col2:
     st.markdown('## Best Homework of the Month 🌟')
     # Placeholder image, replace with actual image URL or path
-    st.image('https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg', caption='Incredible work by our star coder!', use_column_width=True)
+    st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
+    st.write("Link : https://trinket.io/turtle/4ea3424527")
 
 # Dreamers Academy Mention
 st.markdown(f"""
