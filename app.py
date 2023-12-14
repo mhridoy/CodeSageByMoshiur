@@ -58,31 +58,40 @@ st.markdown(f"""
         margin-bottom: 1em;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
- /* New Section Styles */
-    .level-section {{
-        background-color: {colors['accent']};
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ /* Enhanced Section Styles */
+    .enhanced-section {{
+        background: linear-gradient(145deg, {colors['accent']}, {colors['secondary']});
+        padding: 2em;
+        border-radius: 15px;
+        margin-bottom: 1em;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
     }}
 
-    .level-header {{
+    .enhanced-section:hover {{
+        transform: translateY(-10px);
+        background: linear-gradient(145deg, {colors['secondary']}, {colors['accent']});
+    }}
+
+    .section-title {{
         color: {colors['primary']};
-        font-size: 1.5em;
-        margin-bottom: 10px;
+        font-size: 1.75em;
+        margin-bottom: 0.5em;
     }}
 
-    .level-content {{
-        color: {colors['text']};
-        line-height: 1.6;
+    .section-content {{
+        color: {colors['background']};
+        font-size: 1em;
+        line-height: 1.5;
     }}
 
-    .final-outcome {{
-        color: {colors['secondary']};
+    .section-outcome {{
+        color: {colors['button_bg']};
         font-weight: bold;
-        margin-top: 10px;
+        font-size: 1.1em;
+        margin-top: 1em;
     }}
+
     /* Link Style */
     a {{
         color: {colors['secondary']};
@@ -169,34 +178,32 @@ with col2:
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 
-# New Level Sections
+# New Enhanced Level Sections
 st.markdown("""
-<div class="level-section">
-    <h2 class="level-header">Level-1: Python Programming</h2>
-    <p class="level-content">
+<div class="enhanced-section">
+    <h2 class="section-title">Level-1: Python Programming</h2>
+    <p class="section-content">
         Python is a high-level, interpreted, general-purpose programming language. 
         It is currently one of the most popular programming languages in the world. 
         Our coders will learn all the necessary coding fundamentals using this high-level language.
     </p>
-    <p class="final-outcome">Final Outcome: Coding Fundamentals (Basics)</p>
+    <p class="section-outcome">Final Outcome: Coding Fundamentals (Basics)</p>
 </div>
-<div class="level-section">
-    <h2 class="level-header">Level-2: Website Design</h2>
-    <p class="level-content">
-        Whenever you are a web programmer, you will learn and understand the necessity of HTML and CSS. 
-        Kids of different ages can work with HTML and CSS codes to become excellent web programmers. 
-        They are going to get the benefit of knowing the fundamentals of HTML and CSS to design a website.
-        Additionally, they will learn Javascript and a front end design framework for interactive websites.
+<div class="enhanced-section">
+    <h2 class="section-title">Level-2: Website Design</h2>
+    <p class="section-content">
+        Web programming essentials with HTML, CSS, and Javascript. 
+        Kids of different ages will become skilled in designing interactive and responsive websites.
     </p>
-    <p class="final-outcome">Final Outcome: Website Design</p>
+    <p class="section-outcome">Final Outcome: Website Design</p>
 </div>
-<div class="level-section">
-    <h2 class="level-header">Level-3: Robotics & IOT</h2>
-    <p class="level-content">
-        Internet of Things (IOT) refers to objects/things that are connected and communicate via the internet. 
-        In this level, they will build IOT devices and fully functional robots, learning about hardware and software integration.
+<div class="enhanced-section">
+    <h2 class="section-title">Level-3: Robotics & IOT</h2>
+    <p class="section-content">
+        Dive into the future-tech of Internet of Things (IOT) and robotics. 
+        Students will build IOT devices and robots, learning hardware and software integration.
     </p>
-    <p class="final-outcome">Final Outcome: Hardware and Software Integration</p>
+    <p class="section-outcome">Final Outcome: Hardware and Software Integration</p>
 </div>
 """, unsafe_allow_html=True)
 
