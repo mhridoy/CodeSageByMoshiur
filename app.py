@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 
+# Function to load schedule data from the Excel file
+def load_schedule():
+    file_path = 'Schedule of Classes _ Python Programming.xlsx'
+    return pd.read_excel(file_path)
+
 # Page configuration
 st.set_page_config(
     page_title='CodeSage By Moshiur',
@@ -107,18 +112,13 @@ st.markdown(f"""
 # Header
 st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
+# Load the schedule data
+schedule_df = load_schedule()
+
 # Main content area
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([3, 2])
 with col1:
     st.markdown('## Class Schedule 📚')
-    # Schedule Data
-    schedule_data = {
-        'Batch': [f'Batch {i+1}' for i in range(6)],
-        'Schedule': ['Monday & Wednesday: 4pm - 5pm' for _ in range(6)],
-        'Google Colab Link': [f'[Open in Colab](https://colab.research.google.com/batch{i+1})' for i in range(6)]
-    }
-    # DataFrame for Schedule
-    schedule_df = pd.DataFrame(schedule_data)
     st.dataframe(schedule_df.style.set_properties(**{
         'background-color': colors['background'],
         'color': colors['text']
@@ -126,6 +126,7 @@ with col1:
 
 with col2:
     st.markdown('## Best Homework of the Month 🌟')
+    # Placeholder image, replace with actual image URL or path
     st.image('https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg', caption='Incredible work by our star coder!', use_column_width=True)
 
 # Dreamers Academy Mention
@@ -141,7 +142,7 @@ youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your Y
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
-    <p>Check out our <a href="{youtube_url}" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
+    <p>Check out our <a href="{https://youtube.com/mhridoy}" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
 </div>
 """, unsafe_allow_html=True)
 
