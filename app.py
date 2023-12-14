@@ -18,17 +18,15 @@ st.set_page_config(
     }
 )
 
-# Define a modern and soothing color scheme
+# Define a fresh and minimalistic color scheme
 colors = {
-    'background': '#F0F2F6',
-    'primary': '#34568B',
-    'secondary': '#FF6F61',
-    'accent': '#88B04B',
-    'text': '#495057',
-    'button_bg': '#FFD803',   # Make sure this key exists
-    'button_hover': '#CA6702',
-    'footer_bg': '#7D7DA8',   # Footer background color
-    'footer_text': '#EDE9F4'  # Footer text color
+    'background': '#FFFFFF',  # White background for a clean look
+    'primary': '#4A4E69',     # Dark blue for elegance and contrast
+    'secondary': '#9A8C98',   # Soft purple for a touch of color
+    'accent': '#C9ADA7',      # Muted pink for highlights
+    'text': '#22223B',        # Almost black for main text
+    'footer_bg': '#4A4E69',   # Dark blue for the footer
+    'footer_text': '#FFFFFF'  # White text for footer
 }
 
 # Custom styles
