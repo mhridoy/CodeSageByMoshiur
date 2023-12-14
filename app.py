@@ -125,7 +125,7 @@ with col1:
     }))
 
 with col2:
-    st.markdown('## Best Homework of the Month 🌟')
+    st.markdown('## Best Homework of the Month 🌟 Sababah Subah')
     # Placeholder image, replace with actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
     st.write("Link : https://trinket.io/turtle/4ea3424527")
