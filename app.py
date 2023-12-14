@@ -3,7 +3,7 @@ import pandas as pd
 
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'
+    file_path = 'schedule.xlsx'  # Make sure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -15,13 +15,13 @@ st.set_page_config(
 
 # Define an advanced, soothing color scheme
 colors = {
-    'background': '#F7F7FF',  # A very light gray that's easy on the eyes
-    'primary': '#6246EA',     # A rich, calming purple
-    'secondary': '#E45858',   # A soft, warm red for contrasts
-    'accent': '#D1D1E9',      # A muted lavender for accents and highlights
-    'text': '#2B2C34',        # A deep, dark purple for text
-    'button_bg': '#FFD803',   # A cheerful yellow for buttons
-    'button_hover': '#FFC30B',  # A golden hue for button hover state
+    'background': '#F7F7FF',
+    'primary': '#6246EA',
+    'secondary': '#E45858',
+    'accent': '#D1D1E9',
+    'text': '#2B2C34',
+    'button_bg': '#FFD803',
+    'button_hover': '#FFC30B'
 }
 
 # Custom styles
@@ -36,6 +36,7 @@ st.markdown(f"""
     
     h1, h2, h3, h4, h5, h6 {{
         color: {colors['primary']};
+        margin: 10px 0;
     }}
     
     .stButton > button {{
@@ -126,7 +127,6 @@ with col1:
 
 with col2:
     st.markdown('## Best Homework of the Month 🌟 Sababah Subah')
-    # Placeholder image, replace with actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
     st.write("Link : https://trinket.io/turtle/4ea3424527")
 
@@ -139,11 +139,11 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # YouTube Channel Link
-youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your YouTube channel link
+youtube_url = "https://youtube.com/mhridoy"
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
-    <p>Check out our <a href="https://youtube.com/mhridoy" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
+    <p>Check out our <a href="{youtube_url}" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
 </div>
 """, unsafe_allow_html=True)
 
