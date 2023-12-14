@@ -8,7 +8,7 @@ def load_schedule():
 
 # Page configuration
 st.set_page_config(
-    page_title='Dreamers Academy |  CodeSage By Moshiur',
+    page_title='CodeSage By Moshiur',
     layout='wide',
     page_icon='💍🦋',
     menu_items={
@@ -148,7 +148,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
