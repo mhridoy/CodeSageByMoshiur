@@ -20,13 +20,15 @@ st.set_page_config(
 
 # Define a modern and soothing color scheme
 colors = {
-    'background': '#F3F2F7',  # A very soft gray for a serene background
-    'primary': '#7D7DA8',     # A gentle purple for a calming primary color
-    'secondary': '#BFA2DB',   # A light purple for secondary elements
-    'accent': '#E2D4F0',      # A very light purple for accenting elements
-    'text': '#504A65',        # A darker purple for text for contrast
-    'footer_bg': '#7D7DA8',   # A medium purple for the footer background
-    'footer_text': '#EDE9F4'  # A light purple for footer text
+    'background': '#F0F2F6',
+    'primary': '#34568B',
+    'secondary': '#FF6F61',
+    'accent': '#88B04B',
+    'text': '#495057',
+    'button_bg': '#FFD803',   # Make sure this key exists
+    'button_hover': '#CA6702',
+    'footer_bg': '#7D7DA8',   # Footer background color
+    'footer_text': '#EDE9F4'  # Footer text color
 }
 
 # Custom styles
