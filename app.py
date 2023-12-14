@@ -123,7 +123,7 @@ with col1:
 
 with col2:
     st.markdown('## Best Homework of the Month')
-    st.image('path_to_homework_image.jpg', caption='Incredible work by our star coder!', use_column_width=True)
+    st.image('https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg', caption='Incredible work by our star coder!', use_column_width=True)
 
 # Dreamers Academy Mention
 st.markdown(f"""
