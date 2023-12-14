@@ -3,7 +3,7 @@ import pandas as pd
 
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'  # Make sure this path is correct
+    file_path = 'schedule.xlsx'  # Ensure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -13,15 +13,15 @@ st.set_page_config(
     page_icon='🌟'
 )
 
-# Define an advanced, soothing color scheme
+# Define a cool and soothing color scheme
 colors = {
-    'background': '#F7F7FF',
-    'primary': '#6246EA',
-    'secondary': '#E45858',
-    'accent': '#D1D1E9',
-    'text': '#2B2C34',
-    'button_bg': '#FFD803',
-    'button_hover': '#FFC30B'
+    'background': '#F0F2F6',
+    'primary': '#34568B',
+    'secondary': '#FF6F61',
+    'accent': '#88B04B',
+    'text': '#2F3E46',
+    'button_bg': '#FFD662',
+    'button_hover': '#FFA177'
 }
 
 # Custom styles
@@ -29,43 +29,86 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Segoe UI', 'Arial', sans-serif;
         background-color: {colors['background']};
         color: {colors['text']};
     }}
     
-    h1, h2, h3, h4, h5, h6 {{
+    h1 {{
         color: {colors['primary']};
-        margin: 10px 0;
         font-weight: bold;
-        text-shadow: 2px 2px 4px {colors['secondary']};
+        text-align: center;
     }}
 
-    /* Enhanced Button Style */
+    h2 {{
+        color: {colors['secondary']};
+        font-weight: normal;
+        text-align: left;
+    }}
+    
     .stButton > button {{
         border: none;
         border-radius: 20px;
         background-color: {colors['button_bg']};
         color: {colors['background']};
-        padding: 0.5rem 1.5rem;
+        padding: 0.5rem 1rem;
         margin: 0.5rem 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
     }}
     
-    /* Enhanced Table Style */
+    .stButton > button:hover {{
+        background-color: {colors['button_hover']};
+    }}
+    
     .stDataFrame, .stTable {{
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        border: 1px solid {colors['accent']};
+    }}
+    
+    .dataframe th {{
+        background-color: {colors['primary']};
+        color: {colors['background']};
+    }}
+    
+    .dataframe td {{
+        background-color: {colors['background']};
+        color: {colors['text']};
     }}
 
-    /* Rest of the styles remain the same */
+    .footer {{
+        background-color: {colors['primary']};
+        color: {colors['background']};
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 0.875rem;
+    }}
+
+    .custom-section {{
+        background-color: {colors['accent']};
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }}
+    
+    a {{
+        color: {colors['secondary']};
+        text-decoration: none;
+    }}
+    
+    a:hover {{
+        color: {colors['button_hover']};
+        text-decoration: underline;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
-
 # Header
-st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown('<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
@@ -73,16 +116,15 @@ schedule_df = load_schedule()
 # Main content area
 col1, col2 = st.columns([3, 2])
 with col1:
-    st.markdown('## Class Schedule 📚')
+    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
     st.dataframe(schedule_df.style.set_properties(**{
         'background-color': colors['background'],
         'color': colors['text']
     }))
 
 with col2:
-    st.markdown('## Best Homework of the Month 🌟 Sababah Subah')
+    st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
-    st.write("Link : https://trinket.io/turtle/4ea3424527")
 
 # Dreamers Academy Mention
 st.markdown(f"""
@@ -93,7 +135,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # YouTube Channel Link
-youtube_url = "https://youtube.com/mhridoy"
+youtube_url = "https://youtube.com/mhridoy"  # Replace with your actual YouTube channel link
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
