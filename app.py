@@ -179,28 +179,44 @@ courses = [
      "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
 ]
 
-# Add a text area for Python code input
-st.markdown("## Python Code Editor")
-user_code = st.text_area("Write your Python code here:", height=300)
+# Selection for Python editor or Turtle graphics
+activity = st.selectbox("Choose an activity:", ["Python Editor", "Python Turtle Graphics"])
 
-# Button to run the code
-if st.button("Run Code"):
-    # Capture the standard output
-    old_stdout = sys.stdout
-    redirected_output = sys.stdout = io.StringIO()
+if activity == "Python Editor":
+    # Python Code Editor Section
+    st.markdown("## Python Code Editor")
+    user_code = st.text_area("Write your Python code here:", height=300)
 
-    try:
-        # Execute the user's code
-        exec(user_code)
-    except Exception as e:
-        st.error(f"Error: {e}")
-    finally:
-        # Restore the standard output
-        sys.stdout = old_stdout
+    # Button to run the code
+    if st.button("Run Code"):
+        # Capture the standard output
+        old_stdout = sys.stdout
+        redirected_output = sys.stdout = io.StringIO()
 
-    # Get the captured output
-    output = redirected_output.getvalue()
-    st.text_area("Output:", value=output, height=300)
+        try:
+            # Execute the user's code
+            exec(user_code)
+        except Exception as e:
+            st.error(f"Error: {e}")
+        finally:
+            # Restore the standard output
+            sys.stdout = old_stdout
+
+        # Get the captured output
+        output = redirected_output.getvalue()
+        st.text_area("Output:", value=output, height=300)
+
+elif activity == "Python Turtle Graphics":
+    # Python Turtle Graphics Section
+    st.markdown("## Python Turtle Graphics")
+    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
+
+    if show_turtle_window:
+        # Embed Trinket.io Turtle project
+        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
+        st.components.v1.iframe(trinket_embed_url, height=500, scrolling=False)
+
+
 
 # Display courses 
 for course in courses:
