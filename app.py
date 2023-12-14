@@ -142,7 +142,7 @@ youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your Y
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
-    <p>Check out our <a href="{https://youtube.com/mhridoy}" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
+    <p>Check out our <a href="https://youtube.com/mhridoy" target="_blank">YouTube channel</a> for engaging tutorials and learning resources.</p>
 </div>
 """, unsafe_allow_html=True)
 
