@@ -60,40 +60,21 @@ st.markdown(f"""
         margin-bottom: 1em;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
- /* Enhanced Section Styles */
-    .enhanced-section {{
-        background: linear-gradient(145deg, {colors['accent']}, {colors['secondary']});
-        padding: 2em;
-        border-radius: 15px;
-        margin-bottom: 1em;
-        transition: all 0.3s ease-in-out;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+ /.course-section {{
+        padding: 1rem;
+        border-left: 5px solid {colors['accent']};
+        background-color: {colors['background']};
+        margin-bottom: 1rem;
     }}
 
-    .enhanced-section:hover {{
-        transform: translateY(-10px);
-        background: linear-gradient(145deg, {colors['secondary']}, {colors['accent']});
-    }}
-
-    .section-title {{
+    .course-title {{
         color: {colors['primary']};
-        font-size: 1.75em;
-        margin-bottom: 0.5em;
-    }}
-
-    .section-content {{
-        color: {colors['background']};
-        font-size: 1em;
-        line-height: 1.5;
-    }}
-
-    .section-outcome {{
-        color: {colors['button_bg']};
         font-weight: bold;
-        font-size: 1.1em;
-        margin-top: 1em;
     }}
 
+    .course-description {{
+        color: {colors['text']};
+    }}
     /* Link Style */
     a {{
         color: {colors['secondary']};
@@ -179,35 +160,23 @@ with col2:
     # Replace with the actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
+# Course Sections
+courses = [
+    {"title": "Level-1: Python Programming", 
+     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
+    {"title": "Level-2: Website Design", 
+     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
+    {"title": "Level-3: Robotics & IOT", 
+     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
+]
 
-# New Enhanced Level Sections
-st.markdown("""
-<div class="enhanced-section">
-    <h2 class="section-title">Level-1: Python Programming</h2>
-    <p class="section-content">
-        Python is a high-level, interpreted, general-purpose programming language. 
-        It is currently one of the most popular programming languages in the world. 
-        Our coders will learn all the necessary coding fundamentals using this high-level language.
-    </p>
-    <p class="section-outcome">Final Outcome: Coding Fundamentals (Basics)</p>
-</div>
-<div class="enhanced-section">
-    <h2 class="section-title">Level-2: Website Design</h2>
-    <p class="section-content">
-        Web programming essentials with HTML, CSS, and Javascript. 
-        Kids of different ages will become skilled in designing interactive and responsive websites.
-    </p>
-    <p class="section-outcome">Final Outcome: Website Design</p>
-</div>
-<div class="enhanced-section">
-    <h2 class="section-title">Level-3: Robotics & IOT</h2>
-    <p class="section-content">
-        Dive into the future-tech of Internet of Things (IOT) and robotics. 
-        Students will build IOT devices and robots, learning hardware and software integration.
-    </p>
-    <p class="section-outcome">Final Outcome: Hardware and Software Integration</p>
-</div>
-""", unsafe_allow_html=True)
+for course in courses:
+    st.markdown(f"""
+    <div class="course-section">
+        <h2 class="course-title">{course['title']}</h2>
+        <p class="course-description">{course['description']}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Dreamers Academy Mention
 st.markdown(f"""
