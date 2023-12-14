@@ -178,6 +178,9 @@ courses = [
      "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
 ]
 
+st.markdown("<h2>Python Code Editor</h2>", unsafe_allow_html=True)
+components.iframe("https://replit.com/@MdMoshiurRahman/dreamersacademy#main.py?embed=true", height=600)
+
 for course in courses:
     st.markdown(f"""
     <div class="course-section">
