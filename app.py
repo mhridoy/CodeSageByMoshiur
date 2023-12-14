@@ -3,7 +3,7 @@ import pandas as pd
 
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'Schedule of Classes _ Python Programming.xlsx'
+    file_path = 'schedule.xlsx'
     return pd.read_excel(file_path)
 
 # Page configuration
