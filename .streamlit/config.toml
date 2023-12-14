@@ -1,0 +1,9 @@
+[theme]
+primaryColor = "#6246EA"
+backgroundColor = "#F7F7FF"
+secondaryBackgroundColor = "#D1D1E9"
+textColor = "#2B2C34"
+font = "sans serif"
+
+[browser]
+logoVisibility = "hidden"
