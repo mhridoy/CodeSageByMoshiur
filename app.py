@@ -178,8 +178,17 @@ courses = [
      "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
 ]
 
-st.markdown("<h2>Python Code Editor</h2>", unsafe_allow_html=True)
-components.iframe("https://replit.com/@MdMoshiurRahman/dreamersacademy#main.py?embed=true", height=600)
+# Add a text area for Python code input
+st.markdown("## Python Code Editor")
+user_code = st.text_area("Write your Python code here:", height=300)
+
+# Button to run the code
+if st.button("Run Code"):
+    try:
+        # Use Python's exec() function to run the user's code
+        exec(user_code)
+    except Exception as e:
+        st.error(f"Error: {e}")
 
 for course in courses:
     st.markdown(f"""
