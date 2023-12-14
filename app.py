@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-
+import sys
+import io
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -184,12 +185,24 @@ user_code = st.text_area("Write your Python code here:", height=300)
 
 # Button to run the code
 if st.button("Run Code"):
+    # Capture the standard output
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = io.StringIO()
+
     try:
-        # Use Python's exec() function to run the user's code
+        # Execute the user's code
         exec(user_code)
     except Exception as e:
         st.error(f"Error: {e}")
+    finally:
+        # Restore the standard output
+        sys.stdout = old_stdout
 
+    # Get the captured output
+    output = redirected_output.getvalue()
+    st.text_area("Output:", value=output, height=300)
+
+# Display courses 
 for course in courses:
     st.markdown(f"""
     <div class="course-section">
