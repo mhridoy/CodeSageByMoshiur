@@ -2,17 +2,21 @@ import streamlit as st
 import pandas as pd
 
 # Page configuration
-st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon="🌟")
+st.set_page_config(
+    page_title='CodeSage By Moshiur',
+    layout='wide',
+    page_icon='🌟'
+)
 
-# Define a modern color scheme
+# Define a harmonious color palette
 colors = {
-    "primary": "#0083B8",
-    "secondary": "#00B4D8",
-    "accent": "#90E0EF",
-    "background": "#CAF0F8",
-    "text": "#0077B6",
-    "dark_text": "#03045E",
-    "light_text": "#ffffff"
+    'background': '#FAFAFA',  # A gentle off-white background
+    'primary': '#005f73',     # A calming dark teal
+    'secondary': '#0a9396',   # A soothing teal
+    'accent': '#94d2bd',      # A soft green accent
+    'text': '#495057',        # A dark gray for text for readability
+    'button': '#ee9b00',      # A warm amber for buttons and highlights
+    'button_hover': '#ca6702',  # A darker shade for button hover state
 }
 
 # Custom styles
@@ -20,143 +24,126 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Calibri', sans-serif;
         background-color: {colors['background']};
         color: {colors['text']};
     }}
     
-    h1, h2, h3 {{
+    h1 {{
         color: {colors['primary']};
+        font-weight: bold;
+    }}
+    
+    h2 {{
+        color: {colors['secondary']};
     }}
     
     .stButton > button {{
+        border: 2px solid transparent;
         border-radius: 30px;
-        border: none;
-        background-color: {colors['accent']};
-        color: {colors['dark_text']};
-        padding: 10px 24px;
-        margin: 0px 10px;
-        transition: background-color 0.3s ease;
+        background-color: {colors['button']};
+        color: {colors['background']};
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s, border-color 0.3s;
     }}
     
     .stButton > button:hover {{
-        background-color: {colors['secondary']};
+        background-color: {colors['background']};
+        border-color: {colors['button_hover']};
+        color: {colors['button']};
     }}
     
-    .stDataFrame {{
-        border-radius: 10px;
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    .stDataFrame, .stTable {{
+        border-radius: 0.5rem;
     }}
     
     .dataframe {{
-        width: 100%;
-        border-collapse: collapse;
+        border: 2px solid {colors['accent']};
     }}
     
     .dataframe th {{
         background-color: {colors['primary']};
-        color: {colors['light_text']};
+        color: {colors['background']};
     }}
     
-    .dataframe td, .dataframe th {{
-        padding: 10px;
-        border: 1px solid {colors['accent']};
-        text-align: left;
+    .dataframe td {{
+        background-color: {colors['secondary']};
+        color: {colors['background']};
     }}
     
     .footer {{
-        background-color: {colors['secondary']};
-        color: {colors['light_text']};
-        padding: 10px;
+        background-color: {colors['primary']};
+        color: {colors['background']};
+        padding: 1rem;
         position: fixed;
         bottom: 0;
         width: 100%;
         text-align: center;
+        font-size: 0.875rem;
     }}
     
-    .youtube-section {{
-        background-color: {colors['primary']};
-        color: {colors['light_text']};
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px 0;
-        text-align: center;
-        transition: transform 0.3s ease;
-    }}
-    
-    .youtube-section:hover {{
-        transform: scale(1.05);
-    }}
-
-    .homework-section {{
+    .custom-section {{
         background-color: {colors['accent']};
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px 0;
-        text-align: center;
-        transition: transform 0.3s ease;
-    }}
-    
-    .homework-section:hover {{
-        transform: scale(1.05);
+        padding: 2rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
     
     a {{
-        color: {colors['dark_text']};
+        color: {colors['button']};
         text-decoration: none;
+        transition: color 0.2s;
     }}
     
     a:hover {{
-        color: {colors['secondary']};
+        color: {colors['button_hover']};
         text-decoration: underline;
     }}
     
 </style>
 """, unsafe_allow_html=True)
 
-# Header with Title and Subtitle
+# Header
 st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
-# YouTube Link Section
-youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your YouTube channel link
-st.markdown(f"""
-<div class="youtube-section">
-    <h2>Explore Our YouTube Channel</h2>
-    <a href="{youtube_url}" target="_blank" class="youtube-link">Visit YouTube</a>
-</div>
-""", unsafe_allow_html=True)
+# Main content area
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown('## Class Schedule')
+    # Schedule Data
+    schedule_data = {
+        'Batch': [f'Batch {i+1}' for i in range(6)],
+        'Schedule': ['Monday & Wednesday: 4pm - 5pm' for _ in range(6)],
+        'Google Colab Link': [f'[Open in Colab](https://colab.research.google.com/batch{i+1})' for i in range(6)]
+    }
+    # DataFrame for Schedule
+    schedule_df = pd.DataFrame(schedule_data)
+    st.dataframe(schedule_df)
 
-# Class Schedule Section
-st.markdown('## Class Schedule')
-schedule_data = {
-    'Batch Number': [f'Batch {i+1}' for i in range(6)],
-    'Schedule': ['Monday & Wednesday: 4pm - 5pm', 'Tuesday & Thursday: 2pm - 3pm', 'Friday: 5pm - 6pm', 'Saturday: 10am - 12pm', 'Sunday: 1pm - 3pm', 'Monday & Wednesday: 6pm - 7pm'],
-    'Google Colab Link': [f'[Open Colab](https://colab.research.google.com/batch{i+1})' for i in range(6)]
-}
-schedule_df = pd.DataFrame(schedule_data)
-st.dataframe(schedule_df.style.set_properties(**{'background-color': colors['background'], 'color': colors['text']}))
-
-# Homework Showcase Section
-st.markdown("""
-<div class="homework-section">
-    <h2>Best Homework of the Month</h2>
-    <p>Check out this month's star project!</p>
-    <!-- Replace 'path_to_homework_image.jpg' with the actual path to your best homework image -->
-    <img src="path_to_homework_image.jpg" alt="Best Homework" style="max-width: 100%; border-radius: 10px;">
-</div>
-""", unsafe_allow_html=True)
+with col2:
+    st.markdown('## Best Homework of the Month')
+    st.image('path_to_homework_image.jpg', caption='Incredible work by our star coder!', use_column_width=True)
 
 # Dreamers Academy Mention
 st.markdown(f"""
-<div class="youtube-section">
-    <h2>Dreamers Academy</h2>
-    <p>As a proud instructor at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a>, I'm excited to teach Python programming to our brilliant students.</p>
+<div class="custom-section">
+    <h2>Dreamers Academy Collaboration</h2>
+    <p>As an instructor at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a>, I take pride in guiding students through their Python programming journey. Join us to explore the world of coding!</p>
+</div>
+""", unsafe_allow_html=True)
+
+# YouTube Channel Link
+st.markdown(f"""
+<div class="custom-section">
+    <h2>Visit our YouTube Channel</h2>
+    <p>Discover more learning resources and tutorials on our <a href="https://www.youtube.com/c/YourChannelName" target="_blank">YouTube channel</a>.</p>
 </div>
 """, unsafe_allow_html=True)
 
 # Footer
-st.markdown(f"""
+st.markdown("""
 <div class="footer">
-    © 2023 CodeSage By Moshiur. All Rights Reserved.
+    &copy; 2023 CodeSage By Moshiur. All Rights Reserved.
 </div>
 """, unsafe_allow_html=True)
