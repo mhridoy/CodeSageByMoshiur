@@ -3,7 +3,7 @@ import pandas as pd
 
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'  # Make sure this path is correct
+    file_path = 'schedule.xlsx'  # Ensure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -15,11 +15,13 @@ st.set_page_config(
 
 # Define a modern and soothing color scheme
 colors = {
-    'background': '#F0F2F6',  # A soft gray for a light and airy feel
-    'primary': '#34568B',     # A deep blue for a calming effect
-    'secondary': '#FF6F61',   # A warm coral for a pop of energy
-    'accent': '#88B04B',      # A fresh green for vibrancy
-    'text': '#495867',        # A dark slate for readability
+    'background': '#F3F2F7',  # A very soft gray for a serene background
+    'primary': '#7D7DA8',     # A gentle purple for a calming primary color
+    'secondary': '#BFA2DB',   # A light purple for secondary elements
+    'accent': '#E2D4F0',      # A very light purple for accenting elements
+    'text': '#504A65',        # A darker purple for text for contrast
+    'footer_bg': '#7D7DA8',   # A medium purple for the footer background
+    'footer_text': '#EDE9F4'  # A light purple for footer text
 }
 
 # Custom styles
@@ -27,88 +29,82 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Arial', sans-serif;
+        font-family: 'Segoe UI', sans-serif;
         background-color: {colors['background']};
         color: {colors['text']};
     }}
-    
+
     h1 {{
         color: {colors['primary']};
         font-size: 2.5em;
         text-align: center;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
     }}
 
     h2 {{
         color: {colors['secondary']};
         font-size: 1.75em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
-    }}
-    
-    .stButton > button {{
-        border: 2px solid {colors['primary']};
-        border-radius: 5px;
-        background-color: {colors['background']};
-        color: {colors['primary']};
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
-    }}
-    
-    .stButton > button:hover {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
-        border-color: {colors['secondary']};
-    }}
-    
-    .stDataFrame, .stTable {{
-        border-radius: 8px;
-        overflow: hidden;
     }}
 
-    .dataframe {{
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }}
-
-    .dataframe th {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
-    }}
-
-    .dataframe td {{
-        background-color: {colors['accent']};
-        color: {colors['text']};
-    }}
-
-    .footer {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
-        padding: 1em;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }}
-
+    /* Custom Section Style */
     .custom-section {{
-        background-color: {colors['background']};
+        background-color: {colors['accent']};
         padding: 2em;
-        border-radius: 10px;
-        margin-top: 1em;
+        border-radius: 12px;
         margin-bottom: 1em;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
 
+    /* Link Style */
     a {{
         color: {colors['secondary']};
-        font-weight: bold;
         text-decoration: none;
     }}
 
     a:hover {{
         color: {colors['primary']};
         text-decoration: underline;
+    }}
+
+    /* Footer Style */
+    .footer {{
+        background-color: {colors['footer_bg']};
+        color: {colors['footer_text']};
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }}
+
+    /* Table Style */
+    .stDataFrame, .stTable {{
+        border-radius: 8px;
+        overflow: hidden;
+    }}
+
+    .dataframe th {{
+        background-color: {colors['secondary']};
+        color: {colors['text']};
+    }}
+
+    .dataframe td {{
+        background-color: {colors['background']};
+        color: {colors['text']};
+    }}
+
+    /* Button Style */
+    .stButton > button {{
+        border: 2px solid {colors['secondary']};
+        border-radius: 20px;
+        background-color: {colors['accent']};
+        color: {colors['text']};
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+    }}
+
+    .stButton > button:hover {{
+        background-color: {colors['primary']};
+        color: {colors['background']};
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -124,7 +120,7 @@ col1, col2 = st.columns([3, 2])
 with col1:
     st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
     st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['accent'],
+        'background-color': colors['background'],
         'color': colors['text']
     }))
 
