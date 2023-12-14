@@ -2,121 +2,155 @@ import streamlit as st
 import pandas as pd
 
 # Page configuration
-st.set_page_config(
-    page_title='CodeSage By Moshiur',
-    layout='wide',
-    page_icon='🌟',
-)
+st.set_page_config(page_title='CodeSage By Moshiur', layout='wide', page_icon="🌟")
 
-# Define colors and style settings
-primary_color = "#4E33FF"  # A vibrant purple
-secondary_color = "#FF3366"  # A bright pink
-accent_color = "#FDCB6E"  # A sunny yellow
-background_color = "#FAFAFA"  # A light grey, to keep the focus on content
-content_background_color = "#FFFFFF"
-text_color = "#333333"
+# Define a modern color scheme
+colors = {
+    "primary": "#0083B8",
+    "secondary": "#00B4D8",
+    "accent": "#90E0EF",
+    "background": "#CAF0F8",
+    "text": "#0077B6",
+    "dark_text": "#03045E",
+    "light_text": "#ffffff"
+}
 
 # Custom styles
 st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'IBM Plex Sans', sans-serif;
-        background-color: {background_color};
-        color: {text_color};
+        font-family: 'Roboto', sans-serif;
+        background-color: {colors['background']};
+        color: {colors['text']};
     }}
     
-    h1, h2, h3, h4, h5, h6 {{
-        color: {primary_color};
+    h1, h2, h3 {{
+        color: {colors['primary']};
     }}
     
-    .block-container {{
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }}
-
-    /* Custom button styles */
     .stButton > button {{
         border-radius: 30px;
-        border: 2px solid {secondary_color};
+        border: none;
+        background-color: {colors['accent']};
+        color: {colors['dark_text']};
         padding: 10px 24px;
-        color: {secondary_color};
+        margin: 0px 10px;
+        transition: background-color 0.3s ease;
     }}
-
-    /* Streamlit's DataFrame */
+    
+    .stButton > button:hover {{
+        background-color: {colors['secondary']};
+    }}
+    
     .stDataFrame {{
         border-radius: 10px;
-        border: 2px solid {accent_color};
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    }}
+    
+    .dataframe {{
+        width: 100%;
+        border-collapse: collapse;
+    }}
+    
+    .dataframe th {{
+        background-color: {colors['primary']};
+        color: {colors['light_text']};
+    }}
+    
+    .dataframe td, .dataframe th {{
+        padding: 10px;
+        border: 1px solid {colors['accent']};
+        text-align: left;
+    }}
+    
+    .footer {{
+        background-color: {colors['secondary']};
+        color: {colors['light_text']};
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }}
+    
+    .youtube-section {{
+        background-color: {colors['primary']};
+        color: {colors['light_text']};
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px 0;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }}
+    
+    .youtube-section:hover {{
+        transform: scale(1.05);
     }}
 
-    /* Hyperlink styling */
+    .homework-section {{
+        background-color: {colors['accent']};
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px 0;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }}
+    
+    .homework-section:hover {{
+        transform: scale(1.05);
+    }}
+    
     a {{
-        color: {secondary_color};
+        color: {colors['dark_text']};
         text-decoration: none;
     }}
     
-    /* Dreamers Academy Mention */
-    .dreamers-mention {{
-        background-color: {primary_color};
-        color: {content_background_color};
-        padding: 1rem;
-        border-radius: 10px;
-        margin: 2rem 0;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    a:hover {{
+        color: {colors['secondary']};
+        text-decoration: underline;
     }}
-    .dreamers-mention:hover {{
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    }}
-
-    /* Footer */
-    .footer {{
-        text-align: center;
-        padding: 1rem;
-        background-color: {secondary_color};
-        color: {content_background_color};
-        font-size: 0.9rem;
-        border-top: 3px solid {primary_color};
-    }}
+    
 </style>
 """, unsafe_allow_html=True)
 
-# Main title
+# Header with Title and Subtitle
 st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
-# Introduction text
-st.markdown("""
-Welcome to CodeSage By Moshiur, where learning to code is an adventure! Dive into our vibrant classes, check out the latest homework highlights, and visit our YouTube channel for more coding fun.
-""")
+# YouTube Link Section
+youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your YouTube channel link
+st.markdown(f"""
+<div class="youtube-section">
+    <h2>Explore Our YouTube Channel</h2>
+    <a href="{youtube_url}" target="_blank" class="youtube-link">Visit YouTube</a>
+</div>
+""", unsafe_allow_html=True)
 
-# Class Schedule with Google Colab Links
-st.markdown('## 📅 Class Schedule')
-# Schedule Data with Google Colab Links (example links used here)
+# Class Schedule Section
+st.markdown('## Class Schedule')
 schedule_data = {
     'Batch Number': [f'Batch {i+1}' for i in range(6)],
-    'Schedule': ['Mon & Wed: 4pm - 5pm', 'Tue & Thu: 2pm - 3pm', 'Fri: 5pm - 6pm', 'Sat: 10am - 12pm', 'Sun: 1pm - 3pm', 'Mon & Wed: 6pm - 7pm'],
+    'Schedule': ['Monday & Wednesday: 4pm - 5pm', 'Tuesday & Thursday: 2pm - 3pm', 'Friday: 5pm - 6pm', 'Saturday: 10am - 12pm', 'Sunday: 1pm - 3pm', 'Monday & Wednesday: 6pm - 7pm'],
     'Google Colab Link': [f'[Open Colab](https://colab.research.google.com/batch{i+1})' for i in range(6)]
 }
 schedule_df = pd.DataFrame(schedule_data)
-st.dataframe(schedule_df.style.set_properties(**{'background-color': content_background_color, 'color': text_color}))
+st.dataframe(schedule_df.style.set_properties(**{'background-color': colors['background'], 'color': colors['text']}))
 
-# YouTube Section
-youtube_url = "https://www.youtube.com/c/YourChannelName"  # Replace with your YouTube channel link
-st.markdown(f'<a href="{youtube_url}" target="_blank" class="youtube-link">🎥 Visit our YouTube Channel</a>', unsafe_allow_html=True)
-
-# Best Homework of the Month Section
-st.markdown('## 🌟 Best Homework Showcase')
-# Assuming you have a function to fetch the best homework image
-best_homework_img = 'https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg'  # Replace with the path to your best homework image
-st.image(best_homework_img, caption='Incredible work by our star coder this month!', use_column_width=True)
+# Homework Showcase Section
+st.markdown("""
+<div class="homework-section">
+    <h2>Best Homework of the Month</h2>
+    <p>Check out this month's star project!</p>
+    <!-- Replace 'path_to_homework_image.jpg' with the actual path to your best homework image -->
+    <img src="path_to_homework_image.jpg" alt="Best Homework" style="max-width: 100%; border-radius: 10px;">
+</div>
+""", unsafe_allow_html=True)
 
 # Dreamers Academy Mention
 st.markdown(f"""
-<div class="dreamers-mention">
-    <h2>🎓 Dreamers Academy</h2>
-    <p>At Dreamers Academy, we empower our students with the skills they need to become the next generation of problem solvers and innovators. Learn Python with us and start your coding journey today!</p>
-    <a href="https://dreamersacademy.com.bd/" target="_blank">Visit Dreamers Academy</a>
+<div class="youtube-section">
+    <h2>Dreamers Academy</h2>
+    <p>As a proud instructor at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a>, I'm excited to teach Python programming to our brilliant students.</p>
 </div>
 """, unsafe_allow_html=True)
 
