@@ -16,7 +16,7 @@ st.set_page_config(
 # Define a cool and soothing color scheme
 colors = {
     'background': '#F0F2F6',
-    'primary': '#34568B',
+    'primary': '#6246EA',
     'secondary': '#FF6F61',
     'accent': '#88B04B',
     'text': '#2F3E46',
