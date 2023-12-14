@@ -180,7 +180,7 @@ courses = [
 ]
 
 # Selection for Python editor or Turtle graphics
-activity = st.selectbox("Choose an activity:", ["Python Editor", "Python Turtle Graphics"])
+activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
 if activity == "Python Editor":
     # Python Code Editor Section
