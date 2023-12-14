@@ -5,15 +5,7 @@ import pandas as pd
 def load_schedule():
     file_path = 'schedule.xlsx'
     return pd.read_excel(file_path)
-# Function to check password
-def check_password(batch, password):
-    # Example passwords - replace with your own logic and secure storage
-    password_dict = {
-        "1": "password1",  # Replace with actual passwords
-        "2": "password2",
-        # ... add passwords for all batches
-    }
-    return password_dict.get(batch, "") == password
+
 # Page configuration
 st.set_page_config(
     page_title='CodeSage By Moshiur',
@@ -127,18 +119,14 @@ schedule_df = load_schedule()
 col1, col2 = st.columns([3, 2])
 with col1:
     st.markdown('## Class Schedule 📚')
-    batch = st.selectbox("Select a Batch", schedule_df['Batch'].unique())
-    password = st.text_input("Enter Password", type="password")
-
-    if st.button("Access Colab Link"):
-        if check_password(batch, password):
-            link = schedule_df[schedule_df['Batch'] == batch]['Google Colab Link'].iloc[0]
-            st.markdown(f"[Open Google Colab]({link})", unsafe_allow_html=True)
-        else:
-            st.error("Incorrect Password")
+    st.dataframe(schedule_df.style.set_properties(**{
+        'background-color': colors['background'],
+        'color': colors['text']
+    }))
 
 with col2:
     st.markdown('## Best Homework of the Month 🌟 Sababah Subah')
+    # Placeholder image, replace with actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
     st.write("Link : https://trinket.io/turtle/4ea3424527")
 
