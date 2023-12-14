@@ -3,7 +3,7 @@ import pandas as pd
 
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'  # Ensure this path is correct
+    file_path = 'schedule.xlsx'  # Make sure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -13,15 +13,13 @@ st.set_page_config(
     page_icon='🌟'
 )
 
-# Define a cool and soothing color scheme
+# Define a modern and soothing color scheme
 colors = {
-    'background': '#F0F2F6',
-    'primary': '#6246EA',
-    'secondary': '#FF6F61',
-    'accent': '#88B04B',
-    'text': '#2F3E46',
-    'button_bg': '#FFD662',
-    'button_hover': '#FFA177'
+    'background': '#F0F2F6',  # A soft gray for a light and airy feel
+    'primary': '#34568B',     # A deep blue for a calming effect
+    'secondary': '#FF6F61',   # A warm coral for a pop of energy
+    'accent': '#88B04B',      # A fresh green for vibrancy
+    'text': '#495867',        # A dark slate for readability
 }
 
 # Custom styles
@@ -29,86 +27,94 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Segoe UI', 'Arial', sans-serif;
+        font-family: 'Arial', sans-serif;
         background-color: {colors['background']};
         color: {colors['text']};
     }}
     
     h1 {{
         color: {colors['primary']};
-        font-weight: bold;
+        font-size: 2.5em;
         text-align: center;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }}
 
     h2 {{
         color: {colors['secondary']};
-        font-weight: normal;
-        text-align: left;
+        font-size: 1.75em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }}
     
     .stButton > button {{
-        border: none;
-        border-radius: 20px;
-        background-color: {colors['button_bg']};
-        color: {colors['background']};
+        border: 2px solid {colors['primary']};
+        border-radius: 5px;
+        background-color: {colors['background']};
+        color: {colors['primary']};
         padding: 0.5rem 1rem;
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
+        transition: all 0.3s;
     }}
     
     .stButton > button:hover {{
-        background-color: {colors['button_hover']};
+        background-color: {colors['primary']};
+        color: {colors['background']};
+        border-color: {colors['secondary']};
     }}
     
     .stDataFrame, .stTable {{
-        border-radius: 10px;
-        border: 1px solid {colors['accent']};
+        border-radius: 8px;
+        overflow: hidden;
     }}
-    
+
+    .dataframe {{
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }}
+
     .dataframe th {{
         background-color: {colors['primary']};
         color: {colors['background']};
     }}
-    
+
     .dataframe td {{
-        background-color: {colors['background']};
+        background-color: {colors['accent']};
         color: {colors['text']};
     }}
 
     .footer {{
         background-color: {colors['primary']};
         color: {colors['background']};
-        padding: 1rem;
+        padding: 1em;
+        text-align: center;
         position: fixed;
         bottom: 0;
         width: 100%;
-        text-align: center;
-        font-size: 0.875rem;
     }}
 
     .custom-section {{
-        background-color: {colors['accent']};
-        padding: 2rem;
+        background-color: {colors['background']};
+        padding: 2em;
         border-radius: 10px;
-        margin: 1rem 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 1em;
+        margin-bottom: 1em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
-    
+
     a {{
         color: {colors['secondary']};
+        font-weight: bold;
         text-decoration: none;
     }}
-    
+
     a:hover {{
-        color: {colors['button_hover']};
+        color: {colors['primary']};
         text-decoration: underline;
     }}
 </style>
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown('<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1>CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
@@ -118,12 +124,13 @@ col1, col2 = st.columns([3, 2])
 with col1:
     st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
     st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['background'],
+        'background-color': colors['accent'],
         'color': colors['text']
     }))
 
 with col2:
-    st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>Best Homework of the Month 🌟</h2>', unsafe_allow_html=True)
+    # Replace with the actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 # Dreamers Academy Mention
@@ -135,7 +142,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # YouTube Channel Link
-youtube_url = "https://youtube.com/mhridoy"  # Replace with your actual YouTube channel link
+youtube_url = "https://youtube.com/mhridoy"
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
