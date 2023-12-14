@@ -58,7 +58,31 @@ st.markdown(f"""
         margin-bottom: 1em;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }}
+ /* New Section Styles */
+    .level-section {{
+        background-color: {colors['accent']};
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }}
 
+    .level-header {{
+        color: {colors['primary']};
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }}
+
+    .level-content {{
+        color: {colors['text']};
+        line-height: 1.6;
+    }}
+
+    .final-outcome {{
+        color: {colors['secondary']};
+        font-weight: bold;
+        margin-top: 10px;
+    }}
     /* Link Style */
     a {{
         color: {colors['secondary']};
@@ -143,6 +167,38 @@ with col2:
     st.markdown('<h2>Best Homework of the Month 🌟</h2>', unsafe_allow_html=True)
     # Replace with the actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
+
+
+# New Level Sections
+st.markdown("""
+<div class="level-section">
+    <h2 class="level-header">Level-1: Python Programming</h2>
+    <p class="level-content">
+        Python is a high-level, interpreted, general-purpose programming language. 
+        It is currently one of the most popular programming languages in the world. 
+        Our coders will learn all the necessary coding fundamentals using this high-level language.
+    </p>
+    <p class="final-outcome">Final Outcome: Coding Fundamentals (Basics)</p>
+</div>
+<div class="level-section">
+    <h2 class="level-header">Level-2: Website Design</h2>
+    <p class="level-content">
+        Whenever you are a web programmer, you will learn and understand the necessity of HTML and CSS. 
+        Kids of different ages can work with HTML and CSS codes to become excellent web programmers. 
+        They are going to get the benefit of knowing the fundamentals of HTML and CSS to design a website.
+        Additionally, they will learn Javascript and a front end design framework for interactive websites.
+    </p>
+    <p class="final-outcome">Final Outcome: Website Design</p>
+</div>
+<div class="level-section">
+    <h2 class="level-header">Level-3: Robotics & IOT</h2>
+    <p class="level-content">
+        Internet of Things (IOT) refers to objects/things that are connected and communicate via the internet. 
+        In this level, they will build IOT devices and fully functional robots, learning about hardware and software integration.
+    </p>
+    <p class="final-outcome">Final Outcome: Hardware and Software Integration</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Dreamers Academy Mention
 st.markdown(f"""
