@@ -18,15 +18,15 @@ st.set_page_config(
     }
 )
 
-# Define a fresh and minimalistic color scheme
+# Define a creative and soothing light purple color scheme
 colors = {
-    'background': '#FFFFFF',  # White background for a clean look
-    'primary': '#4A4E69',     # Dark blue for elegance and contrast
-    'secondary': '#9A8C98',   # Soft purple for a touch of color
-    'accent': '#C9ADA7',      # Muted pink for highlights
-    'text': '#22223B',        # Almost black for main text
-    'footer_bg': '#4A4E69',   # Dark blue for the footer
-    'footer_text': '#FFFFFF'  # White text for footer
+    'background': '#FAF4FF',  # A very light purple for a serene background
+    'primary': '#7B2CBF',     # A deep purple for contrast
+    'secondary': '#9D4EDD',   # A softer purple for secondary elements
+    'accent': '#CDB4DB',      # A gentle lavender for highlights
+    'text': '#4A2040',        # A darker purple for text
+    'footer_bg': '#7B2CBF',   # Deep purple for the footer
+    'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
 
 # Custom styles
@@ -54,15 +54,22 @@ st.markdown(f"""
     .custom-section {{
         background-color: {colors['accent']};
         padding: 2em;
-        border-radius: 12px;
+        border-radius: 15px;
         margin-bottom: 1em;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
     }}
- /.course-section {{
-        padding: 1rem;
-        border-left: 5px solid {colors['accent']};
+
+    .custom-section:hover {{
+        transform: scale(1.03);
+    }}
+
+    /* Course Section Style */
+    .course-section {{
+        border-left: 5px solid {colors['secondary']};
         background-color: {colors['background']};
-        margin-bottom: 1rem;
+        padding: 1em;
+        margin-bottom: 1em;
     }}
 
     .course-title {{
@@ -73,6 +80,7 @@ st.markdown(f"""
     .course-description {{
         color: {colors['text']};
     }}
+
     /* Link Style */
     a {{
         color: {colors['secondary']};
@@ -83,17 +91,7 @@ st.markdown(f"""
         color: {colors['primary']};
         text-decoration: underline;
     }}
- /* Hiding Streamlit elements */
-    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
-        visibility: hidden;
-    }}
-    footer {{
-        visibility: hidden;
-    }}
-    /* Adjust the padding at the bottom of the page */
-    .block-container {{
-        padding-bottom: 5rem;
-    }}
+
     /* Footer Style */
     .footer {{
         background-color: {colors['footer_bg']};
@@ -134,6 +132,17 @@ st.markdown(f"""
     .stButton > button:hover {{
         background-color: {colors['primary']};
         color: {colors['background']};
+    }}
+
+    /* Hiding Streamlit elements */
+    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
+        visibility: hidden;
+    }}
+    footer {{
+        visibility: hidden;
+    }}
+    .block-container {{
+        padding-bottom: 5rem;
     }}
 </style>
 """, unsafe_allow_html=True)
