@@ -10,7 +10,7 @@ def load_schedule():
 st.set_page_config(
     page_title='CodeSage By Moshiur',
     layout='wide',
-    page_icon='💍🦋',
+    page_icon='🦋',
     menu_items={
         'Get Help': None,
         'Report a bug': None,
