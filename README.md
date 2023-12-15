@@ -51,4 +51,4 @@ Have questions or suggestions? Reach out to us at [info@codesagebymoshiur.org](m
 
 © 2023 CodeSage By Moshiur. All Rights Reserved.
 
-![CodeSage Logo](link-to-codesage-logo.jpg)
+![CodeSage Logo](codesagebymoshiur_logo.jpg)
