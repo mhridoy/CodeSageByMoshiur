@@ -1,4 +1,4 @@
 streamlit
 pandas
 openpyxl
-streamlit_ace
+streamlit-ace
