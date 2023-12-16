@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
-
+from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -169,45 +169,28 @@ with col2:
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 
-# Function to execute Python code and capture output
-def execute_code(code, inputs):
-    # Redefine input function to work with predefined inputs
-    def mocked_input(prompt):
-        if mocked_input.inputs:
-            return mocked_input.inputs.pop(0)
-        return ''
-
-    mocked_input.inputs = inputs.copy()  # Copy the list so we can pop from it
-
+# Function to execute Python code
+def execute_code(code):
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
-        # Execute the user's code
-        exec(code, {'input': mocked_input})
+        exec(code)
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
-        # Restore the standard output
         sys.stdout = old_stdout
 
     return redirected_output.getvalue()
 
-# Interactive Python Editor
-st.markdown("## Interactive Python Editor")
-code = st.text_area("Write your Python code here:", height=250)
+# Enhanced Python Code Editor
+st.markdown("## Python Code Editor")
+code = st_ace(language='python', theme='twilight', key='editor')
 
-# Input for Python 'input()' calls
-st.markdown("## Input for your code (if required)")
-user_inputs = st.text_area("Enter each input on a new line", height=100)
-
-# Button to Run Code
+# Run Button
 if st.button('Run Code'):
-    inputs = user_inputs.split('\n')  # Split the user inputs into a list
-    output = execute_code(code, inputs)
+    output = execute_code(code)
     st.text_area("Output:", value=output, height=200)
-
-
 
 
 # Define the courses
