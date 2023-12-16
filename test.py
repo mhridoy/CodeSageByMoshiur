@@ -170,13 +170,21 @@ with col2:
 
 
 # Function to execute Python code and capture output
-def execute_code(code, input_data=None):
+def execute_code(code, inputs):
+    # Redefine input function to work with predefined inputs
+    def mocked_input(prompt):
+        if mocked_input.inputs:
+            return mocked_input.inputs.pop(0)
+        return ''
+
+    mocked_input.inputs = inputs.copy()  # Copy the list so we can pop from it
+
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
         # Execute the user's code
-        exec(code, {'input': lambda prompt='': input_data})
+        exec(code, {'input': mocked_input})
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
@@ -185,37 +193,19 @@ def execute_code(code, input_data=None):
 
     return redirected_output.getvalue()
 
-# Initialize session state variables
-if 'code' not in st.session_state:
-    st.session_state['code'] = ''
-if 'output' not in st.session_state:
-    st.session_state['output'] = ''
-if 'input_needed' not in st.session_state:
-    st.session_state['input_needed'] = False
-if 'input_data' not in st.session_state:
-    st.session_state['input_data'] = ''
-
 # Interactive Python Editor
 st.markdown("## Interactive Python Editor")
-st.session_state['code'] = st.text_area("Write your Python code here:", height=200, value=st.session_state['code'])
+code = st.text_area("Write your Python code here:", height=250)
 
-# Run Code Button
+# Input for Python 'input()' calls
+st.markdown("## Input for your code (if required)")
+user_inputs = st.text_area("Enter each input on a new line", height=100)
+
+# Button to Run Code
 if st.button('Run Code'):
-    st.session_state['output'] = execute_code(st.session_state['code'])
-    # Check if input() is called in the code
-    if 'input(' in st.session_state['code']:
-        st.session_state['input_needed'] = True
-    else:
-        st.session_state['input_needed'] = False
-
-# Show Input Field if needed
-if st.session_state['input_needed']:
-    st.session_state['input_data'] = st.text_input("Enter input for your code:")
-    if st.button("Submit Input"):
-        st.session_state['output'] = execute_code(st.session_state['code'], st.session_state['input_data'])
-
-# Display the output
-st.text_area("Output:", value=st.session_state['output'], height=200)
+    inputs = user_inputs.split('\n')  # Split the user inputs into a list
+    output = execute_code(code, inputs)
+    st.text_area("Output:", value=output, height=200)
 
 
 
