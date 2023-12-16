@@ -169,27 +169,36 @@ with col2:
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 
-# Function to execute Python code
-def execute_code(code):
+# Function to execute Python code and capture output
+def execute_code(code, input_data=None):
+    def mock_input(prompt):
+        return input_data.pop(0) if input_data else ''
+
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
-        exec(code)
+        # Execute the user's code
+        exec(code, {'input': mock_input})
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
+        # Restore the standard output
         sys.stdout = old_stdout
 
     return redirected_output.getvalue()
 
 # Enhanced Python Code Editor
 st.markdown("## Python Code Editor")
-code = st_ace(language='python', theme='twilight', key='editor')
+code = st_ace(language='python', theme='twilight', key='editor')  # Change 'twilight' to another theme if needed
 
-# Run Button
+# User Input Section
+user_input = st.text_area("Input (Enter each input on a new line if multiple):", height=100)
+input_data = user_input.split("\n") if user_input else None
+
+# Button to Run Code
 if st.button('Run Code'):
-    output = execute_code(code)
+    output = execute_code(code, input_data)
     st.text_area("Output:", value=output, height=200)
 
 
