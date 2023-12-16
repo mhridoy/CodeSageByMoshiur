@@ -168,7 +168,6 @@ with col2:
     st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
-
 # Function to execute Python code and capture output
 def execute_code(code, input_data=None):
     def mock_input(prompt):
@@ -188,9 +187,11 @@ def execute_code(code, input_data=None):
 
     return redirected_output.getvalue()
 
+# Streamlit layout
+st.title("Interactive Python Code Editor")
+
 # Enhanced Python Code Editor
-st.markdown("## Python Code Editor")
-code = st_ace(language='python', theme='contrast', key='editor')  # Change 'twilight' to another theme if needed
+code = st_ace(language='python', theme='twilight', key='editor')
 
 # User Input Section
 user_input = st.text_area("Input (Enter each input on a new line if multiple):", height=100)
@@ -200,6 +201,9 @@ input_data = user_input.split("\n") if user_input else None
 if st.button('Run Code'):
     output = execute_code(code, input_data)
     st.text_area("Output:", value=output, height=200)
+
+
+
 
 
 # Define the courses
