@@ -169,32 +169,41 @@ with col2:
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 
-# Interactive Python Editor
-st.markdown("## Interactive Python Editor")
-code = st.text_area("Write your Python code here:", height=200)
-
-# User Input Section
-user_input = st.text_input("Enter input (if your code requires):")
-
-# Button to Run Code
-if st.button('Run Code'):
-    # Capture the standard output and execute the code
+# Helper function to run Python code and capture output
+def run_python_code(code, user_input=None):
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
-        # If user input is needed, add it to the local scope
-        exec(f"user_input = '{user_input}'\n" + code)
+        if user_input is not None:
+            # If user input is provided, execute code with input
+            exec(f"user_input = '{user_input}'\n{code}")
+        else:
+            # Initially run code without input
+            exec(code)
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
-        # Restore the standard output
         sys.stdout = old_stdout
+    return redirected_output.getvalue()
 
-    # Display the output
-    output = redirected_output.getvalue()
-    st.text_area("Output:", value=output, height=200)
+# Interactive Python Editor
+st.markdown("## Interactive Python Editor")
+code = st.text_area("Write your Python code here:", height=200)
+output = ""
 
+# Button to Run Code
+if st.button('Run Code'):
+    output = run_python_code(code)
+
+# If the code requires input after initial execution
+if "input(" in code:
+    user_input = st.text_input("Enter input for your code:")
+    if st.button("Run with Input"):
+        output = run_python_code(code, user_input)
+
+# Display the output
+st.text_area("Output:", value=output, height=200)
 
 
 
