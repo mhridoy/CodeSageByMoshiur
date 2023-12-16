@@ -169,41 +169,54 @@ with col2:
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
 
-# Helper function to run Python code and capture output
-def run_python_code(code, user_input=None):
+# Function to execute Python code and capture output
+def execute_code(code, input_data=None):
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
-        if user_input is not None:
-            # If user input is provided, execute code with input
-            exec(f"user_input = '{user_input}'\n{code}")
-        else:
-            # Initially run code without input
-            exec(code)
+        # Execute the user's code
+        exec(code, {'input': lambda prompt='': input_data})
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
+        # Restore the standard output
         sys.stdout = old_stdout
+
     return redirected_output.getvalue()
+
+# Initialize session state variables
+if 'code' not in st.session_state:
+    st.session_state['code'] = ''
+if 'output' not in st.session_state:
+    st.session_state['output'] = ''
+if 'input_needed' not in st.session_state:
+    st.session_state['input_needed'] = False
+if 'input_data' not in st.session_state:
+    st.session_state['input_data'] = ''
 
 # Interactive Python Editor
 st.markdown("## Interactive Python Editor")
-code = st.text_area("Write your Python code here:", height=200)
-output = ""
+st.session_state['code'] = st.text_area("Write your Python code here:", height=200, value=st.session_state['code'])
 
-# Button to Run Code
+# Run Code Button
 if st.button('Run Code'):
-    output = run_python_code(code)
+    st.session_state['output'] = execute_code(st.session_state['code'])
+    # Check if input() is called in the code
+    if 'input(' in st.session_state['code']:
+        st.session_state['input_needed'] = True
+    else:
+        st.session_state['input_needed'] = False
 
-# If the code requires input after initial execution
-if "input(" in code:
-    user_input = st.text_input("Enter input for your code:")
-    if st.button("Run with Input"):
-        output = run_python_code(code, user_input)
+# Show Input Field if needed
+if st.session_state['input_needed']:
+    st.session_state['input_data'] = st.text_input("Enter input for your code:")
+    if st.button("Submit Input"):
+        st.session_state['output'] = execute_code(st.session_state['code'], st.session_state['input_data'])
 
 # Display the output
-st.text_area("Output:", value=output, height=200)
+st.text_area("Output:", value=st.session_state['output'], height=200)
+
 
 
 
