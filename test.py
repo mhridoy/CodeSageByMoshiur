@@ -187,6 +187,17 @@ if st.button('Run Code'):
         sys.stdout = old_stdout
         st.text(new_stdout.getvalue())
 
+# Define the courses
+courses = [
+    {"title": "Level-1: Python Programming", 
+     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
+    {"title": "Level-2: Website Design", 
+     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
+    {"title": "Level-3: Robotics & IOT", 
+     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
+]
+
+
 # Display courses 
 for course in courses:
     st.markdown(f"""
