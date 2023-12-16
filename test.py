@@ -168,24 +168,35 @@ with col2:
     st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
+
 # Interactive Python Editor
 st.markdown("## Interactive Python Editor")
-code = st.text_area("Write your Python code here", height=250)
+code = st.text_area("Write your Python code here:", height=200)
+
+# User Input Section
+user_input = st.text_input("Enter input (if your code requires):")
+
+# Button to Run Code
 if st.button('Run Code'):
-    # Redirect output
+    # Capture the standard output and execute the code
     old_stdout = sys.stdout
-    new_stdout = io.StringIO()
-    sys.stdout = new_stdout
+    redirected_output = sys.stdout = io.StringIO()
 
     try:
-        # Execute code
-        exec(code)
+        # If user input is needed, add it to the local scope
+        exec(f"user_input = '{user_input}'\n" + code)
     except Exception as e:
-        st.error(e)
+        st.error(f"Error: {e}")
     finally:
-        # Display output
+        # Restore the standard output
         sys.stdout = old_stdout
-        st.text(new_stdout.getvalue())
+
+    # Display the output
+    output = redirected_output.getvalue()
+    st.text_area("Output:", value=output, height=200)
+
+
+
 
 # Define the courses
 courses = [
