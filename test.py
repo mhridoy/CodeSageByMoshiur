@@ -168,17 +168,14 @@ with col2:
     st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
 
-# Function to execute Python code and capture output
-def execute_code(code, input_data=None):
-    def mock_input(prompt):
-        return input_data.pop(0) if input_data else ''
-
+# Function to execute Python code with predefined inputs
+def execute_code(code, age):
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
 
     try:
-        # Execute the user's code
-        exec(code, {'input': mock_input})
+        # Execute the user's code with provided age
+        exec(code, {'age': age})
     except Exception as e:
         st.error(f"Error: {e}")
     finally:
@@ -190,19 +187,16 @@ def execute_code(code, input_data=None):
 # Streamlit layout
 st.title("Interactive Python Code Editor")
 
+# Get user's age in advance instead of using input()
+user_age = st.number_input("Enter your age", min_value=0, max_value=120, step=1)
+
 # Enhanced Python Code Editor
 code = st_ace(language='python', theme='twilight', key='editor')
 
-# User Input Section
-user_input = st.text_area("Input (Enter each input on a new line if multiple):", height=100)
-input_data = user_input.split("\n") if user_input else None
-
 # Button to Run Code
 if st.button('Run Code'):
-    output = execute_code(code, input_data)
+    output = execute_code(code, user_age)
     st.text_area("Output:", value=output, height=200)
-
-
 
 
 
