@@ -190,7 +190,7 @@ def execute_code(code, input_data=None):
 
 # Enhanced Python Code Editor
 st.markdown("## Python Code Editor")
-code = st_ace(language='python', theme='twilight', key='editor')  # Change 'twilight' to another theme if needed
+code = st_ace(language='python', theme='contrast', key='editor')  # Change 'twilight' to another theme if needed
 
 # User Input Section
 user_input = st.text_area("Input (Enter each input on a new line if multiple):", height=100)
