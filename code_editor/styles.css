@@ -5,18 +5,27 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0; /* Light background */
+    background-color: #f0f0f0;
     color: #333;
     font-family: 'Arial', sans-serif;
 }
 
 header {
-    background-color: #4caf50; /* Green header */
+    background-color: #4caf50;
     color: white;
     width: 100%;
     padding: 10px 0;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
 }
 
 h1 {
@@ -26,10 +35,39 @@ h1 {
 
 #editor {
     width: 70%;
-    height: 75vh;
+    height: 60vh;
     margin-top: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Additional styles for UI elements */
+.output-container {
+    width: 70%;
+    margin-top: 10px;
+}
+
+#run-btn {
+    display: block;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#run-btn:hover {
+    background-color: #388e3c;
+}
+
+#output {
+    border: 1px solid #ccc;
+    height: 200px;
+    background-color: white;
+    overflow-y: scroll;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Additional interactive styling */
