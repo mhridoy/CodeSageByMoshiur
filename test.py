@@ -2,6 +2,21 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
+import streamlit.components.v1 as components
+
+# Custom Component for Ace Editor
+def ace_editor(language="python", theme="monokai", key=None):
+    editor_html = f"""
+    <div id="editor" style="height: 300px; width:100%;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/{theme}");
+        editor.session.setMode("ace/mode/{language}");
+        editor.session.setValue("");
+    </script>
+    """
+    return components.html(editor_html, height=350, key=key)
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -184,24 +199,9 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 
 if activity == "Python Editor":
     # Python Code Editor Section
-    st.markdown("""
-<div id="editor"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/python");
+   editor_key = "ace-editor"
+   ace_editor(key=editor_key)
 
-    function syncEditor() {
-        // Code to sync Ace Editor content with Streamlit
-    }
-
-    editor.session.on('change', function(delta) {
-        // Call sync function on code change
-        syncEditor();
-    });
-</script>
-""", unsafe_allow_html=True)
 
     # Button to run the code
     if st.button("Run Code"):
