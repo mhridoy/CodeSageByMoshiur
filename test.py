@@ -4,6 +4,7 @@ import sys
 import io
 import streamlit.components.v1 as components
 
+
 # Custom Component for Ace Editor
 def ace_editor(language="python", theme="monokai", key=None):
     editor_html = f"""
@@ -200,7 +201,7 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 if activity == "Python Editor":
     # Python Code Editor Section
     editor_key = "ace-editor"
-    ace_editor(key=editor_key)
+    ace_editor()
 
     # Button to run the code
     if st.button("Run Code"):
