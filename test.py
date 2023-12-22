@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
-from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -166,31 +165,26 @@ with col1:
 
 with col2:
     st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
+    # Replace with the actual image URL or path
     st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
+    st.write("Code Link : https://trinket.io/turtle/f3311da13d")
 
-def execute_code(code, inputs):
-    # Mock the input function to use inputs from the provided list
-    mock_inputs = iter(inputs)
+# Course Sections
+courses = [
+    {"title": "Level-1: Python Programming", 
+     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
+    {"title": "Level-2: Website Design", 
+     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
+    {"title": "Level-3: Robotics & IOT", 
+     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
+]
 
-    def mock_input(prompt=''):
-        return next(mock_inputs, '')
+# Selection for Python editor or Turtle graphics
+activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
-    old_stdout = sys.stdout
-    redirected_output = sys.stdout = io.StringIO()
-
-    try:
-        # Execute the user's code, replacing input() with mock_input()
-        exec(code, {'input': mock_input})
-    except Exception as e:
-        st.error(f"Error: {e}")
-    finally:
-        sys.stdout = old_stdout
-
-    return redirected_output.getvalue()
-
-# Streamlit layout
-st.title("Interactive Python Code Editor")
-st.markdown("""
+if activity == "Python Editor":
+    # Python Code Editor Section
+    st.markdown("""
 <div id="editor"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -209,22 +203,35 @@ st.markdown("""
 </script>
 """, unsafe_allow_html=True)
 
-# Button to Run Code
-if st.button('Run Code'):
-    output = execute_code(code, input_data)
-    st.text_area("Output:", value=output, height=200)
+    # Button to run the code
+    if st.button("Run Code"):
+        # Capture the standard output
+        old_stdout = sys.stdout
+        redirected_output = sys.stdout = io.StringIO()
 
+        try:
+            # Execute the user's code
+            exec(user_code)
+        except Exception as e:
+            st.error(f"Error: {e}")
+        finally:
+            # Restore the standard output
+            sys.stdout = old_stdout
 
+        # Get the captured output
+        output = redirected_output.getvalue()
+        st.text_area("Output:", value=output, height=300)
 
-# Define the courses
-courses = [
-    {"title": "Level-1: Python Programming", 
-     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
-    {"title": "Level-2: Website Design", 
-     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
-    {"title": "Level-3: Robotics & IOT", 
-     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
-]
+elif activity == "Python Turtle Graphics":
+    # Python Turtle Graphics Section
+    st.markdown("## Python Turtle Graphics")
+    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
+
+    if show_turtle_window:
+        # Embed Trinket.io Turtle project
+        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
+        st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+
 
 
 # Display courses 
