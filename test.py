@@ -190,13 +190,24 @@ def execute_code(code, inputs):
 
 # Streamlit layout
 st.title("Interactive Python Code Editor")
+st.markdown("""
+<div id="editor"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/python");
 
-# Enhanced Python Code Editor
-code = st_ace(language='python', theme='twilight', key='editor')
+    function syncEditor() {
+        // Code to sync Ace Editor content with Streamlit
+    }
 
-# User Input Section
-user_input = st.text_area("Enter expected inputs (one per line):", height=100)
-input_data = user_input.split("\n") if user_input else []
+    editor.session.on('change', function(delta) {
+        // Call sync function on code change
+        syncEditor();
+    });
+</script>
+""", unsafe_allow_html=True)
 
 # Button to Run Code
 if st.button('Run Code'):
