@@ -199,9 +199,8 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 
 if activity == "Python Editor":
     # Python Code Editor Section
-   editor_key = "ace-editor"
-   ace_editor(key=editor_key)
-
+    editor_key = "ace-editor"
+    ace_editor(key=editor_key)
 
     # Button to run the code
     if st.button("Run Code"):
