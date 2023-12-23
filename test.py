@@ -153,7 +153,7 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 
 if activity == "Python Editor":
         # Python Code Editor Section
-    user_code = st_ace.st_ace(
+    user_code = st_ace(
     language="python",
     theme="monokai",
     key="code_editor",
