@@ -25,7 +25,7 @@ colors = {
     'primary': '#31708E',
     'secondary': '#A3C4BC',
     'accent': '#FFD580',
-    'text': '#1A1A1A',
+    'text': '#252422',
     'footer_bg': '#31708E',
     'footer_text': '#FFFAF3'
 }
