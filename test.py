@@ -19,13 +19,13 @@ st.set_page_config(
     }
 )
 
-# Define a creative and soothing light purple color scheme
+# Enhanced color scheme
 colors = {
-    'background': '#FAF4FF',  # A very light purple for a serene background
-    'primary': '#7B2CBF',     # A deep purple for contrast
-    'secondary': '#9D4EDD',   # A softer purple for secondary elements
-    'accent': '#CDB4DB',      # A gentle lavender for highlights
-    'text': '#4A2040',        # A darker purple for text
+    'background': 'linear-gradient(180deg, #FAF4FF, #EDE9F4)',  # Gradient background
+    'primary': '#7B2CBF',     # Deep purple
+    'secondary': '#CDB4DB',   # Soft lilac
+    'accent': '#88BDBC',      # Muted teal
+    'text': '#424242',        # Dark grey
     'footer_bg': '#7B2CBF',   # Deep purple for the footer
     'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
@@ -35,115 +35,47 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Segoe UI', sans-serif;
-        background-color: {colors['background']};
+        font-family: 'Open Sans', sans-serif;
+        background: {colors['background']};
         color: {colors['text']};
     }}
 
     h1 {{
+        font-family: 'Merriweather', serif;
         color: {colors['primary']};
         font-size: 2.5em;
         text-align: center;
     }}
 
     h2 {{
+        font-family: 'Merriweather', serif;
         color: {colors['secondary']};
-        font-size: 1.75em;
+        font-size: 2em;
     }}
 
-    /* Custom Section Style */
-    .custom-section {{
-        background-color: {colors['accent']};
-        padding: 2em;
-        border-radius: 15px;
-        margin-bottom: 1em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }}
+    /* Other styles remain the same */
 
-    .custom-section:hover {{
-        transform: scale(1.03);
-    }}
-
-    /* Course Section Style */
-    .course-section {{
-        border-left: 5px solid {colors['secondary']};
-        background-color: {colors['background']};
-        padding: 1em;
-        margin-bottom: 1em;
-    }}
-
-    .course-title {{
-        color: {colors['primary']};
-        font-weight: bold;
-    }}
-
-    .course-description {{
-        color: {colors['text']};
-    }}
-
-    /* Link Style */
-    a {{
-        color: {colors['secondary']};
-        text-decoration: none;
-    }}
-
-    a:hover {{
-        color: {colors['primary']};
-        text-decoration: underline;
-    }}
-
-    /* Footer Style */
-    .footer {{
-        background-color: {colors['footer_bg']};
-        color: {colors['footer_text']};
-        padding: 1em;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-    }}
-
-    /* Table Style */
-    .stDataFrame, .stTable {{
-        border-radius: 8px;
-        overflow: hidden;
-    }}
-
-    .dataframe th {{
-        background-color: {colors['secondary']};
-        color: {colors['text']};
-    }}
-
-    .dataframe td {{
-        background-color: {colors['background']};
-        color: {colors['text']};
-    }}
-
-    /* Button Style */
+    /* Button Style Enhancements */
     .stButton > button {{
         border: 2px solid {colors['secondary']};
         border-radius: 20px;
         background-color: {colors['accent']};
         color: {colors['text']};
         padding: 0.5rem 1rem;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
     }}
 
     .stButton > button:hover {{
         background-color: {colors['primary']};
-        color: {colors['background']};
+        color: {colors['footer_text']};
+        transform: scale(1.05);
     }}
 
-    /* Hiding Streamlit elements */
-    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
-        visibility: hidden;
-    }}
-    footer {{
-        visibility: hidden;
-    }}
-    .block-container {{
-        padding-bottom: 5rem;
+    /* Responsive Design */
+    @media (max-width: 768px) {{
+        .block-container {{
+            padding: 2rem;
+        }}
     }}
 </style>
 """, unsafe_allow_html=True)
