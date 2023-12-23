@@ -2,4 +2,4 @@ streamlit
 pandas
 openpyxl
 streamlit-ace
-streamlit-code-editor
+streamlit_code_editor
