@@ -28,6 +28,9 @@ colors = {
     'text': '#252422',
     'footer_bg': '#31708E',
     'footer_text': '#FFFAF3'
+    'table_bg': '#FFFFFF',
+    'table_text': '#31708E',
+    'row_highlight': '#E6FDFC'
 }
 
 # Custom styles
@@ -79,8 +82,35 @@ st.markdown(f"""
         }}
     }}
 
-    /* Additional styles for other elements */
-    /* ... (Customize as needed) */
+      /* Enhanced Table Style */
+    .stDataFrame, .stTable {{
+        border-radius: 8px;
+        overflow: hidden;
+    }}
+
+    .dataframe th {{
+        background-color: {colors['secondary']};
+        color: {colors['table_text']};
+    }}
+
+    .dataframe td {{
+        background-color: {colors['table_bg']};
+        color: {colors['text']};
+        padding: 12px;
+    }}
+
+    .dataframe tr:nth-of-type(odd) {{
+        background-color: {colors['row_highlight']};
+    }}
+
+    /* Adjusting the table header */
+    .dataframe thead th {{
+        color: {colors['footer_text']};
+        font-size: 1em;
+    }}
+
+    /* Additional styles for responsive and interactive elements */
+    /* ... */
 </style>
 """, unsafe_allow_html=True)
 # Header
@@ -92,10 +122,11 @@ schedule_df = load_schedule()
 # Main content area
 col1, col2 = st.columns([3, 2])
 with col1:
-    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
-    st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['background'],
-        'color': colors['text']
+       st.dataframe(schedule_df.style.set_properties(**{
+        'background-color': colors['table_bg'],
+        'color': colors['text'],
+        'border-radius': '8px',
+        'padding': '12px'
     }))
 
 with col2:
