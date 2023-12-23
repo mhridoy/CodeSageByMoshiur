@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
+import streamlit_code_editor as stce
+
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -149,9 +151,15 @@ courses = [
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
 if activity == "Python Editor":
-    # Python Code Editor Section
+        # Python Code Editor Section
     st.markdown("## Python Code Editor")
-    user_code = st.text_area("Write your Python code here:", height=300)
+    user_code = stce.code_editor(
+        language="python",
+        key="code_editor",
+        height=300,
+        default_text="Write your Python code here:"
+    )
+
 
     # Button to run the code
     if st.button("Run Code"):
