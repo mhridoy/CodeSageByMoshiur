@@ -213,7 +213,7 @@ elif activity == "Python Turtle Graphics":
 
     if show_turtle_window:
         # Embed Trinket.io Turtle project
-        trinket_embed_url = "https://trinket.io/turtle/f3311da13d"  # Replace with your Trinket.io embed URL
+        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
         st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
 
 
