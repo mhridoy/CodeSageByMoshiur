@@ -159,7 +159,8 @@ if activity == "Python Editor":
     <div class="custom-code-editor" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     """, unsafe_allow_html=True)
     
-    user_code = st.text_area("Write your Python code here:", height=400, theme="monokai", placeholder="def hello_world():\n    print('Hello, beautiful world!')")
+    user_code = st.text_area("Write your Python code here:", height=400, placeholder="def hello_world():\n    print('Hello, beautiful world!')")
+
     
     # Button to run the code with a captivating hover effect
     if st.button("Run Code ", style="border-radius: 20px; background-color: #95A5A6; color: #252422; transition: all 0.3s;"):
