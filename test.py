@@ -153,23 +153,20 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 
 if activity == "Python Editor":
         # Python Code Editor Section
-    user_code = st_ace(
-    language="python",
-    theme="monokai",
-    key="code_editor",
-    height=300,
-    auto_update=True,
-    enable_snippets=True,
-    default_text="Write your Python code here:"
-)
 
-
-    # Button to run the code
-    if st.button("Run Code"):
+    # Create a visually appealing code editor with rounded corners and a soft glow
+    st.write("""
+    <div class="custom-code-editor" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    """, unsafe_allow_html=True)
+    
+    user_code = st.text_area("Write your Python code here:", height=400, theme="monokai", placeholder="def hello_world():\n    print('Hello, beautiful world!')")
+    
+    # Button to run the code with a captivating hover effect
+    if st.button("Run Code ", style="border-radius: 20px; background-color: #95A5A6; color: #252422; transition: all 0.3s;"):
         # Capture the standard output
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
-
+    
         try:
             # Execute the user's code
             exec(user_code)
@@ -178,10 +175,18 @@ if activity == "Python Editor":
         finally:
             # Restore the standard output
             sys.stdout = old_stdout
-
+    
         # Get the captured output
         output = redirected_output.getvalue()
-        st.text_area("Output:", value=output, height=300)
+    
+        # Display output with a subtle highlight
+        st.markdown(f"""
+        <div class="output-section" style="border-radius: 10px; padding: 15px; background-color: #F8F5F1; color: #495464;">
+        `{output}`
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.write("</div>", unsafe_allow_html=True)
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
