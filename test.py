@@ -27,7 +27,7 @@ colors = {
     'accent': '#FFD580',
     'text': '#252422',
     'footer_bg': '#31708E',
-    'footer_text': '#FFFAF3'
+    'footer_text': '#FFFAF3',
     'table_bg': '#FFFFFF',
     'table_text': '#31708E',
     'row_highlight': '#E6FDFC'
