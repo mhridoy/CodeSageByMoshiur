@@ -21,13 +21,13 @@ st.set_page_config(
 
 # Enhanced color scheme
 colors = {
-    'background': 'linear-gradient(180deg, #FAF4FF, #EDE9F4)',  # Gradient background
-    'primary': '#7B2CBF',     # Deep purple
-    'secondary': '#CDB4DB',   # Soft lilac
-    'accent': '#88BDBC',      # Muted teal
-    'text': '#424242',        # Dark grey
-    'footer_bg': '#7B2CBF',   # Deep purple for the footer
-    'footer_text': '#EDE9F4'  # Light purple text for the footer
+    'background': 'linear-gradient(135deg, #E6FDFC, #FFFAF3)',
+    'primary': '#31708E',
+    'secondary': '#A3C4BC',
+    'accent': '#FFD580',
+    'text': '#1A1A1A',
+    'footer_bg': '#31708E',
+    'footer_text': '#FFFAF3'
 }
 
 # Custom styles
@@ -35,51 +35,54 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Georgia', serif;
         background: {colors['background']};
         color: {colors['text']};
     }}
 
+    h1, h2 {{
+        font-family: 'Helvetica', sans-serif;
+        margin: 0.5em 0;
+    }}
+
     h1 {{
-        font-family: 'Merriweather', serif;
         color: {colors['primary']};
         font-size: 2.5em;
-        text-align: center;
     }}
 
     h2 {{
-        font-family: 'Merriweather', serif;
         color: {colors['secondary']};
         font-size: 2em;
     }}
 
-    /* Other styles remain the same */
-
-    /* Button Style Enhancements */
+    /* Enhanced Button Style */
     .stButton > button {{
-        border: 2px solid {colors['secondary']};
+        border: none;
         border-radius: 20px;
         background-color: {colors['accent']};
         color: {colors['text']};
         padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.3s;
     }}
 
     .stButton > button:hover {{
         background-color: {colors['primary']};
         color: {colors['footer_text']};
-        transform: scale(1.05);
+        transform: translateY(-2px);
     }}
 
-    /* Responsive Design */
+    /* Responsive Design Adjustments */
     @media (max-width: 768px) {{
         .block-container {{
             padding: 2rem;
         }}
     }}
+
+    /* Additional styles for other elements */
+    /* ... (Customize as needed) */
 </style>
 """, unsafe_allow_html=True)
-
 # Header
 st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
