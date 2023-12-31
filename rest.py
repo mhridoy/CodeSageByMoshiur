@@ -1,15 +1,18 @@
 import streamlit as st
 import docxtpl  # Install using: pip install docxtpl
 import requests  # For payment status check
-
+import os
 # Payment verification function
 def verify_payment(payment_id):
     # Replace with your logic to check payment status using bKash API
     response = requests.get(f"https://api.bkash.com/payment/status/{payment_id}")
     return response.json()["status"] == "successful"
 
-# Resume template
-resume_template = docxtpl.DocxTemplate("resume_template.docx")  # Replace with your template path
+template_file = "resume_template.docx"
+if not os.path.exists(template_file):
+    st.error(f"Template file '{template_file}' not found.")
+else:
+    resume_template = docxtpl.DocxTemplate(template_file)
 
 # User input fields
 st.title("Resume Builder")
