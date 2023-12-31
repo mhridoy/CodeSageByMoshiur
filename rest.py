@@ -1,70 +1,49 @@
 import streamlit as st
-import docxtpl  # Install using: pip install docxtpl
-import requests  # For payment status check
-import os
-# Payment verification function
-def verify_payment(payment_id):
-    # Replace with your logic to check payment status using bKash API
-    response = requests.get(f"https://api.bkash.com/payment/status/{payment_id}")
-    return response.json()["status"] == "successful"
+from fpdf import FPDF
 
-# Define a function to check if the file is a valid docx
-def is_valid_docx(file_path):
-    try:
-        docxtpl.DocxTemplate(file_path)
-        return True
-    except Exception as e:
-        st.error(f"Failed to load DOCX template: {e}")
-        return False
+# Function to generate PDF
+def create_pdf(context):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
 
-# Check if the resume template file exists and is valid
-template_file = "resume_template.docx"
-if os.path.exists(template_file) and is_valid_docx(template_file):
-    resume_template = docxtpl.DocxTemplate(template_file)
+    # Adding personal information
+    pdf.cell(200, 10, txt=f"Name: {context['name']}", ln=True)
+    pdf.cell(200, 10, txt=f"Email: {context['email']}", ln=True)
+    pdf.cell(200, 10, txt=f"Phone Number: {context['phone_number']}", ln=True)
 
+    # Adding Education
+    pdf.cell(200, 10, txt="Education:", ln=True)
+    for edu in context['education']:
+        pdf.cell(200, 10, txt=f"{edu['degree']} from {edu['institution']} - {edu['year']}", ln=True)
 
+    # Adding Work Experience
+    pdf.cell(200, 10, txt="Work Experience:", ln=True)
+    for exp in context['work_experience']:
+        pdf.cell(200, 10, txt=f"{exp['job_title']} at {exp['company']} ({exp['duration']})", ln=True)
+        pdf.multi_cell(0, 10, txt=exp['description'])
+
+    # Adding Skills
+    pdf.cell(200, 10, txt="Skills:", ln=True)
+    pdf.multi_cell(0, 10, txt=", ".join(context['skills']))
+
+    # Adding References
+    pdf.cell(200, 10, txt="References:", ln=True)
+    for ref in context['references']:
+        pdf.cell(200, 10, txt=f"{ref['name']} - {ref['position']}, Contact: {ref['contact']}", ln=True)
+
+    pdf.output("resume.pdf")
 
 # User input fields
 st.title("Resume Builder")
 
 with st.form("resume_form"):
-    st.write("**Personal Information**")
-    name = st.text_input("Name")
-    email = st.text_input("Email")
-    phone_number = st.text_input("Phone Number")
-
-    st.write("**Education**")
-    education = []
-    for i in range(3):
-        degree = st.text_input(f"Degree {i+1}")
-        institution = st.text_input(f"Institution {i+1}")
-        year = st.text_input(f"Year {i+1}")
-        education.append({"degree": degree, "institution": institution, "year": year})
-
-    st.write("**Work Experience**")
-    work_experience = []
-    for i in range(2):
-        job_title = st.text_input(f"Job Title {i+1}")
-        company = st.text_input(f"Company {i+1}")
-        duration = st.text_input(f"Duration {i+1}")
-        description = st.text_area(f"Description {i+1}")
-        work_experience.append({"job_title": job_title, "company": company, "duration": duration, "description": description})
-
-    st.write("**Skills**")
-    skills = st.text_area("Skills (comma-separated)")
-
-    st.write("**References**")
-    references = []
-    for i in range(2):
-        name = st.text_input(f"Name {i+1}")
-        position = st.text_input(f"Position {i+1}")
-        contact = st.text_input(f"Contact {i+1}")
-        references.append({"name": name, "position": position, "contact": contact})
+    # ... (Your existing code for user inputs)
 
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-    # Render resume content
+    # Gather data into context
     context = {
         "name": name,
         "email": email,
@@ -74,23 +53,15 @@ if submitted:
         "skills": skills.split(","),
         "references": references
     }
-    resume_template.render(context)
 
-    # Generate resume file
-    resume_file = "resume.docx"
-    resume_template.save(resume_file)
+    # Create PDF
+    create_pdf(context)
 
-    # Redirect to payment gateway
-    st.session_state["payment_required"] = True
-    st.session_state["resume_file"] = resume_file
-    st.experimental_redirection("https://shop.bkash.com/codesage-by-moshiur01752175087/pay/bdt20/nCzYqc")
+    # Display the payment link
+    st.markdown("Please complete the payment to download your resume.")
+    st.markdown("[Proceed to Payment](https://shop.bkash.com/codesage-by-moshiur01752175087/pay/bdt20/nCzYqc)", unsafe_allow_html=True)
 
-# Payment verification and download
-if st.session_state.get("payment_required"):
-    payment_id = st.session_state.get("payment_id")  # Get payment ID from URL or user input
-    if payment_id and verify_payment(payment_id):
-        resume_file = st.session_state.get("resume_file")
-        st.download_button(label="Download Resume", data=resume_file, file_name="resume.docx")
-        st.session_state.clear()  # Clear session state
-    else:
-        st.error("Payment verification failed. Please try again.")
+    # Assume payment is successful for demo purposes
+    # In a real application, you should verify the payment
+    with open("resume.pdf", "rb") as file:
+        st.download_button(label="Download Resume", data=file, file_name="resume.pdf", mime="application/pdf")
