@@ -71,7 +71,7 @@ with st.form("resume_form"):
         contact = st.text_input(f"Contact {i+1}")
         references.append({"name": name, "position": position, "contact": contact})
 
-submitted = st.form_submit_button("Submit")
+     submitted = st.form_submit_button("Submit")
 
 if submitted:
     # Gather data into context
