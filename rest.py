@@ -8,11 +8,21 @@ def verify_payment(payment_id):
     response = requests.get(f"https://api.bkash.com/payment/status/{payment_id}")
     return response.json()["status"] == "successful"
 
+# Define a function to check if the file is a valid docx
+def is_valid_docx(file_path):
+    try:
+        docxtpl.DocxTemplate(file_path)
+        return True
+    except Exception as e:
+        st.error(f"Failed to load DOCX template: {e}")
+        return False
+
+# Check if the resume template file exists and is valid
 template_file = "resume_template.docx"
-if not os.path.exists(template_file):
-    st.error(f"Template file '{template_file}' not found.")
-else:
+if os.path.exists(template_file) and is_valid_docx(template_file):
     resume_template = docxtpl.DocxTemplate(template_file)
+
+
 
 # User input fields
 st.title("Resume Builder")
