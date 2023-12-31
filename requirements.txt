@@ -4,3 +4,4 @@ openpyxl
 streamlit-ace
 streamlit_code_editor
 streamlit_ace
+docxtpl
