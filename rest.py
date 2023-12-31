@@ -38,9 +38,40 @@ def create_pdf(context):
 st.title("Resume Builder")
 
 with st.form("resume_form"):
-    # ... (Your existing code for user inputs)
+    st.write("**Personal Information**")
+    name = st.text_input("Name")
+    email = st.text_input("Email")
+    phone_number = st.text_input("Phone Number")
 
-    submitted = st.form_submit_button("Submit")
+    st.write("**Education**")
+    education = []
+    for i in range(3):
+        degree = st.text_input(f"Degree {i+1}")
+        institution = st.text_input(f"Institution {i+1}")
+        year = st.text_input(f"Year {i+1}")
+        education.append({"degree": degree, "institution": institution, "year": year})
+
+    st.write("**Work Experience**")
+    work_experience = []
+    for i in range(2):
+        job_title = st.text_input(f"Job Title {i+1}")
+        company = st.text_input(f"Company {i+1}")
+        duration = st.text_input(f"Duration {i+1}")
+        description = st.text_area(f"Description {i+1}")
+        work_experience.append({"job_title": job_title, "company": company, "duration": duration, "description": description})
+
+    st.write("**Skills**")
+    skills = st.text_area("Skills (comma-separated)")
+
+    st.write("**References**")
+    references = []
+    for i in range(2):
+        name = st.text_input(f"Name {i+1}")
+        position = st.text_input(f"Position {i+1}")
+        contact = st.text_input(f"Contact {i+1}")
+        references.append({"name": name, "position": position, "contact": contact})
+
+submitted = st.form_submit_button("Submit")
 
 if submitted:
     # Gather data into context
