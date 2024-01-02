@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import io
 import streamlit_ace as st_ace
+from streamlit_ace import st_ace
 
 
 # Function to load schedule data from the Excel file
