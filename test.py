@@ -107,7 +107,7 @@ st.markdown(f"""
     }}
 
     .reportview-container {
-        font-family: monospace;
+        background-color: pink;
     }
     .output-container {
         border: 1px solid #f0f0f0;
