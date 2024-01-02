@@ -164,10 +164,10 @@ with col1:
     }))
 
 with col2:
-    st.markdown('<h2>Best Homework of the Month 🌟 Shahmir rashid</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>Best Homework of the Month 🌟 Afsara </h2>', unsafe_allow_html=True)
     # Replace with the actual image URL or path
-    st.image('best_homework01.png', caption='Incredible work by our star coder!', use_column_width=True)
-    st.write("Code Link : https://trinket.io/python/17ebb5fb46")
+    st.image('best_homework02.png', caption='Incredible work by our star coder!', use_column_width=True)
+    st.write("Code Link : https://trinket.io/python/ef2a270c85")
 
 # Course Sections
 courses = [
