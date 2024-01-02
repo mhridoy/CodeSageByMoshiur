@@ -106,13 +106,13 @@ st.markdown(f"""
         background-color: {colors['row_highlight']};
     }}
 
-    .reportview-container {
+    .reportview-container {{
         background-color: pink;
-    }
-    .output-container {
+    }}
+    .output-container {{
         border: 1px solid #f0f0f0;
         background-color: #f9f9f9;
-    }
+    }}
 
     /* Adjusting the table header */
     .dataframe thead th {{
