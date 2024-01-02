@@ -106,6 +106,14 @@ st.markdown(f"""
         background-color: {colors['row_highlight']};
     }}
 
+    .reportview-container {
+        font-family: monospace;
+    }
+    .output-container {
+        border: 1px solid #f0f0f0;
+        background-color: #f9f9f9;
+    }
+
     /* Adjusting the table header */
     .dataframe thead th {{
         color: {colors['footer_text']};
@@ -151,23 +159,19 @@ courses = [
 # Selection for Python editor or Turtle graphics
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
-if activity == "Python Editor":
-        # Python Code Editor Section
+# Python Code Editor with syntax highlighting
+st.markdown("## Python Code Editor")
+user_code = st_ace(language="python", theme=theme, key="code_editor", height=300)
 
-    # Create a visually appealing code editor with rounded corners and a soft glow
-    st.write("""
-    <div class="custom-code-editor" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    """, unsafe_allow_html=True)
-    
-    user_code = st.text_area("Write your Python code here:", height=400, placeholder="def hello_world():\n    print('Hello, beautiful world!')")
+# Button to run the code
+if st.button("Run Code"):
 
-    
-    # Button to run the code with a captivating hover effect
-    if st.button("Run Code ", style="border-radius: 20px; background-color: #95A5A6; color: #252422; transition: all 0.3s;"):
+    # Confirmation for code execution
+    if st.checkbox("I confirm to run the code", key="confirm_run"):
         # Capture the standard output
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
-    
+
         try:
             # Execute the user's code
             exec(user_code)
@@ -176,28 +180,11 @@ if activity == "Python Editor":
         finally:
             # Restore the standard output
             sys.stdout = old_stdout
-    
-        # Get the captured output
+
+        # Get the captured output and display in styled container
         output = redirected_output.getvalue()
-    
-        # Display output with a subtle highlight
-        st.markdown(f"""
-        <div class="output-section" style="border-radius: 10px; padding: 15px; background-color: #F8F5F1; color: #495464;">
-        `{output}`
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.write("</div>", unsafe_allow_html=True)
-
-elif activity == "Python Turtle Graphics":
-    # Python Turtle Graphics Section
-    st.markdown("## Python Turtle Graphics")
-    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
-
-    if show_turtle_window:
-        # Embed Trinket.io Turtle project
-        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
-        st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+        st.markdown("## Output")
+        st.text_area("", value=output, height=300, key="output")
 
 
 
