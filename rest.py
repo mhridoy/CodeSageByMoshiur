@@ -1,39 +1,58 @@
 import streamlit as st
 import subprocess
-import os
+import sys
+import time
+import pandas as pd
+import random
 
-# Function to compile and run C++ code
-def run_cpp_code(code):
-    # Write code to temporary file
-    with open("temp.cpp", "w") as file:
-        file.write(code)
+# Function to run Python code
+def run_python_code(code):
+    result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True)
+    return result.stdout if result.stdout else result.stderr
 
-    # Compile the C++ program
-    compile_process = subprocess.run(["g++", "temp.cpp", "-o", "temp"], capture_output=True, text=True)
-    if compile_process.returncode != 0:
-        return compile_process.stderr
+# User Authentication
+def check_user(username):
+    # Example check (replace with a real user check in a real scenario)
+    return username in ['student1', 'student2', 'student3']
 
-    # Run the compiled program
-    run_process = subprocess.run(["./temp"], capture_output=True, text=True)
-    return run_process.stdout if run_process.returncode == 0 else run_process.stderr
+# Streamlit app
+st.title('Python Coding Exam')
 
-# Streamlit UI
-st.title("C++ Code Editor")
+# User login
+username = st.sidebar.text_input("Username")
+if username:
+    if check_user(username):
+        st.sidebar.success("Logged in as {}".format(username))
 
-# Text area for code input
-code = st.text_area("Enter your C++ code here:", placeholder="// Your C++ code")
+        # Exam timer
+        exam_duration = 1800  # 30 minutes in seconds
+        if 'start_time' not in st.session_state:
+            st.session_state.start_time = time.time()
 
-# Button to run code
-if st.button("Run Code"):
-    if code.strip() != "":
-        # Run the C++ code
-        output = run_cpp_code(code)
-        st.text_area("Output:", value=output, height=300)
+        elapsed_time = time.time() - st.session_state.start_time
+        if elapsed_time < exam_duration:
+            st.sidebar.write("Time remaining: {} seconds".format(int(exam_duration - elapsed_time)))
+
+            # Questions
+            questions = [
+                "1. Write a Python function to calculate the factorial of a number.",
+                "2. Create a Python function that takes a list and returns a new list with unique elements of the first list.",
+                "3. Write a Python program to find the sum of all numbers in a list."
+            ]
+
+            random_question = random.choice(questions)
+            st.subheader('Question')
+            st.write(random_question)
+
+            # Code editor
+            code = st.text_area("Write your code here:", height=200)
+
+            # Button to run the code
+            if st.button('Run Code'):
+                output = run_python_code(code)
+                st.subheader('Output')
+                st.text(output)
+        else:
+            st.error("Time's up! Please submit your exam.")
     else:
-        st.error("Please enter some code.")
-
-# Clean up temporary files
-if os.path.exists("temp.cpp"):
-    os.remove("temp.cpp")
-if os.path.exists("temp"):
-    os.remove("temp")
+        st.sidebar.error("Invalid username")
