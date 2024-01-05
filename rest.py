@@ -4,7 +4,20 @@ import sys
 import time
 import pandas as pd
 import random
+import streamlit.components.v1 as components
 
+# JavaScript to prompt for full-screen
+fullscreen_script = """
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    if (confirm("Click OK to go into full-screen mode for the exam.")) {
+        document.documentElement.requestFullscreen();
+    }
+});
+</script>
+"""
+
+components.html(fullscreen_script, height=0)
 # Function to run Python code
 def run_python_code(code):
     result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True)
