@@ -51,9 +51,11 @@ def main():
     with col1:
         st.markdown("## Code Editor")
         c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
-        result = execute_cpp_code(c_plus_code)
-        st.markdown("####  Output:")
-        st.code(result, language='bash')
+        if c_plus_code:
+            result = execute_cpp_code(c_plus_code)
+            st.markdown("#### C++ Code Output:")
+            st.code(result, language='bash')
+
 
     with col2:
         st.markdown("## Learning Resources")
