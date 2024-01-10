@@ -5,41 +5,48 @@ import os
 import uuid
 
 def main():
-    # Customizing the page layout, style, and title
+    # Customizing the page layout and style
     st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
     
+    # Custom CSS for the app
     st.markdown("""
     <style>
     /* Main page style */
     body {
-        color: #4F8BF9; /* Primary text color */
-        background-color: #E6F0FF; /* Page background color */
+        color: #333; /* Primary text color */
+        background-color: #FAE3E3; /* Soft pink background color */
     }
-    /* Header style */
-    .reportview-container .main .block-container {
-        padding-top: 5rem;
+    /* Streamlit components and widgets style */
+    .stTextInput, .stButton>button {
+        background-color: #FFD6D6;
+        border-color: #FFB6C1;
+        color: #5D2A42;
     }
-    /* Editor and button style */
+    .st-bb, .st-cf {
+        color: #5D2A42;
+    }
     .st-bc, .st-ae {
-        border-color: #4F8BF9;
-        background-color: #FFFFFF;
-        color: #4F8BF9;
+        border-color: #FFB6C1;
+    }
+    /* Header and titles style */
+    h1 {
+        color: #5D2A42;
     }
     /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
-        color: #4F8BF9;
+        color: #5D2A42;
     }
     </style>
     """, unsafe_allow_html=True)
 
     # Title and introduction
     st.title("Welcome to CodeSage")
-    st.write("Explore and enhance your programming skills. Write and execute your C++ code right here.")
+    st.markdown("#### A soothing space to enhance your programming journey. Write and execute C++ code in a calming environment.")
 
     # YouTube channel link
-    st.markdown("For more insights and tutorials, visit [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+    st.markdown("Discover more on [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
 
     # Streamlit-ace editor for C++ code
     c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
