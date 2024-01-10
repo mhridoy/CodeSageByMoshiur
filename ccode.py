@@ -5,42 +5,48 @@ import os
 import uuid
 
 def main():
-    # Customizing the page layout and style
+    # Customizing the page layout, style, and title
     st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
+    
     st.markdown("""
     <style>
-    .main {
-        background-color: #F5F5F5;
+    /* Main page style */
+    body {
+        color: #4F8BF9; /* Primary text color */
+        background-color: #E6F0FF; /* Page background color */
     }
-    .st-bc { 
-        display: none;
+    /* Header style */
+    .reportview-container .main .block-container {
+        padding-top: 5rem;
     }
-    h1 {
-        color: #0E6BA8;
+    /* Editor and button style */
+    .st-bc, .st-ae {
+        border-color: #4F8BF9;
+        background-color: #FFFFFF;
+        color: #4F8BF9;
     }
+    /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
+        color: #4F8BF9;
     }
     </style>
     """, unsafe_allow_html=True)
 
     # Title and introduction
-    st.title("CodeSage by Moshiur")
-    st.write("Welcome to CodeSage, a platform dedicated to enhancing your programming journey. "
-             "Here, you can write and run your C++ code directly in the browser. "
-             "This tool is designed to provide a seamless coding experience.")
+    st.title("Welcome to CodeSage")
+    st.write("Explore and enhance your programming skills. Write and execute your C++ code right here.")
 
     # YouTube channel link
-    st.markdown("Check out my YouTube channel for more programming insights and tutorials: "
-                "[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+    st.markdown("For more insights and tutorials, visit [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
 
     # Streamlit-ace editor for C++ code
     c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
 
     if c_plus_code:
         result = execute_cpp_code(c_plus_code)
-        st.text("C++ Code Output:")
+        st.markdown("#### C++ Code Output:")
         st.code(result, language='bash')
 
 def execute_cpp_code(code):
