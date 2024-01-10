@@ -13,44 +13,44 @@ def main():
     <style>
     /* Main page style */
     body {
-        color: #342E4C; /* Primary text color */
-        background-color: #E0BBE4; /* Gradient background color */
-        background-image: linear-gradient(315deg, #E0BBE4 0%, #957DAD 74%);
+        color: #293241; /* Primary text color */
+        background-color: #a8dadc; /* Soft teal background color */
+        background-image: linear-gradient(180deg, #a8dadc 0%, #457b9d 100%);
     }
     /* Streamlit components and widgets style */
     .stTextInput, .stButton>button, .stSelectbox, .stSlider {
-        background-color: #FFC8DD;
-        border-color: #FFAFCC;
-        color: #6A2C70;
+        background-color: #f1faee;
+        border-color: #1d3557;
+        color: #1d3557;
     }
     .st-bb, .st-cf {
-        color: #6A2C70;
+        color: #1d3557;
     }
     .st-bc, .st-ae {
-        border-color: #FFAFCC;
+        border-color: #1d3557;
     }
     /* Header and titles style */
     h1, h2, h3 {
-        color: #B28DFF;
+        color: #f4a261;
     }
     /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
-        color: #B28DFF;
+        color: #2a9d8f;
     }
     </style>
     """, unsafe_allow_html=True)
 
     # Page header
-    st.title("CodeSage By Moshiur এ স্বাগতম")
-    st.markdown("#### প্রোগ্রামিং যাত্রায় আপনার সঙ্গী। C++ কোডিং এখানেই লিখুন এবং চালান।")
+    st.title("Welcome to CodeSage")
+    st.markdown("#### Enhance your programming journey. Write and execute C++ code in a relaxing environment.")
 
     # Layout with columns
     col1, col2 = st.columns([3, 2])
 
     with col1:
-        st.markdown("## কোড এডিটর")
+        st.markdown("## Code Editor")
         c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
         prev_code = st.session_state.get('prev_code', '')
 
@@ -62,16 +62,15 @@ def main():
         st.session_state['prev_code'] = c_plus_code
 
     with col2:
-        st.markdown("## প্রোগ্রামিং টিপস")
-        st.markdown("বাংলায় C++ টিপস:")
-        tip = st.selectbox("টিপ নির্বাচন করুন:", 
-                           ["টিপ নির্বাচন করুন", "টিপ ১: কোড দক্ষতা", "টিপ ২: পরিষ্কার কোড", "টিপ ৩: ডিবাগিং কৌশল"])
-        if tip == "টিপ ১: কোড দক্ষতা":
-            st.info("দক্ষ কোড লেখার জন্য...")
-        elif tip == "টিপ ২: পরিষ্কার কোড":
-            st.info("পরিষ্কার কোড লেখা নিশ্চিত করে...")
-        elif tip == "টিপ ৩: ডিবাগিং কৌশল":
-            st.info("ডিবাগিং করার সময়...")
+        st.markdown("## Programming Tips")
+        st.markdown("Explore C++ tips and tricks:")
+        tip = st.selectbox("Choose a programming tip to learn more:",
+                           ["Select a tip", "Tip 1: Code Efficiency", "Tip 2: Readable Code", "Tip 3: Debugging Strategies"])
+        if tip != "Select a tip":
+            st.info(f"You selected {tip}. Here's some information on it...")
+
+        st.markdown("## YouTube Channel")
+        st.markdown("For more insights and tutorials, visit [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
 
 def execute_cpp_code(code):
     # Generate a unique file name
