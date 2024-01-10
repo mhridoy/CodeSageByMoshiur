@@ -13,48 +13,59 @@ def main():
     <style>
     /* Main page style */
     body {
-        color: #333; /* Primary text color */
-        background-color: #FAE3E3; /* Soft pink background color */
+        color: #342E4C; /* Primary text color */
+        background-color: #F2E7FE; /* Soft lavender background color */
     }
     /* Streamlit components and widgets style */
-    .stTextInput, .stButton>button {
-        background-color: #FFD6D6;
-        border-color: #FFB6C1;
-        color: #5D2A42;
+    .stTextInput, .stButton>button, .stSelectbox, .stSlider {
+        background-color: #ECD4F4;
+        border-color: #D0B3E6;
+        color: #342E4C;
     }
     .st-bb, .st-cf {
-        color: #5D2A42;
+        color: #342E4C;
     }
     .st-bc, .st-ae {
-        border-color: #FFB6C1;
+        border-color: #D0B3E6;
     }
     /* Header and titles style */
-    h1 {
-        color: #5D2A42;
+    h1, h2, h3 {
+        color: #5C5470;
     }
     /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
-        color: #5D2A42;
+        color: #5C5470;
     }
     </style>
     """, unsafe_allow_html=True)
 
-    # Title and introduction
+    # Page header
     st.title("Welcome to CodeSage")
-    st.markdown("#### A soothing space to enhance your programming journey. Write and execute C++ code in a calming environment.")
+    st.markdown("#### Enhance your programming journey in a calming and interactive environment.")
 
-    # YouTube channel link
-    st.markdown("Discover more on [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+    # Layout with columns
+    col1, col2 = st.columns(2)
 
-    # Streamlit-ace editor for C++ code
-    c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
+    with col1:
+        st.markdown("## Code Editor")
+        c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
+        if st.button("Run Code"):
+            result = execute_cpp_code(c_plus_code)
+            st.code(result, language='bash')
 
-    if c_plus_code:
-        result = execute_cpp_code(c_plus_code)
-        st.markdown("#### C++ Code Output:")
-        st.code(result, language='bash')
+    with col2:
+        st.markdown("## Learning Resources")
+        st.markdown("Explore tutorials, tips, and more:")
+        if st.button("Visit YouTube Channel"):
+            st.markdown("Check out [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+
+        st.markdown("## Quick Tips")
+        tip = st.selectbox("Choose a programming tip to learn more:",
+                           ["Select a tip", "Tip 1: Code Efficiency", "Tip 2: Readable Code", "Tip 3: Debugging Strategies"])
+        if tip != "Select a tip":
+            st.info(f"You selected {tip}. Here's some information on it...")
 
 def execute_cpp_code(code):
     # Generate a unique file name
