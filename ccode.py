@@ -1,48 +1,21 @@
 import streamlit as st
-from streamlit_ace import st_ace
 import subprocess
-import os
-import uuid
 
-def main():
-    st.title("C++ Integration with Streamlit")
+st.title("C++ Code Execution Demo")
 
-    # Streamlit-ace editor for C++ code
-    c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
+# Store the code in session state
+if 'code' not in st.session_state:
+    st.session_state['code'] = ""
 
-    if st.button("Run C++ Code"):
-        result = execute_cpp_code(c_plus_code)
-        st.text("C++ Code Output:")
-        st.code(result, language='bash')
+code = st.text_area("Write your C++ code here", height=400, value=st.session_state['code'])
 
-def execute_cpp_code(code):
-    # Generate a unique file name
-    filename = f"temp_code_{uuid.uuid4().hex}.cpp"
-    executable = f"temp_code_{uuid.uuid4().hex}"
+if st.button("Run Code"):
+    st.session_state['code'] = code  # Update code in session state
 
+    # Assuming you have a pre-compiled executable named "output" in your app directory
     try:
-        # Write code to a file
-        with open(filename, "w") as file:
-            file.write(code)
-
-        # Compile the C++ code
-        compile_process = subprocess.run(["g++", filename, "-o", executable], capture_output=True, text=True)
-        if compile_process.returncode != 0:
-            # Compilation failed
-            return compile_process.stderr
-
-        # Run the compiled executable
-        run_process = subprocess.run([f"./{executable}"], capture_output=True, text=True)
-        return run_process.stdout if run_process.returncode == 0 else run_process.stderr
-
-    except Exception as e:
-        return str(e)
-    finally:
-        # Clean up: remove the temporary files
-        if os.path.exists(filename):
-            os.remove(filename)
-        if os.path.exists(executable):
-            os.remove(executable)
-
-if __name__ == "__main__":
-    main()
+        output = subprocess.check_output(["./output"])
+        st.write("Output:")
+        st.code(output.decode("utf-8"), language="cpp")
+    except subprocess.CalledProcessError as e:
+        st.error(f"Error: {e}")
