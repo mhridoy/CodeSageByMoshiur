@@ -14,60 +14,64 @@ def main():
     /* Main page style */
     body {
         color: #342E4C; /* Primary text color */
-        background-color: #F2E7FE; /* Soft lavender background color */
+        background-color: #E0BBE4; /* Gradient background color */
+        background-image: linear-gradient(315deg, #E0BBE4 0%, #957DAD 74%);
     }
     /* Streamlit components and widgets style */
     .stTextInput, .stButton>button, .stSelectbox, .stSlider {
-        background-color: #ECD4F4;
-        border-color: #D0B3E6;
-        color: #342E4C;
+        background-color: #FFC8DD;
+        border-color: #FFAFCC;
+        color: #6A2C70;
     }
     .st-bb, .st-cf {
-        color: #342E4C;
+        color: #6A2C70;
     }
     .st-bc, .st-ae {
-        border-color: #D0B3E6;
+        border-color: #FFAFCC;
     }
     /* Header and titles style */
     h1, h2, h3 {
-        color: #5C5470;
+        color: #B28DFF;
     }
     /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
-        color: #5C5470;
+        color: #B28DFF;
     }
     </style>
     """, unsafe_allow_html=True)
 
     # Page header
-    st.title("Welcome to CodeSage")
-    st.markdown("#### Enhance your programming journey in a calming and interactive environment.")
+    st.title("CodeSage By Moshiur এ স্বাগতম")
+    st.markdown("#### প্রোগ্রামিং যাত্রায় আপনার সঙ্গী। C++ কোডিং এখানেই লিখুন এবং চালান।")
 
     # Layout with columns
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([3, 2])
 
     with col1:
-        st.markdown("## Code Editor")
+        st.markdown("## কোড এডিটর")
         c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
-        if c_plus_code:
+        prev_code = st.session_state.get('prev_code', '')
+
+        # Execute C++ code when there's a change in the editor content
+        if c_plus_code and c_plus_code != prev_code:
             result = execute_cpp_code(c_plus_code)
-            st.markdown("#### C++ Code Output:")
             st.code(result, language='bash')
 
+        st.session_state['prev_code'] = c_plus_code
 
     with col2:
-        st.markdown("## Learning Resources")
-        st.markdown("Explore tutorials, tips, and more:")
-        if st.button("Visit YouTube Channel"):
-            st.markdown("Check out [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
-
-        st.markdown("## Quick Tips")
-        tip = st.selectbox("Choose a programming tip to learn more:",
-                           ["Select a tip", "Tip 1: Code Efficiency", "Tip 2: Readable Code", "Tip 3: Debugging Strategies"])
-        if tip != "Select a tip":
-            st.info(f"You selected {tip}. Here's some information on it...")
+        st.markdown("## প্রোগ্রামিং টিপস")
+        st.markdown("বাংলায় C++ টিপস:")
+        tip = st.selectbox("টিপ নির্বাচন করুন:", 
+                           ["টিপ নির্বাচন করুন", "টিপ ১: কোড দক্ষতা", "টিপ ২: পরিষ্কার কোড", "টিপ ৩: ডিবাগিং কৌশল"])
+        if tip == "টিপ ১: কোড দক্ষতা":
+            st.info("দক্ষ কোড লেখার জন্য...")
+        elif tip == "টিপ ২: পরিষ্কার কোড":
+            st.info("পরিষ্কার কোড লেখা নিশ্চিত করে...")
+        elif tip == "টিপ ৩: ডিবাগিং কৌশল":
+            st.info("ডিবাগিং করার সময়...")
 
 def execute_cpp_code(code):
     # Generate a unique file name
