@@ -5,22 +5,43 @@ import os
 import uuid
 
 def main():
-    st.title("C++ Integration with Streamlit")
+    # Customizing the page layout and style
+    st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
+    st.markdown("""
+    <style>
+    .main {
+        background-color: #F5F5F5;
+    }
+    .st-bc { 
+        display: none;
+    }
+    h1 {
+        color: #0E6BA8;
+    }
+    .footer {
+        font-size: 16px;
+        font-style: italic;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    # Previous C++ code (if any)
-    prev_code = None
+    # Title and introduction
+    st.title("CodeSage by Moshiur")
+    st.write("Welcome to CodeSage, a platform dedicated to enhancing your programming journey. "
+             "Here, you can write and run your C++ code directly in the browser. "
+             "This tool is designed to provide a seamless coding experience.")
+
+    # YouTube channel link
+    st.markdown("Check out my YouTube channel for more programming insights and tutorials: "
+                "[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
 
     # Streamlit-ace editor for C++ code
     c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
 
-    # Execute C++ code when there's a change in the editor content
-    if c_plus_code and c_plus_code != prev_code:
+    if c_plus_code:
         result = execute_cpp_code(c_plus_code)
         st.text("C++ Code Output:")
         st.code(result, language='bash')
-
-    # Update previous code
-    prev_code = c_plus_code
 
 def execute_cpp_code(code):
     # Generate a unique file name
