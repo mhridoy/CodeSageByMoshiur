@@ -67,7 +67,7 @@ def main():
         if tip != "Select a tip":
             st.info(f"You selected {tip}. Here's some information on it...")
 
-def execute_cpp_code(code):
+ef execute_cpp_code(code):
     # Generate a unique file name
     filename = f"temp_code_{uuid.uuid4().hex}.cpp"
     executable = f"temp_code_{uuid.uuid4().hex}"
