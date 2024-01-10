@@ -7,23 +7,20 @@ import uuid
 def main():
     st.title("C++ Integration with Streamlit")
 
-    # Hide the 'Apply cmd+Enter' button using custom CSS
-    hide_button_style = """
-    <style>
-    .st-bc { 
-        display: none;
-    }
-    </style>
-    """
-    st.markdown(hide_button_style, unsafe_allow_html=True)
+    # Previous C++ code (if any)
+    prev_code = None
 
     # Streamlit-ace editor for C++ code
     c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
 
-    if st.button("Run C++ Code"):
+    # Execute C++ code when there's a change in the editor content
+    if c_plus_code and c_plus_code != prev_code:
         result = execute_cpp_code(c_plus_code)
         st.text("C++ Code Output:")
         st.code(result, language='bash')
+
+    # Update previous code
+    prev_code = c_plus_code
 
 def execute_cpp_code(code):
     # Generate a unique file name
