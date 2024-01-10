@@ -49,6 +49,6 @@ Have questions or suggestions? Reach out to us at [info@codesagebymoshiur.org](m
 
 ## Footer
 
-© 2023 CodeSage By Moshiur. All Rights Reserved.
+© 2024 🤗 CodeSage By Moshiur. All Rights Reserved.
 
 ![CodeSage Logo](codesagebymoshiur_logo.png)
