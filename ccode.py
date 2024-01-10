@@ -7,9 +7,18 @@ import uuid
 def main():
     st.title("C++ Integration with Streamlit")
 
+    # Hide the 'Apply cmd+Enter' button using custom CSS
+    hide_button_style = """
+    <style>
+    .st-bc { 
+        display: none;
+    }
+    </style>
+    """
+    st.markdown(hide_button_style, unsafe_allow_html=True)
+
     # Streamlit-ace editor for C++ code
-    # Set keybinding to None to disable Apply cmd+Enter
-    c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor", keybinding=None)
+    c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
 
     if st.button("Run C++ Code"):
         result = execute_cpp_code(c_plus_code)
