@@ -21,16 +21,11 @@ def main():
 
     with tab1:
         c_plus_code = st_ace(language="c_cpp", theme="monokai", key="cppEditor")
-                # Input for the code
         user_input = st.text_area("Input for your code (if any):", height=100)
-        prev_code = st.session_state.get('prev_code', '')
 
-        # Execute C++ code when there's a change in the editor content
-        if c_plus_code and c_plus_code != prev_code:
+        if st.button("Run C++ Code"):
             result = execute_cpp_code(c_plus_code, user_input)
             st.code(result, language='bash')
-            
-        st.session_state['prev_code'] = c_plus_code
 
     with tab2:
         display_programming_tips()
@@ -72,15 +67,16 @@ def apply_custom_css():
     """, unsafe_allow_html=True)
 
 
-def execute_cpp_code(code, user_input):
-    # Function to handle the execution of C++ code
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".cpp") as src_file:
-        src_file.write(code.encode())
-        src_filename = src_file.name
 
-    executable = f"{src_file.name}.exe"
+def execute_cpp_code(code, user_input):
+    # Create a temporary file for the source code
+    src_filename = f"temp_code_{uuid.uuid4().hex}.cpp"
+    executable = f"{src_filename}.exe"
 
     try:
+        with open(src_filename, "w") as src_file:
+            src_file.write(code)
+
         # Compile the C++ code
         compile_process = subprocess.run(["g++", src_filename, "-o", executable], capture_output=True, text=True)
         if compile_process.returncode != 0:
@@ -92,7 +88,8 @@ def execute_cpp_code(code, user_input):
 
     finally:
         # Clean up: remove the temporary files
-        os.remove(src_filename)
+        if os.path.exists(src_filename):
+            os.remove(src_filename)
         if os.path.exists(executable):
             os.remove(executable)
 
