@@ -69,7 +69,6 @@ def apply_custom_css():
 
 
 def execute_cpp_code(code, user_input):
-    # Create a temporary file for the source code
     src_filename = f"temp_code_{uuid.uuid4().hex}.cpp"
     executable = f"{src_filename}.exe"
 
@@ -82,8 +81,12 @@ def execute_cpp_code(code, user_input):
         if compile_process.returncode != 0:
             return compile_process.stderr
 
+        # Check if the executable exists and has execute permissions
+        if not os.path.exists(executable) or not os.access(executable, os.X_OK):
+            return "Compilation succeeded, but the executable is not found or is not executable."
+
         # Run the compiled executable with user input
-        run_process = subprocess.run([executable], input=user_input, text=True, capture_output=True)
+        run_process = subprocess.run([f"./{executable}"], input=user_input, text=True, capture_output=True)
         return run_process.stdout if run_process.returncode == 0 else run_process.stderr
 
     finally:
