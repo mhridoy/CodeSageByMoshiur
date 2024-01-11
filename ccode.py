@@ -107,7 +107,7 @@ def display_programming_tips():
 def display_youtube_channel():
         st.markdown("## Explore More on YouTube")
         st.markdown("[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
-        st.video("https://www.youtube.com/watch?v=qsqYEGav6mU")  # Replace with a relevant video link
+        st.video("https://www.youtube.com/watch?v=qsqYEGav6mU", format="video/mp4", start_time=0, use_column_width=True)  # Replace with a relevant video link
 
 if __name__ == "__main__":
     main()
