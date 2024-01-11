@@ -7,51 +7,50 @@ import uuid
 def main():
     # Customizing the page layout and style
     st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
-    
+
     # Custom CSS for the app
     st.markdown("""
     <style>
     /* Main page style */
     body {
-        color: #293241; /* Primary text color */
-        background-color: #a8dadc; /* Soft teal background color */
-        background-image: linear-gradient(180deg, #a8dadc 0%, #457b9d 100%);
+        color: #023047; /* Primary text color */
+        background-color: #8ECAE6; /* Soft blue background */
+        background-image: linear-gradient(315deg, #8ECAE6 0%, #BDB2FF 74%);
     }
     /* Streamlit components and widgets style */
     .stTextInput, .stButton>button, .stSelectbox, .stSlider {
-        background-color: #f1faee;
-        border-color: #1d3557;
-        color: #1d3557;
+        background-color: #FFB4A2;
+        border-color: #FFCDB2;
+        color: #023047;
     }
     .st-bb, .st-cf {
-        color: #1d3557;
+        color: #023047;
     }
     .st-bc, .st-ae {
-        border-color: #1d3557;
+        border-color: #FFCDB2;
     }
     /* Header and titles style */
     h1, h2, h3 {
-        color: #f4a261;
+        color: #FFB4A2;
     }
     /* Footer style */
     .footer {
         font-size: 16px;
         font-style: italic;
-        color: #2a9d8f;
+        color: #FFB4A2;
     }
     </style>
     """, unsafe_allow_html=True)
 
     # Page header
-    st.title("Welcome to CodeSage By Moshiur")
-    st.markdown("#### Enhance your programming journey. Write and execute C++ code in a relaxing environment.")
+    st.title("Welcome to CodeSage")
+    st.markdown("#### Enhance your programming journey in a vibrant and interactive environment.")
 
-    # Layout with columns
-    col1, col2 = st.columns([3, 2])
+    # Layout with tabs
+    tab1, tab2, tab3 = st.tabs(["Code Editor", "Programming Tips", "YouTube Channel"])
 
-    with col1:
-        st.markdown("## Code Editor")
-        c_plus_code = st_ace(language="c_cpp", theme="twilight", key="cppEditor")
+    with tab1:
+        c_plus_code = st_ace(language="c_cpp", theme="monokai", key="cppEditor")
         prev_code = st.session_state.get('prev_code', '')
 
         # Execute C++ code when there's a change in the editor content
@@ -61,16 +60,18 @@ def main():
 
         st.session_state['prev_code'] = c_plus_code
 
-    with col2:
-        st.markdown("## Programming Tips")
+    with tab2:
+        st.markdown("## Learn with Tips")
         st.markdown("Explore C++ tips and tricks:")
-        tip = st.selectbox("Choose a programming tip to learn more:",
-                           ["Select a tip", "Tip 1: Code Efficiency", "Tip 2: Readable Code", "Tip 3: Debugging Strategies"])
+        tip = st.selectbox("Choose a programming tip:",
+                           ["Select a tip", "Tip 1: Efficient Code", "Tip 2: Clean Code", "Tip 3: Debugging"])
         if tip != "Select a tip":
-            st.info(f"You selected {tip}. Here's some information on it...")
+            st.info(f"Info on {tip}")
 
-        st.markdown("## YouTube Channel")
-        st.markdown("For more insights and tutorials, visit [Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+    with tab3:
+        st.markdown("## Explore More on YouTube")
+        st.markdown("[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
+        st.video("https://youtube.com/live/qsqYEGav6mU")  # Replace with a relevant video link
 
 def execute_cpp_code(code):
     # Generate a unique file name
