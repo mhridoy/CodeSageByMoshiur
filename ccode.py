@@ -9,6 +9,35 @@ def main():
     st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
 
     # Custom CSS for the app
+    apply_custom_css()
+    
+
+    # Page header
+    st.title("Welcome to CodeSage")
+    st.markdown("#### Enhance your programming journey in a vibrant and interactive environment.")
+
+    # Layout with tabs
+    tab1, tab2, tab3 = st.tabs(["Code Editor", "Programming Tips", "YouTube Channel"])
+
+    with tab1:
+        c_plus_code = st_ace(language="c_cpp", theme="monokai", key="cppEditor")
+                # Input for the code
+        user_input = st.text_area("Input for your code (if any):", height=100)
+        prev_code = st.session_state.get('prev_code', '')
+
+        # Execute C++ code when there's a change in the editor content
+        if c_plus_code and c_plus_code != prev_code:
+            result = execute_cpp_code(c_plus_code, user_input)
+            st.code(result, language='bash')
+            
+        st.session_state['prev_code'] = c_plus_code
+
+    with tab2:
+        display_programming_tips()
+
+    with tab3:
+        display_youtube_channel()
+def apply_custom_css():
     st.markdown("""
     <style>
     /* Main page style */
@@ -42,25 +71,32 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Page header
-    st.title("Welcome to CodeSage")
-    st.markdown("#### Enhance your programming journey in a vibrant and interactive environment.")
 
-    # Layout with tabs
-    tab1, tab2, tab3 = st.tabs(["Code Editor", "Programming Tips", "YouTube Channel"])
+def execute_cpp_code(code, user_input):
+    # Function to handle the execution of C++ code
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".cpp") as src_file:
+        src_file.write(code.encode())
+        src_filename = src_file.name
 
-    with tab1:
-        c_plus_code = st_ace(language="c_cpp", theme="monokai", key="cppEditor")
-        prev_code = st.session_state.get('prev_code', '')
+    executable = f"{src_file.name}.exe"
 
-        # Execute C++ code when there's a change in the editor content
-        if c_plus_code and c_plus_code != prev_code:
-            result = execute_cpp_code(c_plus_code)
-            st.code(result, language='bash')
+    try:
+        # Compile the C++ code
+        compile_process = subprocess.run(["g++", src_filename, "-o", executable], capture_output=True, text=True)
+        if compile_process.returncode != 0:
+            return compile_process.stderr
 
-        st.session_state['prev_code'] = c_plus_code
+        # Run the compiled executable with user input
+        run_process = subprocess.run([executable], input=user_input, text=True, capture_output=True)
+        return run_process.stdout if run_process.returncode == 0 else run_process.stderr
 
-    with tab2:
+    finally:
+        # Clean up: remove the temporary files
+        os.remove(src_filename)
+        if os.path.exists(executable):
+            os.remove(executable)
+
+def display_programming_tips():
         st.markdown("## Learn with Tips")
         st.markdown("Explore C++ tips and tricks:")
         tip = st.selectbox("Choose a programming tip:",
@@ -68,39 +104,10 @@ def main():
         if tip != "Select a tip":
             st.info(f"Info on {tip}")
 
-    with tab3:
+def display_youtube_channel():
         st.markdown("## Explore More on YouTube")
         st.markdown("[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
         st.video("https://www.youtube.com/watch?v=qsqYEGav6mU")  # Replace with a relevant video link
-
-def execute_cpp_code(code):
-    # Generate a unique file name
-    filename = f"temp_code_{uuid.uuid4().hex}.cpp"
-    executable = f"temp_code_{uuid.uuid4().hex}"
-
-    try:
-        # Write code to a file
-        with open(filename, "w") as file:
-            file.write(code)
-
-        # Compile the C++ code
-        compile_process = subprocess.run(["g++", filename, "-o", executable], capture_output=True, text=True)
-        if compile_process.returncode != 0:
-            # Compilation failed
-            return compile_process.stderr
-
-        # Run the compiled executable
-        run_process = subprocess.run([f"./{executable}"], capture_output=True, text=True)
-        return run_process.stdout if run_process.returncode == 0 else run_process.stderr
-
-    except Exception as e:
-        return str(e)
-    finally:
-        # Clean up: remove the temporary files
-        if os.path.exists(filename):
-            os.remove(filename)
-        if os.path.exists(executable):
-            os.remove(executable)
 
 if __name__ == "__main__":
     main()
