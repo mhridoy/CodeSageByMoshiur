@@ -71,7 +71,7 @@ def main():
     with tab3:
         st.markdown("## Explore More on YouTube")
         st.markdown("[Moshiur's YouTube Channel](https://youtube.com/mhridoy)")
-        st.video("https://youtube.com/live/qsqYEGav6mU")  # Replace with a relevant video link
+        st.video("https://www.youtube.com/watch?v=qsqYEGav6mU")  # Replace with a relevant video link
 
 def execute_cpp_code(code):
     # Generate a unique file name
