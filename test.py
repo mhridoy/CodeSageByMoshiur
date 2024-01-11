@@ -186,7 +186,7 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 if activity == "Python Editor":
     # Python Code Editor Section
     st.markdown("## Python Code Editor")
-    user_code = streamlit_ace.st_ace(language='python', theme='monokai', key='code-editor')
+    user_code = st_ace(language='python', theme='monokai', key='code-editor')
 
     # Button to run the code
     if st.button("Run Code"):
