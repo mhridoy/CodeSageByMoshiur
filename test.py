@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
-import streamlit_ace as st_ace
-from streamlit_ace import st_ace
-
-
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
@@ -23,18 +19,15 @@ st.set_page_config(
     }
 )
 
-# Enhanced color scheme
+# Define a creative and soothing light purple color scheme
 colors = {
-    'background': 'linear-gradient(135deg, #E6FDFC, #FFFAF3)',
-    'primary': '#31708E',
-    'secondary': '#A3C4BC',
-    'accent': '#FFD580',
-    'text': '#252422',
-    'footer_bg': '#31708E',
-    'footer_text': '#FFFAF3',
-    'table_bg': '#FFFFFF',
-    'table_text': '#31708E',
-    'row_highlight': '#E6FDFC'
+    'background': '#FAF4FF',  # A very light purple for a serene background
+    'primary': '#7B2CBF',     # A deep purple for contrast
+    'secondary': '#9D4EDD',   # A softer purple for secondary elements
+    'accent': '#CDB4DB',      # A gentle lavender for highlights
+    'text': '#4A2040',        # A darker purple for text
+    'footer_bg': '#7B2CBF',   # Deep purple for the footer
+    'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
 
 # Custom styles
@@ -42,51 +35,76 @@ st.markdown(f"""
 <style>
     /* Global Styles */
     body {{
-        font-family: 'Georgia', serif;
-        background: {colors['background']};
+        font-family: 'Segoe UI', sans-serif;
+        background-color: {colors['background']};
         color: {colors['text']};
-    }}
-
-    h1, h2 {{
-        font-family: 'Helvetica', sans-serif;
-        margin: 0.5em 0;
     }}
 
     h1 {{
         color: {colors['primary']};
         font-size: 2.5em;
+        text-align: center;
     }}
 
     h2 {{
         color: {colors['secondary']};
-        font-size: 2em;
+        font-size: 1.75em;
     }}
 
-    /* Enhanced Button Style */
-    .stButton > button {{
-        border: none;
-        border-radius: 20px;
+    /* Custom Section Style */
+    .custom-section {{
         background-color: {colors['accent']};
+        padding: 2em;
+        border-radius: 15px;
+        margin-bottom: 1em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }}
+
+    .custom-section:hover {{
+        transform: scale(1.03);
+    }}
+
+    /* Course Section Style */
+    .course-section {{
+        border-left: 5px solid {colors['secondary']};
+        background-color: {colors['background']};
+        padding: 1em;
+        margin-bottom: 1em;
+    }}
+
+    .course-title {{
+        color: {colors['primary']};
+        font-weight: bold;
+    }}
+
+    .course-description {{
         color: {colors['text']};
-        padding: 0.5rem 1rem;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s, transform 0.3s;
     }}
 
-    .stButton > button:hover {{
-        background-color: {colors['primary']};
+    /* Link Style */
+    a {{
+        color: {colors['secondary']};
+        text-decoration: none;
+    }}
+
+    a:hover {{
+        color: {colors['primary']};
+        text-decoration: underline;
+    }}
+
+    /* Footer Style */
+    .footer {{
+        background-color: {colors['footer_bg']};
         color: {colors['footer_text']};
-        transform: translateY(-2px);
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
     }}
 
-    /* Responsive Design Adjustments */
-    @media (max-width: 768px) {{
-        .block-container {{
-            padding: 2rem;
-        }}
-    }}
-
-      /* Enhanced Table Style */
+    /* Table Style */
     .stDataFrame, .stTable {{
         border-radius: 8px;
         overflow: hidden;
@@ -94,39 +112,44 @@ st.markdown(f"""
 
     .dataframe th {{
         background-color: {colors['secondary']};
-        color: {colors['table_text']};
+        color: {colors['text']};
     }}
 
     .dataframe td {{
-        background-color: {colors['table_bg']};
+        background-color: {colors['background']};
         color: {colors['text']};
-        padding: 12px;
     }}
 
-    .dataframe tr:nth-of-type(odd) {{
-        background-color: {colors['row_highlight']};
+    /* Button Style */
+    .stButton > button {{
+        border: 2px solid {colors['secondary']};
+        border-radius: 20px;
+        background-color: {colors['accent']};
+        color: {colors['text']};
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
     }}
 
-    .reportview-container {{
-        background-color: pink;
-    }}
-    .output-container {{
-        border: 1px solid #f0f0f0;
-        background-color: #f9f9f9;
+    .stButton > button:hover {{
+        background-color: {colors['primary']};
+        color: {colors['background']};
     }}
 
-    /* Adjusting the table header */
-    .dataframe thead th {{
-        color: {colors['footer_text']};
-        font-size: 1em;
+    /* Hiding Streamlit elements */
+    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
+        visibility: hidden;
     }}
-
-    /* Additional styles for responsive and interactive elements */
-    /* ... */
+    footer {{
+        visibility: hidden;
+    }}
+    .block-container {{
+        padding-bottom: 5rem;
+    }}
 </style>
 """, unsafe_allow_html=True)
+
 # Header
-st.markdown(f'<h1><img src="https://i.imgur.com/4UZzJwD.png" width="50"> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
@@ -134,18 +157,17 @@ schedule_df = load_schedule()
 # Main content area
 col1, col2 = st.columns([3, 2])
 with col1:
-       st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['table_bg'],
-        'color': colors['text'],
-        'border-radius': '8px',
-        'padding': '12px'
+    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
+    st.dataframe(schedule_df.style.set_properties(**{
+        'background-color': colors['background'],
+        'color': colors['text']
     }))
 
 with col2:
-    st.markdown('<h2>Best Homework of the Month 🌟 Sababah Subah</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>Best Homework of the Month 🌟 Afsara </h2>', unsafe_allow_html=True)
     # Replace with the actual image URL or path
-    st.image('best_homework.png', caption='Incredible work by our star coder!', use_column_width=True)
-    st.write("Code Link : https://trinket.io/turtle/f3311da13d")
+    st.image('best_homework02.png', caption='Incredible work by our star coder!', use_column_width=True)
+    st.write("Code Link : https://trinket.io/python/ef2a270c85")
 
 # Course Sections
 courses = [
@@ -160,15 +182,13 @@ courses = [
 # Selection for Python editor or Turtle graphics
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
-# Python Code Editor with syntax highlighting
-st.markdown("## Python Code Editor")
-user_code = st_ace(language="python", theme=theme, key="code_editor", height=300)
+if activity == "Python Editor":
+    # Python Code Editor Section
+    st.markdown("## Python Code Editor")
+    user_code = st.text_area("Write your Python code here:", height=300)
 
-# Button to run the code
-if st.button("Run Code"):
-
-    # Confirmation for code execution
-    if st.checkbox("I confirm to run the code", key="confirm_run"):
+    # Button to run the code
+    if st.button("Run Code"):
         # Capture the standard output
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
@@ -182,10 +202,19 @@ if st.button("Run Code"):
             # Restore the standard output
             sys.stdout = old_stdout
 
-        # Get the captured output and display in styled container
+        # Get the captured output
         output = redirected_output.getvalue()
-        st.markdown("## Output")
-        st.text_area("", value=output, height=300, key="output")
+        st.text_area("Output:", value=output, height=300)
+
+elif activity == "Python Turtle Graphics":
+    # Python Turtle Graphics Section
+    st.markdown("## Python Turtle Graphics")
+    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
+
+    if show_turtle_window:
+        # Embed Trinket.io Turtle project
+        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
+        st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
 
 
 
