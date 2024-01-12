@@ -212,7 +212,7 @@ if activity == "Python Editor":
     
         # Get the captured output
         output = redirected_output.getvalue()
-        st.text_area("Output:", value=output, height=300)
+        st.code("Output:", value=output, height=300)
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
