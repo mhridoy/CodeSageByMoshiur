@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import sys
 import io
+from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
     file_path = 'schedule.xlsx'  # Ensure this path is correct
