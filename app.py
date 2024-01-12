@@ -190,7 +190,7 @@ if activity == "Python Editor":
     
     # User Input Section
     st.markdown("## User Input")
-    user_input = st.code("Enter input (like a command-line)", key='user-input', height=300)
+    user_input = st.code("Enter input (like a command-line)", key='user-input')
     
     # Button to run the code
     if st.button("Run Code"):
