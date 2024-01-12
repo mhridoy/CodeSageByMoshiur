@@ -185,26 +185,33 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 if activity == "Python Editor":
     # Python Code Editor Section
     st.markdown("## Python Code Editor")
-    user_code = st.text_area("Write your Python code here:", height=300)
-
+    user_code = st_ace(language='python', theme='monokai', key='code-editor')
+    
+    # User Input Section
+    st.markdown("## User Input")
+    user_input = st.text_input("Enter input (like a command-line)", key='user-input',height=300)
+    
     # Button to run the code
     if st.button("Run Code"):
         # Capture the standard output
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
-
+    
         try:
-            # Execute the user's code
-            exec(user_code)
+            # Execute the user's code, passing user input if available
+            if user_input:
+                exec(f"user_input = '{user_input}'\n{user_code}", globals())
+            else:
+                exec(user_code)
         except Exception as e:
             st.error(f"Error: {e}")
         finally:
             # Restore the standard output
             sys.stdout = old_stdout
-
+    
         # Get the captured output
         output = redirected_output.getvalue()
-        st.text_area("Output:", value=output, height=300)
+        st.code("Output:", value=output, height=300)
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
