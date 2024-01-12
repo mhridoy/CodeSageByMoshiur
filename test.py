@@ -135,6 +135,9 @@ st.markdown(f"""
         background-color: {colors['primary']};
         color: {colors['background']};
     }}
+    .stTextInput > div > div > input {{
+        font-size: 20px;
+    }}
 
     /* Hiding Streamlit elements */
     .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
