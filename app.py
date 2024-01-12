@@ -190,7 +190,7 @@ if activity == "Python Editor":
     
     # User Input Section
     st.markdown("## User Input")
-    user_input = st.code("Enter input (like a command-line)", key='user-input')
+    user_input = st.text_input("Enter input (like a command-line)", key='user-input')
     
     # Button to run the code
     if st.button("Run Code"):
@@ -212,7 +212,7 @@ if activity == "Python Editor":
     
         # Get the captured output
         output = redirected_output.getvalue()
-        st.code("Output:", value=output, height=300)
+        st.text_area("Output:", value=output, height=300)
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
@@ -255,6 +255,6 @@ st.markdown(f"""
 # Footer
 st.markdown(f"""
 <div class="footer">
-    © 2023 CodeSage By Moshiur. All Rights Reserved.
+    © 2024 CodeSage By Moshiur. All Rights Reserved.
 </div>
 """, unsafe_allow_html=True)
