@@ -5,7 +5,7 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'  # Ensure this path is correct
+    file_path = 'schedule02.xlsx'  # Ensure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
