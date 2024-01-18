@@ -189,56 +189,52 @@ activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Pyth
 if activity == "Python Editor":
     # Python Code Editor Section
     st.markdown("## Python Code Editor")
-    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=250)  # Increase height for better visibility
+    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=250)
     
     # Custom styles for the Python editor
-    st.markdown(f"""
+    st.markdown("""
     <style>
-        .ace_editor {{
-            border: 2px solid {colors['secondary']};
+        .ace_editor {
+            border: 2px solid #your_secondary_color;
             border-radius: 10px;
-            background-color: {colors['accent']};
-        }}
+            background-color: #your_accent_color;
+        }
     </style>
     """, unsafe_allow_html=True)
     
     # User Input Section
     st.markdown("## User Input")
-    user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)  # Increase height for larger input area
+    user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)
     
     # Button to run the code
     if st.button("Run Code"):
         # Check if the code is empty or contains only whitespace
-        st.write(user_input)
         if not user_code.strip():
             st.warning('Please enter some code to run.')
-            
-        # Display a spinner and a message indicating that the code is running
-        with st.spinner('Running...'):
-            # Capture the standard output and handle exceptions
-            old_stdout = sys.stdout
-            redirected_output = sys.stdout = io.StringIO()
-    
-            try:
-                # Execute the user's code, passing user input if available
-                 if user_input:
-                        exec(user_code, {'user_input': user_input})  # Pass user_input as a variable
-                 else:
-                    exec(user_code)
-            except Exception as e:
-                st.error(f"Error: {e}")
-            finally:
-                # Restore the standard output
-                sys.stdout = old_stdout
-    
-            # Get the captured output
-            output = redirected_output.getvalue()
-    
-        # Display the output in a text area
-        st.text_area("Output:", value=output, height=300)
-    
-        # Optionally, clear the running status message
-        st.success('Execution finished!')
+        else:
+            # Display a spinner and a message indicating that the code is running
+            with st.spinner('Running...'):
+                # Capture the standard output and handle exceptions
+                old_stdout = sys.stdout
+                redirected_output = sys.stdout = io.StringIO()
+                
+                try:
+                    # Define a variable `user_input` in the local scope for the exec
+                    local_vars = {"user_input": user_input}
+                    # Execute the user's code
+                    exec(user_code, globals(), local_vars)
+                except Exception as e:
+                    st.error(f"Error: {e}")
+                finally:
+                    # Restore the standard output
+                    sys.stdout = old_stdout
+                
+                # Get the captured output
+                output = redirected_output.getvalue()
+                
+            # Display the output in a text area
+            st.text_area("Output:", value=output, height=300)
+            st.success('Execution finished!')
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
