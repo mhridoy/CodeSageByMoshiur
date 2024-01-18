@@ -186,55 +186,51 @@ courses = [
 # Selection for Python editor or Turtle graphics
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
-if activity == "Python Editor":
-    # Python Code Editor Section
-    st.markdown("## Python Code Editor")
-    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=250)
-    
-    # Custom styles for the Python editor
-    st.markdown("""
-    <style>
-        .ace_editor {
-            border: 2px solid #your_secondary_color;
-            border-radius: 10px;
-            background-color: #your_accent_color;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # User Input Section
-    st.markdown("## User Input")
-    user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)
-    
-    # Button to run the code
-    if st.button("Run Code"):
-        # Check if the code is empty or contains only whitespace
-        if not user_code.strip():
-            st.warning('Please enter some code to run.')
-        else:
-            # Display a spinner and a message indicating that the code is running
-            with st.spinner('Running...'):
-                # Capture the standard output and handle exceptions
-                old_stdout = sys.stdout
-                redirected_output = sys.stdout = io.StringIO()
-                
-                try:
-                    # Define a variable `user_input` in the local scope for the exec
-                    local_vars = {"user_input": user_input}
-                    # Execute the user's code
-                    exec(user_code, globals(), local_vars)
-                except Exception as e:
-                    st.error(f"Error: {e}")
-                finally:
-                    # Restore the standard output
-                    sys.stdout = old_stdout
-                
-                # Get the captured output
-                output = redirected_output.getvalue()
-                
-            # Display the output in a text area
-            st.text_area("Output:", value=output, height=300)
-            st.success('Execution finished!')
+import streamlit as st
+import sys
+import io
+
+st.markdown("## Python Code Editor")
+
+# Python code editor where users can write their code
+user_code = st.text_area("Write your Python code here. Use 'user_input' to reference the input below:", height=250)
+
+st.markdown("## Input for your code")
+st.markdown("Enter the input for your code below. Use '\\n' for new lines.")
+
+# Text area for users to input their data
+user_input = st.text_area("Input:", height=150)
+
+# Button to execute the user's code
+if st.button("Run Code"):
+    # Check if the code is empty or contains only whitespace
+    if not user_code.strip():
+        st.warning('Please enter some code to run.')
+    else:
+        # Display a spinner while the code is running
+        with st.spinner('Running your code...'):
+            # Redirect standard output
+            old_stdout = sys.stdout
+            redirected_output = sys.stdout = io.StringIO()
+
+            # Prepare the environment for the execution
+            local_vars = {}
+
+            # Execute the user's code
+            try:
+                exec(user_code, globals(), local_vars)
+            except Exception as e:
+                # If an exception occurs, display the error to the user
+                st.error(f"Error in executing code: {e}")
+            finally:
+                # Restore the standard output
+                sys.stdout = old_stdout
+
+            # Retrieve the output and display it
+            output = redirected_output.getvalue()
+            st.text_area("Output:", value=output, height=300, key='output')
+        
+        st.success('Execution finished!')
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
