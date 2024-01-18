@@ -221,10 +221,10 @@ if activity == "Python Editor":
     
             try:
                 # Execute the user's code, passing user input if available
-                if user_input:
-                    exec(f"user_input = '''{user_input}'''\n{user_code}", {})
-                else:
-                    exec(user_code, {})
+                 if user_input:
+                exec(user_code, {'user_input': user_input})  # Pass user_input as a variable
+            else:
+                exec(user_code)
             except Exception as e:
                 st.error(f"Error: {e}")
             finally:
