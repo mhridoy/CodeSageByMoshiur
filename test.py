@@ -211,7 +211,7 @@ if activity == "Python Editor":
         # Check if the code is empty or contains only whitespace
         if not user_code.strip():
             st.warning('Please enter some code to run.')
-            return
+            return ""
     
         # Display a spinner and a message indicating that the code is running
         with st.spinner('Running...'):
