@@ -187,7 +187,7 @@ courses = [
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
 if activity == "Python Editor":
-   # Python Code Editor Section
+    # Python Code Editor Section
     st.markdown("## Python Code Editor")
     user_code = st_ace(language='python', theme='monokai', key='code-editor', height=250)  # Increase height for better visibility
     
@@ -206,13 +206,12 @@ if activity == "Python Editor":
     st.markdown("## User Input")
     user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)  # Increase height for larger input area
     
-     # Button to run the code
+    # Button to run the code
     if st.button("Run Code"):
         # Check if the code is empty or contains only whitespace
         if not user_code.strip():
             st.warning('Please enter some code to run.')
             
-    
         # Display a spinner and a message indicating that the code is running
         with st.spinner('Running...'):
             # Capture the standard output and handle exceptions
@@ -222,9 +221,9 @@ if activity == "Python Editor":
             try:
                 # Execute the user's code, passing user input if available
                 if user_input:
-                    exec(f"user_input = '''{user_input}'''\n{user_code}", globals())
+                    exec(f"user_input = '''{user_input}'''\n{user_code}", {})
                 else:
-                    exec(user_code)
+                    exec(user_code, {})
             except Exception as e:
                 st.error(f"Error: {e}")
             finally:
