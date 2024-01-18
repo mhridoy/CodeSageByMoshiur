@@ -206,35 +206,39 @@ if activity == "Python Editor":
     st.markdown("## User Input")
     user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)  # Increase height for larger input area
     
-           # Button to run the code
+     # Button to run the code
     if st.button("Run Code"):
-            # Display a spinner and a message indicating that the code is running
-            with st.spinner('Running...'):
-                # Capture the standard output and handle exceptions
-                old_stdout = sys.stdout
-                redirected_output = sys.stdout = io.StringIO()
-        
-                try:
-                    # Execute the user's code, passing user input if available
-                    if user_input:
-                        exec(f"user_input = '''{user_input}'''\n{user_code}", globals())
-                    else:
-                        exec(user_code)
-                except Exception as e:
-                    st.error(f"Error: {e}")
-                finally:
-                    # Restore the standard output
-                    sys.stdout = old_stdout
-        
-                # Get the captured output
-                output = redirected_output.getvalue()
-        
-            # Display the output in a text area
-            st.text_area("Output:", value=output, height=300)
-        
-            # Optionally, clear the running status message
-            st.success('Execution finished!')
-
+        # Check if the code is empty or contains only whitespace
+        if not user_code.strip():
+            st.warning('Please enter some code to run.')
+            return
+    
+        # Display a spinner and a message indicating that the code is running
+        with st.spinner('Running...'):
+            # Capture the standard output and handle exceptions
+            old_stdout = sys.stdout
+            redirected_output = sys.stdout = io.StringIO()
+    
+            try:
+                # Execute the user's code, passing user input if available
+                if user_input:
+                    exec(f"user_input = '''{user_input}'''\n{user_code}", globals())
+                else:
+                    exec(user_code)
+            except Exception as e:
+                st.error(f"Error: {e}")
+            finally:
+                # Restore the standard output
+                sys.stdout = old_stdout
+    
+            # Get the captured output
+            output = redirected_output.getvalue()
+    
+        # Display the output in a text area
+        st.text_area("Output:", value=output, height=300)
+    
+        # Optionally, clear the running status message
+        st.success('Execution finished!')
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
