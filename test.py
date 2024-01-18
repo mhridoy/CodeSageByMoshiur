@@ -187,24 +187,35 @@ courses = [
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
 if activity == "Python Editor":
-    # Python Code Editor Section
+   # Python Code Editor Section
     st.markdown("## Python Code Editor")
-    user_code = st_ace(language='python', theme='monokai', key='code-editor')
+    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=250)  # Increase height for better visibility
+    
+    # Custom styles for the Python editor
+    st.markdown(f"""
+    <style>
+        .ace_editor {{
+            border: 2px solid {colors['secondary']};
+            border-radius: 10px;
+            background-color: {colors['accent']};
+        }}
+    </style>
+    """, unsafe_allow_html=True)
     
     # User Input Section
     st.markdown("## User Input")
-    user_input = st.text_input("Enter input (like a command-line)", key='user-input')
+    user_input = st.text_area("Enter input (like a command-line)", key='user-input', height=150)  # Increase height for larger input area
     
     # Button to run the code
     if st.button("Run Code"):
-        # Capture the standard output
+        # Capture the standard output and handle exceptions
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
     
         try:
             # Execute the user's code, passing user input if available
             if user_input:
-                exec(f"user_input = '{user_input}'\n{user_code}", globals())
+                exec(f"user_input = '''{user_input}'''\n{user_code}", globals())
             else:
                 exec(user_code)
         except Exception as e:
@@ -215,7 +226,8 @@ if activity == "Python Editor":
     
         # Get the captured output
         output = redirected_output.getvalue()
-        st.text_area("Output:", value=output, height=300)
+        st.text_area("Output:", value=output, height=300)  # Increase height if needed
+
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
