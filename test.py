@@ -209,6 +209,7 @@ if activity == "Python Editor":
     # Button to run the code
     if st.button("Run Code"):
         # Check if the code is empty or contains only whitespace
+        st.write(user_input)
         if not user_code.strip():
             st.warning('Please enter some code to run.')
             
