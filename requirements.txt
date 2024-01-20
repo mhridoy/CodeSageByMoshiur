@@ -6,3 +6,4 @@ streamlit_code_editor
 streamlit_ace
 docxtpl
 fpdf
+sqlite3
