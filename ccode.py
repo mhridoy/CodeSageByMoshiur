@@ -6,7 +6,7 @@ import uuid
 
 def main():
     # Customizing the page layout and style
-    st.set_page_config(page_title="CodeSage by Moshiur", layout="wide")
+    st.set_page_config(page_title="CodeSage by Moshiur", page_icon='🦋', layout="wide")
 
     # Custom CSS for the app
     apply_custom_css()
