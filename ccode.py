@@ -13,7 +13,7 @@ def main():
     
 
     # Page header
-    st.title("Welcome to CodeSage")
+    st.title("Welcome to CodeSage By Moshiur")
     st.markdown("#### Enhance your programming journey in a vibrant and interactive environment.")
 
     # Layout with tabs
