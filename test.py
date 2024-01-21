@@ -91,13 +91,16 @@ schedule_df = load_schedule()
 # Function to display class schedule
 # Manually assign a fruit name as password for each day
 day_to_fruit_password = {
-    "Fri-Sat": "apple",
-    "Fri-Mon": "banana",
-    "Mon-Wed": "orange",
-    "Tue-Thu": "grape",
-    "Wed-Fri": "pineapple",
-    "Thu-Sat": "mango",
-    "Sat-Sun": "strawberry"
+    "Fri-Sat 10:00(AM)": "apple",
+    "Fri-Sat 11:10(AM)": "orange",
+    "Fri-Sat 2:50(PM)": "grape",
+    "Fri-Sat 4:30(PM)": "melon",
+    "Fri-Mon 5:50(PM)": "banana",
+    "Mon-Wed 3:00(PM)": "cherry",
+    "Tue-Thu 12:00(PM)": "pear",
+    "Wed-Fri 1:30(PM)": "peach",
+    "Thu-Sat 9:00(AM)": "plum",
+    "Sat-Sun 10:30(AM)": "mango",
     # Add more day combinations and corresponding fruit names as needed
 }
 
