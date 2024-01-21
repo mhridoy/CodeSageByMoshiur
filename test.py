@@ -190,10 +190,9 @@ def python_editor():
 # Function for Python Turtle Graphics (assuming you have a way to embed this)
 def python_turtle_graphics():
     st.markdown("## Python Turtle Graphics")
-    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
-    if show_turtle_window:
-        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
-        st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+
+    trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
+    st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
 
 # Function to display courses
 def display_courses():
