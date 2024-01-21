@@ -20,132 +20,59 @@ st.set_page_config(
     }
 )
 
-# Define a creative and soothing light purple color scheme
+# Enhanced color scheme
 colors = {
-    'background': '#FAF4FF',  # A very light purple for a serene background
-    'primary': '#7B2CBF',     # A deep purple for contrast
-    'secondary': '#9D4EDD',   # A softer purple for secondary elements
-    'accent': '#CDB4DB',      # A gentle lavender for highlights
-    'text': '#4A2040',        # A darker purple for text
-    'footer_bg': '#7B2CBF',   # Deep purple for the footer
-    'footer_text': '#EDE9F4'  # Light purple text for the footer
+    'background': '#F0E6F6',  # Soothing lavender background
+    'primary': '#5D3FD3',     # Rich purple for primary elements
+    'secondary': '#A391E6',   # Lighter purple for secondary elements
+    'accent': '#D3CCE3',      # Soft lilac for accents
+    'text': '#382933',        # Dark purple for text, ensuring readability
+    'footer_bg': '#5D3FD3',   # Footer background
+    'footer_text': '#EDE9F4'  # Footer text
 }
 
-# Custom styles
+# Custom styles with interactive elements
 st.markdown(f"""
 <style>
     /* Global Styles */
-    body {{
-        font-family: 'Segoe UI', sans-serif;
-        background-color: {colors['background']};
-        color: {colors['text']};
-    }}
+    /* ...existing styles... */
 
-    h1 {{
-        color: {colors['primary']};
-        font-size: 2.5em;
-        text-align: center;
-    }}
-
-    h2 {{
-        color: {colors['secondary']};
-        font-size: 1.75em;
-    }}
-
-    /* Custom Section Style */
-    .custom-section {{
-        background-color: {colors['accent']};
-        padding: 2em;
-        border-radius: 15px;
-        margin-bottom: 1em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }}
-
-    .custom-section:hover {{
-        transform: scale(1.03);
-    }}
-
-    /* Course Section Style */
-    .course-section {{
-        border-left: 5px solid {colors['secondary']};
-        background-color: {colors['background']};
-        padding: 1em;
-        margin-bottom: 1em;
-    }}
-
-    .course-title {{
-        color: {colors['primary']};
-        font-weight: bold;
-    }}
-
-    .course-description {{
-        color: {colors['text']};
-    }}
-
-    /* Link Style */
-    a {{
-        color: {colors['secondary']};
-        text-decoration: none;
-    }}
-
-    a:hover {{
-        color: {colors['primary']};
-        text-decoration: underline;
-    }}
-
-    /* Footer Style */
-    .footer {{
-        background-color: {colors['footer_bg']};
-        color: {colors['footer_text']};
-        padding: 1em;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-    }}
-
-    /* Table Style */
-    .stDataFrame, .stTable {{
-        border-radius: 8px;
-        overflow: hidden;
-    }}
-
-    .dataframe th {{
-        background-color: {colors['secondary']};
-        color: {colors['text']};
-    }}
-
-    .dataframe td {{
-        background-color: {colors['background']};
-        color: {colors['text']};
-    }}
-
-    /* Button Style */
+    /* Enhanced Button Style with Hover Effect */
     .stButton > button {{
-        border: 2px solid {colors['secondary']};
-        border-radius: 20px;
         background-color: {colors['accent']};
         color: {colors['text']};
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        transition: background-color 0.3s, transform 0.3s;
     }}
 
     .stButton > button:hover {{
-        background-color: {colors['primary']};
-        color: {colors['background']};
+        background-color: {colors['secondary']};
+        transform: translateY(-2px);
     }}
 
-    /* Hiding Streamlit elements */
-    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
-        visibility: hidden;
+    /* Enhanced Input Fields */
+    .stTextInput > div > div > input {{
+        border-radius: 20px;
+        padding: 10px;
     }}
-    footer {{
-        visibility: hidden;
+
+    /* Enhanced Tab Style */
+    .stTabs > div > button {{
+        border: none;
+        padding: 1rem;
+        border-radius: 20px;
+        transition: background-color 0.3s;
     }}
-    .block-container {{
-        padding-bottom: 5rem;
+
+    .stTabs > div > button:focus {{
+        box-shadow: none;
+        background-color: {colors['secondary']};
     }}
+
+    /* Enhanced Dataframe Style */
+    /* ... */
 </style>
 """, unsafe_allow_html=True)
 
