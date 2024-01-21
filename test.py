@@ -89,12 +89,36 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 # Load the schedule data
 schedule_df = load_schedule()
 # Function to display class schedule
+# Manually assign a fruit name as password for each day
+day_to_fruit_password = {
+    "Fri-Sat": "apple",
+    "Fri-Mon": "banana",
+    "Mon-Wed": "orange",
+    "Tue-Thu": "grape",
+    "Wed-Fri": "pineapple",
+    "Thu-Sat": "mango",
+    "Sat-Sun": "strawberry"
+    # Add more day combinations and corresponding fruit names as needed
+}
+
+# Extract unique day names from the DataFrame
+day_names = schedule_df['Day'].unique()
+
+# Function to display class schedule
 def display_schedule():
-    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
-    st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['background'],
-        'color': colors['text']
-    }))
+    selected_day = st.selectbox("Select your day:", day_names)
+    if selected_day:
+        password = st.text_input("Enter your password:", type="password")
+        if password:
+            if password == day_to_fruit_password.get(selected_day, ""):
+                day_schedule = schedule_df[schedule_df['Day'] == selected_day]
+                st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
+                st.dataframe(day_schedule.style.set_properties(**{
+                    'background-color': colors['background'],
+                    'color': colors['text']
+                }))
+            else:
+                st.error("Invalid password. Please try again.")
 
 # Function to display best homework
 def display_homework():
