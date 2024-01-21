@@ -104,19 +104,20 @@ day_to_fruit_password = {
     # Add more day combinations and corresponding fruit names as needed
 }
 
-# Extract unique day names from the DataFrame
-day_names = schedule_df['Day'].unique()
+# Extract unique day-time combinations from the DataFrame
+day_time_combinations = schedule_df['Day'] + ' ' + schedule_df['Time']
+unique_day_time_combinations = day_time_combinations.unique()
 
 # Function to display class schedule
 def display_schedule():
-    selected_day = st.selectbox("Select your day:", day_names)
-    if selected_day:
+    selected_day_time = st.selectbox("Select your day and time:", unique_day_time_combinations)
+    if selected_day_time:
         password = st.text_input("Enter your password:", type="password")
         if password:
-            if password == day_to_fruit_password.get(selected_day, ""):
-                day_schedule = schedule_df[schedule_df['Day'] == selected_day]
-                st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
-                st.dataframe(day_schedule.style.set_properties(**{
+            if password == day_time_to_fruit_password.get(selected_day_time, ""):
+                specific_schedule = schedule_df[day_time_combinations == selected_day_time]
+                st.markdown('<h2>Class Schedule for Selected Time 📚</h2>', unsafe_allow_html=True)
+                st.dataframe(specific_schedule.style.set_properties(**{
                     'background-color': colors['background'],
                     'color': colors['text']
                 }))
