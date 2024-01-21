@@ -184,7 +184,7 @@ st.markdown(f"""
 <div class="footer">
     <p>Connect with us:</p>
     <!-- Social media icons -->
-    <a href="https://facebook.com/codesagebymoshiur" target="_blank"><img src="https://icons8.com/icon/118468/facebook" alt="Facebook"></a>
+    <a href="https://facebook.com/codesagebymoshiur" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/06-facebook-1024.png" alt="Facebook"></a>
     <a href="https://twitter.com/" target="_blank"><img src="https://icons8.com/icon/437/twitter" alt="Twitter"></a>
     <a href="https://instagram.com/" target="_blank"><img src="https://icons8.com/icon/32292/instagram" alt="Instagram"></a>
     <p>© 2024 CodeSage By Moshiur. All Rights Reserved.</p>
