@@ -5,7 +5,7 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule.xlsx'  # Ensure this path is correct
+    file_path = 'schedule03.xlsx'  # Ensure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -135,9 +135,6 @@ st.markdown(f"""
         background-color: {colors['primary']};
         color: {colors['background']};
     }}
-    .stTextInput > div > div > input {{
-        font-size: 20px;
-    }}
 
     /* Hiding Streamlit elements */
     .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
@@ -186,51 +183,36 @@ courses = [
 # Selection for Python editor or Turtle graphics
 activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
 
-import streamlit as st
-import sys
-import io
-
-st.markdown("## Python Code Editor")
-
-# Python code editor where users can write their code
-user_code = st.text_area("Write your Python code here. Use 'user_input' to reference the input below:", height=250)
-
-st.markdown("## Input for your code")
-st.markdown("Enter the input for your code below. Use '\\n' for new lines.")
-
-# Text area for users to input their data
-user_input = st.text_area("Input:", height=150)
-
-# Button to execute the user's code
-if st.button("Run Code"):
-    # Check if the code is empty or contains only whitespace
-    if not user_code.strip():
-        st.warning('Please enter some code to run.')
-    else:
-        # Display a spinner while the code is running
-        with st.spinner('Running your code...'):
-            # Redirect standard output
-            old_stdout = sys.stdout
-            redirected_output = sys.stdout = io.StringIO()
-
-            # Prepare the environment for the execution
-            local_vars = {}
-
-            # Execute the user's code
-            try:
-                exec(user_code, globals(), local_vars)
-            except Exception as e:
-                # If an exception occurs, display the error to the user
-                st.error(f"Error in executing code: {e}")
-            finally:
-                # Restore the standard output
-                sys.stdout = old_stdout
-
-            # Retrieve the output and display it
-            output = redirected_output.getvalue()
-            st.text_area("Output:", value=output, height=300, key='output')
-        
-        st.success('Execution finished!')
+if activity == "Python Editor":
+    # Python Code Editor Section
+    st.markdown("## Python Code Editor")
+    user_code = st_ace(language='python', theme='monokai', key='code-editor')
+    
+    # User Input Section
+    st.markdown("## User Input")
+    user_input = st.text_input("Enter input (like a command-line)", key='user-input')
+    
+    # Button to run the code
+    if st.button("Run Code"):
+        # Capture the standard output
+        old_stdout = sys.stdout
+        redirected_output = sys.stdout = io.StringIO()
+    
+        try:
+            # Execute the user's code, passing user input if available
+            if user_input:
+                exec(f"user_input = '{user_input}'\n{user_code}", globals())
+            else:
+                exec(user_code)
+        except Exception as e:
+            st.error(f"Error: {e}")
+        finally:
+            # Restore the standard output
+            sys.stdout = old_stdout
+    
+        # Get the captured output
+        output = redirected_output.getvalue()
+        st.text_area("Output:", value=output, height=300)
 
 elif activity == "Python Turtle Graphics":
     # Python Turtle Graphics Section
@@ -273,6 +255,6 @@ st.markdown(f"""
 # Footer
 st.markdown(f"""
 <div class="footer">
-    © 2023 CodeSage By Moshiur. All Rights Reserved.
+    © 2024 CodeSage By Moshiur. All Rights Reserved.
 </div>
 """, unsafe_allow_html=True)
