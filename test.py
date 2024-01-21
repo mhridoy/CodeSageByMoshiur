@@ -90,7 +90,7 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 schedule_df = load_schedule()
 # Function to display class schedule
 # Manually assign a fruit name as password for each day
-day_to_fruit_password = {
+day_time_to_fruit_password = {
     "Fri-Sat 10:00(AM)": "apple",
     "Fri-Sat 11:10(AM)": "orange",
     "Fri-Sat 2:50(PM)": "grape",
