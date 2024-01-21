@@ -154,52 +154,28 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 
 # Load the schedule data
 schedule_df = load_schedule()
-
-# Main content area
-col1, col2 = st.columns([3, 2])
-with col1:
+# Function to display class schedule
+def display_schedule():
     st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
     st.dataframe(schedule_df.style.set_properties(**{
         'background-color': colors['background'],
         'color': colors['text']
     }))
 
-with col2:
-    st.markdown('<h2>Best Homework of the Month 🌟 Afsara </h2>', unsafe_allow_html=True)
-    # Replace with the actual image URL or path
-    st.image('best_homework02.png', caption='Incredible work by our star coder!', use_column_width=True)
-    st.write("Code Link : https://trinket.io/python/ef2a270c85")
+# Function to display best homework
+def display_homework():
+    st.markdown('<h2>Best Homework of the Month 🌟</h2>', unsafe_allow_html=True)
+    st.image('best_homework02.png', caption='Incredible work by our student!', use_column_width=True)
 
-# Course Sections
-courses = [
-    {"title": "Level-1: Python Programming", 
-     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
-    {"title": "Level-2: Website Design", 
-     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
-    {"title": "Level-3: Robotics & IOT", 
-     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
-]
-
-# Selection for Python editor or Turtle graphics
-activity = st.selectbox("Wanna Try Some Code: 🤗🤗", ["Python Editor", "Python Turtle Graphics"])
-
-if activity == "Python Editor":
-    # Python Code Editor Section
+# Function for Python code editor
+def python_editor():
     st.markdown("## Python Code Editor")
     user_code = st_ace(language='python', theme='monokai', key='code-editor')
-    
-    # User Input Section
-    st.markdown("## User Input")
     user_input = st.text_input("Enter input (like a command-line)", key='user-input')
-    
-    # Button to run the code
     if st.button("Run Code"):
-        # Capture the standard output
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
-    
         try:
-            # Execute the user's code, passing user input if available
             if user_input:
                 exec(f"user_input = '{user_input}'\n{user_code}", globals())
             else:
@@ -207,33 +183,51 @@ if activity == "Python Editor":
         except Exception as e:
             st.error(f"Error: {e}")
         finally:
-            # Restore the standard output
             sys.stdout = old_stdout
-    
-        # Get the captured output
         output = redirected_output.getvalue()
         st.text_area("Output:", value=output, height=300)
 
-elif activity == "Python Turtle Graphics":
-    # Python Turtle Graphics Section
+# Function for Python Turtle Graphics (assuming you have a way to embed this)
+def python_turtle_graphics():
     st.markdown("## Python Turtle Graphics")
-    show_turtle_window = st.checkbox("Show/Hide Python Turtle Window", value=False)
 
-    if show_turtle_window:
-        # Embed Trinket.io Turtle project
-        trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"  # Replace with your Trinket.io embed URL
-        st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+    trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
+    st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+
+# Function to display courses
+def display_courses():
+    courses = [
+    {"title": "Level-1: Python Programming", 
+     "description": "Python is a high-level, interpreted, general-purpose programming language..."},
+    {"title": "Level-2: Website Design", 
+     "description": "Web programming essentials with HTML, CSS, and Javascript..."},
+    {"title": "Level-3: Robotics & IOT", 
+     "description": "Dive into the future-tech of Internet of Things (IOT) and robotics..."}
+]
+    for course in courses:
+        st.markdown(f"""
+        <div class="course-section">
+            <h2 class="course-title">{course['title']}</h2>
+            <p class="course-description">{course['description']}</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 
-# Display courses 
-for course in courses:
-    st.markdown(f"""
-    <div class="course-section">
-        <h2 class="course-title">{course['title']}</h2>
-        <p class="course-description">{course['description']}</p>
-    </div>
-    """, unsafe_allow_html=True)
+# Main app layout with tabs
+tab1, tab2, tab3, tab4 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics"])
+
+with tab1:
+    display_schedule()
+
+with tab2:
+    display_homework()
+
+with tab3:
+    python_editor()
+
+with tab4:
+    python_turtle_graphics()
 
 # Dreamers Academy Mention
 st.markdown(f"""
