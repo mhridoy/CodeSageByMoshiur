@@ -31,48 +31,55 @@ colors = {
     'footer_text': '#EDE9F4'  # Footer text
 }
 
-# Custom styles with interactive elements
+# Import Google Font and enhanced CSS styling
 st.markdown(f"""
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* Global Styles */
-    /* ...existing styles... */
-
-    /* Enhanced Button Style with Hover Effect */
-    .stButton > button {{
-        background-color: {colors['accent']};
+    /* Apply Google Font */
+    body {{
+        font-family: 'Roboto', sans-serif;
+        background-color: {colors['background']};
         color: {colors['text']};
+    }}
+
+    h1, h2, h3, h4, h5, h6 {{
+        font-family: 'Roboto', sans-serif;
+    }}
+
+    /* Button Style with Hover Effect */
+    .stButton > button {{
+        background: linear-gradient(45deg, {colors['primary']}, {colors['secondary']});
+        color: white;
         border: none;
         padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        transition: background-color 0.3s, transform 0.3s;
+        border-radius: 30px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
     }}
 
     .stButton > button:hover {{
-        background-color: {colors['secondary']};
-        transform: translateY(-2px);
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }}
 
-    /* Enhanced Input Fields */
-    .stTextInput > div > div > input {{
-        border-radius: 20px;
-        padding: 10px;
+    /* Custom Section Style */
+    .custom-section {{
+        background-color: {colors['accent']};
+        padding: 2em;
+        border-radius: 15px;
+        margin-bottom: 1em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
     }}
 
-    /* Enhanced Tab Style */
-    .stTabs > div > button {{
-        border: none;
-        padding: 1rem;
-        border-radius: 20px;
-        transition: background-color 0.3s;
+    .custom-section:hover {{
+        transform: scale(1.03);
     }}
 
-    .stTabs > div > button:focus {{
-        box-shadow: none;
-        background-color: {colors['secondary']};
-    }}
-
-    /* Enhanced Dataframe Style */
-    /* ... */
+    /* Other Custom Styles... */
 </style>
 """, unsafe_allow_html=True)
 
