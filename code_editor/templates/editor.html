@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamers Academy | CodeSage By Moshiur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="workspace">
+        <header class="main-header">
+            <h1>Dreamers Academy | CodeSage By Moshiur</h1>
+        </header>
+        <main>
+            <div class="code-area">
+                <div class="editor html-editor">
+                    <div class="editor-header">HTML</div>
+                    <textarea id="html" class="code-input"></textarea>
+                </div>
+                <div class="editor css-editor">
+                    <div class="editor-header">CSS</div>
+                    <textarea id="css" class="code-input"></textarea>
+                </div>
+                <div class="editor js-editor">
+                    <div class="editor-header">JavaScript</div>
+                    <textarea id="js" class="code-input"></textarea>
+                </div>
+            </div>
+            <div class="output-container">
+                <div class="editor-header">Output</div>
+                <iframe id="output"></iframe>
+            </div>
+            <footer>
+                <button onclick="updateOutput()">Run Code</button>
+                <button onclick="openInNewTab()">Open Output in New Tab</button>
+                <button onclick="saveCode()">Share Code</button>
+            </footer>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
