@@ -5,7 +5,7 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule03.xlsx'  # Ensure this path is correct
+    file_path = 'schedule04.xlsx'  # Ensure this path is correct
     return pd.read_excel(file_path)
 
 # Page configuration
@@ -20,49 +20,36 @@ st.set_page_config(
     }
 )
 
-# Enhanced color scheme
+# Define a creative and soothing light purple color scheme
 colors = {
-    'background': '#F0E6F6',  # Soothing lavender background
-    'primary': '#5D3FD3',     # Rich purple for primary elements
-    'secondary': '#A391E6',   # Lighter purple for secondary elements
-    'accent': '#D3CCE3',      # Soft lilac for accents
-    'text': '#382933',        # Dark purple for text, ensuring readability
-    'footer_bg': '#5D3FD3',   # Footer background
-    'footer_text': '#EDE9F4'  # Footer text
+    'background': '#FAF4FF',  # A very light purple for a serene background
+    'primary': '#7B2CBF',     # A deep purple for contrast
+    'secondary': '#9D4EDD',   # A softer purple for secondary elements
+    'accent': '#CDB4DB',      # A gentle lavender for highlights
+    'text': '#4A2040',        # A darker purple for text
+    'footer_bg': '#7B2CBF',   # Deep purple for the footer
+    'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
 
-# Import Google Font and enhanced CSS styling
+# Custom styles
 st.markdown(f"""
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* Apply Google Font */
+    /* Global Styles */
     body {{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Segoe UI', sans-serif;
         background-color: {colors['background']};
         color: {colors['text']};
     }}
 
-    h1, h2, h3, h4, h5, h6 {{
-        font-family: 'Roboto', sans-serif;
+    h1 {{
+        color: {colors['primary']};
+        font-size: 2.5em;
+        text-align: center;
     }}
 
-    /* Button Style with Hover Effect */
-    .stButton > button {{
-        background: linear-gradient(45deg, {colors['primary']}, {colors['secondary']});
-        color: white;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 30px;
-        transition: transform 0.2s, box-shadow 0.2s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-    }}
-
-    .stButton > button:hover {{
-        transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    h2 {{
+        color: {colors['secondary']};
+        font-size: 1.75em;
     }}
 
     /* Custom Section Style */
@@ -79,7 +66,86 @@ st.markdown(f"""
         transform: scale(1.03);
     }}
 
-    /* Other Custom Styles... */
+    /* Course Section Style */
+    .course-section {{
+        border-left: 5px solid {colors['secondary']};
+        background-color: {colors['background']};
+        padding: 1em;
+        margin-bottom: 1em;
+    }}
+
+    .course-title {{
+        color: {colors['primary']};
+        font-weight: bold;
+    }}
+
+    .course-description {{
+        color: {colors['text']};
+    }}
+
+    /* Link Style */
+    a {{
+        color: {colors['secondary']};
+        text-decoration: none;
+    }}
+
+    a:hover {{
+        color: {colors['primary']};
+        text-decoration: underline;
+    }}
+
+    /* Footer Style */
+    .footer {{
+        background-color: {colors['footer_bg']};
+        color: {colors['footer_text']};
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }}
+
+    /* Table Style */
+    .stDataFrame, .stTable {{
+        border-radius: 8px;
+        overflow: hidden;
+    }}
+
+    .dataframe th {{
+        background-color: {colors['secondary']};
+        color: {colors['text']};
+    }}
+
+    .dataframe td {{
+        background-color: {colors['background']};
+        color: {colors['text']};
+    }}
+
+    /* Button Style */
+    .stButton > button {{
+        border: 2px solid {colors['secondary']};
+        border-radius: 20px;
+        background-color: {colors['accent']};
+        color: {colors['text']};
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+    }}
+
+    .stButton > button:hover {{
+        background-color: {colors['primary']};
+        color: {colors['background']};
+    }}
+
+    /* Hiding Streamlit elements */
+    .css-1y0tads, .css-1v3fvcr, .css-1r6o8ze {{
+        visibility: hidden;
+    }}
+    footer {{
+        visibility: hidden;
+    }}
+    .block-container {{
+        padding-bottom: 5rem;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -89,40 +155,12 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 # Load the schedule data
 schedule_df = load_schedule()
 # Function to display class schedule
-# Manually assign a fruit name as password for each day
-day_time_to_fruit_password = {
-    "Fri-Sat 10:00(AM)": "apple",
-    "Fri-Sat 11:10(AM)": "orange",
-    "Fri-Sat 2:50(PM)": "grape",
-    "Fri-Sat 4:30(PM)": "melon",
-    "Fri-Mon 5:50(PM)": "banana",
-    "Mon-Wed 3:00(PM)": "cherry",
-    "Tue-Thu 12:00(PM)": "pear",
-    "Wed-Fri 1:30(PM)": "peach",
-    "Thu-Sat 9:00(AM)": "plum",
-    "Sat-Sun 10:30(AM)": "mango",
-    # Add more day combinations and corresponding fruit names as needed
-}
-
-# Extract unique day-time combinations from the DataFrame
-day_time_combinations = schedule_df['Day'] + ' ' + schedule_df['Time']
-unique_day_time_combinations = day_time_combinations.unique()
-
-# Function to display class schedule
 def display_schedule():
-    selected_day_time = st.selectbox("Select your day and time:", unique_day_time_combinations)
-    if selected_day_time:
-        password = st.text_input("Enter your password:", type="password")
-        if password:
-            if password == day_time_to_fruit_password.get(selected_day_time, ""):
-                specific_schedule = schedule_df[day_time_combinations == selected_day_time]
-                st.markdown('<h2>Class Schedule for Selected Time 📚</h2>', unsafe_allow_html=True)
-                st.dataframe(specific_schedule.style.set_properties(**{
-                    'background-color': colors['background'],
-                    'color': colors['text']
-                }))
-            else:
-                st.error("Invalid password. Please try again.")
+    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
+    st.dataframe(schedule_df.style.set_properties(**{
+        'background-color': colors['background'],
+        'color': colors['text']
+    }))
 
 # Function to display best homework
 def display_homework():
@@ -155,7 +193,9 @@ def python_turtle_graphics():
 
     trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
     st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
-
+def web_editor():
+    web_editor_url = "https://moshiur.pythonanywhere.com"
+    st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
 # Function to display courses
 def display_courses():
     courses = [
@@ -177,7 +217,7 @@ def display_courses():
 
 
 # Main app layout with tabs
-tab1, tab2, tab3, tab4 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor"])
 
 with tab1:
     display_schedule()
@@ -190,6 +230,8 @@ with tab3:
 
 with tab4:
     python_turtle_graphics()
+with tab5:
+    web_editor()
 
 # Dreamers Academy Mention
 st.markdown(f"""
@@ -208,13 +250,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+# Footer
 st.markdown(f"""
 <div class="footer">
-    <p>Connect with us:</p>
-    <!-- Social media icons -->
-    <a href="https://facebook.com/codesagebymoshiur" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/06-facebook-1024.png" alt="Facebook"></a>
-    <a href="https://twitter.com/" target="_blank"><img src="https://icons8.com/icon/437/twitter" alt="Twitter"></a>
-    <a href="https://instagram.com/" target="_blank"><img src="https://icons8.com/icon/32292/instagram" alt="Instagram"></a>
-    <p>© 2024 CodeSage By Moshiur. All Rights Reserved.</p>
+    © 2024 CodeSage By Moshiur. All Rights Reserved.
 </div>
 """, unsafe_allow_html=True)
