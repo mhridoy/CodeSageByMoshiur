@@ -117,3 +117,74 @@ footer button:hover, footer input[type="submit"]:hover {
         min-height: 300px; /* Larger minimum height for larger screens */
     }
 }
+
+.editor-section, .upload-section {
+    padding: 20px;
+}
+
+/* Image Upload Section Styles */
+.upload-section {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-section h2, .upload-section h3 {
+    color: #333;
+}
+
+.upload-button {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #5c6bc0;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #3f51b5;
+}
+
+.image-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.image-item {
+    background: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.image-item a {
+    display: block;
+    margin-bottom: 5px;
+    color: #5c6bc0;
+    text-decoration: none;
+}
+
+.insert-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.insert-btn:hover {
+    background-color: #45a049;
+}
+
+
