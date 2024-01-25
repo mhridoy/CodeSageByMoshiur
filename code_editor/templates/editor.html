@@ -8,34 +8,57 @@
 </head>
 <body>
     <div class="workspace">
-        <header class="main-header">
-            <h1>Dreamers Academy | CodeSage By Moshiur</h1>
-        </header>
-        <main>
-            <div class="code-area">
-                <div class="editor html-editor">
-                    <div class="editor-header">HTML</div>
-                    <textarea id="html" class="code-input"></textarea>
-                </div>
-                <div class="editor css-editor">
-                    <div class="editor-header">CSS</div>
-                    <textarea id="css" class="code-input"></textarea>
-                </div>
-                <div class="editor js-editor">
-                    <div class="editor-header">JavaScript</div>
-                    <textarea id="js" class="code-input"></textarea>
-                </div>
+    <header class="main-header">
+        <h1>Dreamers Academy | CodeSage By Moshiur</h1>
+    </header>
+    <main>
+        <div class="code-area">
+            <div class="editor html-editor">
+                <div class="editor-header">HTML</div>
+                <textarea id="html" class="code-input"></textarea>
             </div>
-            <div class="output-container">
-                <div class="editor-header">Output</div>
-                <iframe id="output"></iframe>
+            <div class="editor css-editor">
+                <div class="editor-header">CSS</div>
+                <textarea id="css" class="code-input"></textarea>
             </div>
-            <footer>
-                <button onclick="updateOutput()">Run Code</button>
-                <button onclick="openInNewTab()">Open Output in New Tab</button>
-                <button onclick="saveCode()">Share Code</button>
-            </footer>
-        </main>
+            <div class="editor js-editor">
+                <div class="editor-header">JavaScript</div>
+                <textarea id="js" class="code-input"></textarea>
+            </div>
+        </div>
+        <div class="output-container">
+            <div class="editor-header">Output</div>
+            <iframe id="output"></iframe>
+        </div>
+        <footer>
+            <button onclick="updateOutput()">Run Code</button>
+            <button onclick="openInNewTab()">Open Output in New Tab</button>
+            <button onclick="saveCode()">Share Code</button>
+        </footer>
+    </main>
+
+    <!-- Image Upload & History Section -->
+    <div id="imageUpload" class="upload-section" >
+        <h2>Upload Image</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input class="upload-button" type="submit" value="Upload Image">
+        </form>
+        <h3>Uploaded Images</h3>
+        <div class="image-list">
+        
+            {% for file in files %}
+            <div class="image-item">
+               
+                    <a href="{{ url_for('uploaded_file', filename=file) }}" target="_blank">{{ file }}</a>
+                    <!-- Button to insert image URL into HTML editor -->
+                    <button class="insert-btn" onclick="insertImage('{{ url_for('uploaded_file', filename=file) }}')">Insert into Editor</button>
+               
+                </div>
+            {% endfor %}
+       
+    </div>
+    </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
