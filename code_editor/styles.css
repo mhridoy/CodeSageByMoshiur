@@ -1,73 +1,190 @@
-/* Basic styling */
-body {
+body, html {
+    height: 100%;
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fb;
+    color: #333;
+}
+
+.workspace {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
-    color: #333;
-    font-family: 'Arial', sans-serif;
+    height: 100%;
 }
 
-header {
-    background-color: #4caf50;
-    color: white;
-    width: 100%;
-    padding: 10px 0;
+.main-header {
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.logo {
-    width: 50px;
-    height: auto;
-    margin-right: 15px;
-}
-
-h1 {
+.main-header h1 {
+    color: #5c6bc0;
+    font-weight: normal;
     margin: 0;
-    font-size: 24px;
+    font-size: 2rem;
 }
 
-#editor {
-    width: 70%;
-    height: 60vh;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.code-area {
+    display: flex;
+    flex: 1;
+}
+
+.editor {
+    flex: 1;
+    margin: 0.5rem;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-header {
+    padding: 0.75rem;
+    background-color: #5c6bc0;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.code-input {
+    flex: 1;
+    padding: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem;
+    border: none;
+    outline: none;
+    resize: none;
+    background: #fbfbfb;
+    color: #424242;
 }
 
 .output-container {
-    width: 70%;
-    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin: 0.5rem;
+    flex-basis: 100%;
 }
 
-#run-btn {
-    display: block;
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    background-color: #4caf50;
+iframe {
+    width: 100%;
+    height: 300px; /* Fixed height for output */
+    border: none;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer button, footer input[type="submit"] {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #5c6bc0;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+footer button:hover, footer input[type="submit"]:hover {
+    background-color: #3f51b5;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .code-area {
+        flex-direction: row; /* Horizontal layout on larger screens */
+    }
+
+    .editor {
+        min-height: 300px; /* Larger minimum height for larger screens */
+    }
+}
+
+.editor-section, .upload-section {
+    padding: 20px;
+}
+
+/* Image Upload Section Styles */
+.upload-section {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-section h2, .upload-section h3 {
+    color: #333;
+}
+
+.upload-button {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #5c6bc0;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#run-btn:hover {
-    background-color: #388e3c;
+.upload-button:hover {
+    background-color: #3f51b5;
 }
 
-#output {
-    border: 1px solid #ccc;
-    height: 200px;
-    background-color: white;
-    overflow-y: scroll;
+.image-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.image-item {
+    background: #fff;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Additional interactive styling */
+.image-item a {
+    display: block;
+    margin-bottom: 5px;
+    color: #5c6bc0;
+    text-decoration: none;
+}
+
+.insert-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.insert-btn:hover {
+    background-color: #45a049;
+}
+
+
