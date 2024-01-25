@@ -62,3 +62,23 @@ function saveCode() {
     document.body.appendChild(form);
     form.submit();
 }
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener for all insert buttons
+    document.querySelectorAll('.insert-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const imageUrl = this.getAttribute('data-url');
+            insertImage(imageUrl);
+        });
+    });
+});
+
+function insertImage(url) {
+    const editor = document.getElementById('html'); // Ensure you have an element with ID 'html' for your HTML editor
+    editor.value += `<img src="${url}" alt="Image">`; // Append an img tag to the editor content
+}
