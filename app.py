@@ -193,7 +193,9 @@ def python_turtle_graphics():
 
     trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
     st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
-
+def web_editor():
+    web_editor_url = "https://moshiur.pythonanywhere.com"
+    st.components.v1.iframe(web_editor_url, height=1000, scrolling=False)
 # Function to display courses
 def display_courses():
     courses = [
@@ -215,7 +217,7 @@ def display_courses():
 
 
 # Main app layout with tabs
-tab1, tab2, tab3, tab4 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor"])
 
 with tab1:
     display_schedule()
@@ -228,6 +230,8 @@ with tab3:
 
 with tab4:
     python_turtle_graphics()
+with tab5:
+    web_editor()
 
 # Dreamers Academy Mention
 st.markdown(f"""
