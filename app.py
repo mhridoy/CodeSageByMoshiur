@@ -195,7 +195,7 @@ def python_turtle_graphics():
     st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
 def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
-    st.components.v1.iframe(web_editor_url, height=1000, scrolling=False)
+    st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
 # Function to display courses
 def display_courses():
     courses = [
