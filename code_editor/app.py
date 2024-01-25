@@ -1,16 +1,23 @@
-from flask import Flask, render_template, request, redirect, url_for
-import uuid
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
+from werkzeug.utils import secure_filename
 import os
+import uuid
+
+UPLOAD_FOLDER = 'static/upload'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB
+app.secret_key = 'your_secret_key_here'
 
 # In-memory storage for demonstration purposes
-# In a real application, consider using a database
 code_storage = {}
 
 @app.route('/')
 def index():
-    return render_template('editor.html')
+    files = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template('editor.html', files=files)
 
 @app.route('/save', methods=['POST'])
 def save():
@@ -39,7 +46,7 @@ def new_tab():
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Output</title>
+        <title>Open in New Tab</title>
         <style>{css_content}</style>
     </head>
     <body>
@@ -50,5 +57,32 @@ def new_tab():
     """
     return full_html
 
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(url_for('index'))
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(url_for('index'))
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('File successfully uploaded')
+    else:
+        flash('Invalid file format or file is too large.')
+    return redirect(url_for('index'))
+
+@app.route('/upload/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 if __name__ == '__main__':
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
