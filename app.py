@@ -195,8 +195,32 @@ def display_schedule():
 
 # Function to display best homework
 def display_homework():
+    # Connect to the Google Sheet
+    sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_name = "sheet03"
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+    df = pd.read_csv(url, dtype=str).fillna("")
+
+    # Display the title
     st.markdown('<h2>Best Homework of the Month 🌟</h2>', unsafe_allow_html=True)
-    st.image('best_homework02.png', caption='Incredible work by our student!', use_column_width=True)
+
+    # Create three columns in the Streamlit app
+    col1, col2, col3 = st.columns(3)
+
+    # Display the images in the columns
+    for i in range(0, len(df), 3):
+        with col1:
+            if i < len(df):
+                st.image(df.loc[i, 'Image Link'], caption=df.loc[i, 'Name'], use_column_width=True)
+                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
+        with col2:
+            if i+1 < len(df):
+                st.image(df.loc[i+1, 'Image Link'], caption=df.loc[i+1, 'Name'], use_column_width=True)
+                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
+        with col3:
+            if i+2 < len(df):
+                st.image(df.loc[i+2, 'Image Link'], caption=df.loc[i+2, 'Name'], use_column_width=True)
+                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
 
 # Function for Python code editor
 def python_editor():
