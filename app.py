@@ -5,8 +5,12 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule04.xlsx'  # Ensure this path is correct
-    return pd.read_excel(file_path)
+    sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_name = "sheet"
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+    df = pd.read_csv(url, dtype=str).fillna("")
+    #file_path = 'schedule04.xlsx'  # Ensure this path is correct
+    return df
 
 # Page configuration
 st.set_page_config(
@@ -156,11 +160,38 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 schedule_df = load_schedule()
 # Function to display class schedule
 def display_schedule():
-    st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
-    st.dataframe(schedule_df.style.set_properties(**{
-        'background-color': colors['background'],
-        'color': colors['text']
-    }))
+    # Connect to the first Google Sheet
+    sheet_id1 = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_name1 = "sheet01"
+    url1 = f"https://docs.google.com/spreadsheets/d/{sheet_id1}/gviz/tq?tqx=out:csv&sheet={sheet_name1}"
+    df1 = pd.read_csv(url1, dtype=str).fillna("")
+    selected_schedule_df1 = df1.iloc[:, :3]
+
+    # Connect to the second Google Sheet
+    sheet_id2 = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_name2 = "sheet02"
+    url2 = f"https://docs.google.com/spreadsheets/d/{sheet_id2}/gviz/tq?tqx=out:csv&sheet={sheet_name2}"
+    df2 = pd.read_csv(url2, dtype=str).fillna("")
+    selected_schedule_df2 = df2.iloc[:, :3]
+
+    # Create two columns in the Streamlit app
+    col1, col2 = st.columns(2)
+
+    # Display the first dataframe in the first column
+    with col1:
+        st.markdown('<h2>Level 1 (Python) Schedule 📚</h2>', unsafe_allow_html=True)
+        st.dataframe(selected_schedule_df1.style.set_properties(**{
+            'background-color': colors['background'],
+            'color': colors['text']
+        }))
+
+    # Display the second dataframe in the second column
+    with col2:
+        st.markdown('<h2>Level 2 (Web Design) Schedule 📚</h2>', unsafe_allow_html=True)
+        st.dataframe(selected_schedule_df2.style.set_properties(**{
+            'background-color': colors['background'],
+            'color': colors['text']
+        }))
 
 # Function to display best homework
 def display_homework():
