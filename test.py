@@ -5,8 +5,12 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    file_path = 'schedule04.xlsx'  # Ensure this path is correct
-    return pd.read_excel(file_path)
+    sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_name = "sheet"
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+    df = pd.read_csv(url, dtype=str).fillna("")
+    #file_path = 'schedule04.xlsx'  # Ensure this path is correct
+    return df
 
 # Page configuration
 st.set_page_config(
