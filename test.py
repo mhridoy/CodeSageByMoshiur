@@ -175,7 +175,7 @@ def display_schedule():
     selected_schedule_df2 = df2.iloc[:, :3]
 
     # Create two columns in the Streamlit app
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
 
     # Display the first dataframe in the first column
     with col1:
