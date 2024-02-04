@@ -160,8 +160,11 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 schedule_df = load_schedule()
 # Function to display class schedule
 def display_schedule():
+    # Select the first three columns of the dataframe
+    selected_schedule_df = schedule_df.iloc[:, :3]
+
     st.markdown('<h2>Class Schedule 📚</h2>', unsafe_allow_html=True)
-    st.dataframe(schedule_df.style.set_properties(**{
+    st.dataframe(selected_schedule_df.style.set_properties(**{
         'background-color': colors['background'],
         'color': colors['text']
     }))
