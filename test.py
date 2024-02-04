@@ -159,7 +159,7 @@ st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsaf
 # Load the schedule data
 schedule_df = load_schedule()
 # Function to display class schedule
-def display_schedules():
+def display_schedule():
     # Connect to the first Google Sheet
     sheet_id1 = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
     sheet_name1 = "sheet01"
