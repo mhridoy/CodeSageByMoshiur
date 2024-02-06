@@ -252,23 +252,32 @@ def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
 def web01():
-    # Custom CSS to inject into the page for a hacker-like aesthetic
+    # Custom CSS to inject into the page for specific aesthetic adjustments
     custom_css = """
     <style>
-
         .caption {
             color: #00ff00;
             font-style: italic;
+            text-align: center;
         }
         a:link, a:visited {
             color: #dddddd;
             background-color: transparent;
             text-decoration: none;
+            display: block;
+            text-align: center;
+            margin: auto;
         }
         a:hover, a:active {
             color: #ffffff;
             background-color: transparent;
             text-decoration: underline;
+        }
+        .centered {
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
         }
     </style>
     """
@@ -282,14 +291,20 @@ def web01():
     Dive into the world of coding with a design that resonates with **hacker vibes**. Click the link below to start your journey!
     """, unsafe_allow_html=True)
 
-    # Displaying the image with a hacker vibes design
+    # Displaying the image with a hacker vibes design, reduced size and centered
     hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'
-    st.image(hacker_image_url, caption='Hacker Vibes Design', use_column_width=True)
+    st.markdown(f'<div class="centered"><img src="{hacker_image_url}" width="50%" alt="Hacker Vibes Design"></div>', unsafe_allow_html=True)
 
-    # Displaying the link to your web editor with a custom button
+    # Displaying the link to your web editor with a custom button, centered
     editor_link = 'http://codesage.pythonanywhere.com'
-    st.markdown(f'<a href="{editor_link}" target="_blank"><button style="color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer;">Visit My Web Editor</button></a>', unsafe_allow_html=True)
+    st.markdown(f'<div class="button-container"><a href="{editor_link}" target="_blank"><button style="color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer;">Visit My Web Editor</button></a></div>', unsafe_allow_html=True)
 
+    # Adding related links
+    st.markdown("""
+    ### Related Links
+    - [imgbb.com](https://imgbb.com)
+    - [translate.google.com](https://translate.google.com)
+    """, unsafe_allow_html=True)
 
 
     
