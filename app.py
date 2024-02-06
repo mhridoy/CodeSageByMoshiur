@@ -251,6 +251,40 @@ def python_turtle_graphics():
 def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
+def web01():
+    # Inline style for the image and button to ensure they are centered
+    image_style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"
+    button_style = "display: block; margin: 20px auto; color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer; text-align: center;"
+
+    # Title for your link display with hacker aesthetic
+    st.title('👾 Check Out  Web Editor! 👾')
+
+    # Description or any additional text you want to show
+    st.markdown("""
+    Dive into the world of coding with a design that resonates with **hacker vibes**. Click the link below to start your journey!
+    """, unsafe_allow_html=True)
+
+    # Displaying the image with a hacker vibes design, reduced size and centered using inline style
+    hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'
+    st.markdown(f'<img src="{hacker_image_url}" style="{image_style}" alt="Hacker Vibes Design">', unsafe_allow_html=True)
+
+    # Displaying the link to your web editor with a custom button, centered using inline style
+    editor_link = 'http://codesage.pythonanywhere.com'
+    st.markdown(f'<a href="{editor_link}" target="_blank"><button style="{button_style}">Visit My Web Editor</button></a>', unsafe_allow_html=True)
+
+    # Adding related links with blue color for links
+    st.markdown("""
+    ### Related Links
+    - [imgbb.com](https://imgbb.com)
+    - [translate.google.com](https://translate.google.com)
+    """, unsafe_allow_html=True)
+
+    # Manually set link colors to blue for this section
+    st.markdown('<style>a { color: blue; }</style>', unsafe_allow_html=True)
+
+
+
+    
 # Function to display courses
 def display_courses():
     courses = [
@@ -272,7 +306,7 @@ def display_courses():
 
 
 # Main app layout with tabs
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor Simple", "Web Editor Ultimate"])
 
 with tab1:
     display_schedule()
@@ -287,7 +321,14 @@ with tab4:
     python_turtle_graphics()
 with tab5:
     web_editor()
+with tab6:
+    web01()
 
+
+st.write("\n")
+st.write("\n")
+st.write("\n")
+st.write("\n")
 # Dreamers Academy Mention
 st.markdown(f"""
 <div class="custom-section">
