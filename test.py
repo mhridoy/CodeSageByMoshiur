@@ -251,6 +251,22 @@ def python_turtle_graphics():
 def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
+def web01():
+    # Title for your link display
+    st.title('Check Out My Web Editor!')
+
+    # Description or any additional text you want to show
+    st.write('Dive into the world of coding with a design that resonates with hacker vibes. Click the link below to start your journey!')
+
+    # Displaying the image (replace 'your_image_url_here' with the actual URL of your hacker vibes image)
+    hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'  # Replace this with the URL of your chosen image
+    st.image(hacker_image_url, caption='Hacker Vibes Design')
+
+    # Displaying the link to your web editor
+    editor_link = 'http://codesage.pythonanywhere.com'
+    st.markdown(f'### [Visit My Web Editor]({editor_link})')
+
+    
 # Function to display courses
 def display_courses():
     courses = [
@@ -272,7 +288,7 @@ def display_courses():
 
 
 # Main app layout with tabs
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor Simple", "Web Editor Ultimate"])
 
 with tab1:
     display_schedule()
@@ -287,7 +303,8 @@ with tab4:
     python_turtle_graphics()
 with tab5:
     web_editor()
-
+with tab6:
+    web01()
 # Dreamers Academy Mention
 st.markdown(f"""
 <div class="custom-section">
