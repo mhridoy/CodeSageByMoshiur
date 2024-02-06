@@ -255,11 +255,7 @@ def web01():
     # Custom CSS to inject into the page for a hacker-like aesthetic
     custom_css = """
     <style>
-        .stApp {
-            background-color: #0f0f0f;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-        }
+
         .caption {
             color: #00ff00;
             font-style: italic;
