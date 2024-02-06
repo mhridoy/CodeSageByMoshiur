@@ -290,11 +290,7 @@ def web01():
     editor_link = 'http://codesage.pythonanywhere.com'
     st.markdown(f'<a href="{editor_link}" target="_blank"><button style="color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer;">Visit My Web Editor</button></a>', unsafe_allow_html=True)
 
-    # Optionally, add more interactive or informative elements here
 
-    # Displaying the link to your web editor
-    editor_link = 'http://codesage.pythonanywhere.com'
-    st.markdown(f'### [Visit My Web Editor]({editor_link})')
 
     
 # Function to display courses
@@ -335,6 +331,12 @@ with tab5:
     web_editor()
 with tab6:
     web01()
+
+
+st.write("\n")
+st.write("\n")
+st.write("\n")
+st.write("\n")
 # Dreamers Academy Mention
 st.markdown(f"""
 <div class="custom-section">
