@@ -216,7 +216,7 @@ def display_homework():
         with col2:
             if i+1 < len(df):
                 st.image(df.loc[i+1, 'Image Link'], caption=df.loc[i+1, 'Name'], use_column_width=True)
-                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
+                st.markdown(f"Code Link {df.loc[i+1, 'Code Link']}")
         with col3:
             if i+2 < len(df):
                 st.image(df.loc[i+2, 'Image Link'], caption=df.loc[i+2, 'Name'], use_column_width=True)
