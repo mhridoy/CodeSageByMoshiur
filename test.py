@@ -252,15 +252,49 @@ def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
 def web01():
-    # Title for your link display
-    st.title('Check Out My Web Editor!')
+    # Custom CSS to inject into the page for a hacker-like aesthetic
+    custom_css = """
+    <style>
+        .stApp {
+            background-color: #0f0f0f;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .caption {
+            color: #00ff00;
+            font-style: italic;
+        }
+        a:link, a:visited {
+            color: #dddddd;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        a:hover, a:active {
+            color: #ffffff;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+    </style>
+    """
+    st.markdown(custom_css, unsafe_allow_html=True)
+
+    # Title for your link display with hacker aesthetic
+    st.title('👾 Check Out My Web Editor! 👾')
 
     # Description or any additional text you want to show
-    st.write('Dive into the world of coding with a design that resonates with hacker vibes. Click the link below to start your journey!')
+    st.markdown("""
+    Dive into the world of coding with a design that resonates with **hacker vibes**. Click the link below to start your journey!
+    """, unsafe_allow_html=True)
 
-    # Displaying the image (replace 'your_image_url_here' with the actual URL of your hacker vibes image)
-    hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'  # Replace this with the URL of your chosen image
-    st.image(hacker_image_url, caption='Hacker Vibes Design')
+    # Displaying the image with a hacker vibes design
+    hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'
+    st.image(hacker_image_url, caption='Hacker Vibes Design', use_column_width=True)
+
+    # Displaying the link to your web editor with a custom button
+    editor_link = 'http://codesage.pythonanywhere.com'
+    st.markdown(f'<a href="{editor_link}" target="_blank"><button style="color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer;">Visit My Web Editor</button></a>', unsafe_allow_html=True)
+
+    # Optionally, add more interactive or informative elements here
 
     # Displaying the link to your web editor
     editor_link = 'http://codesage.pythonanywhere.com'
