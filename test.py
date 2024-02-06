@@ -257,7 +257,7 @@ def web01():
     button_style = "display: block; margin: 20px auto; color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer; text-align: center;"
 
     # Title for your link display with hacker aesthetic
-    st.title('👾 Check Out My Web Editor! 👾')
+    st.title('👾 Check Out  Web Editor! 👾')
 
     # Description or any additional text you want to show
     st.markdown("""
