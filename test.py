@@ -252,64 +252,37 @@ def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
 def web01():
-    # Define a unique class name for this function's container
-    unique_class_name = "web01-hacker-vibes"
+    # Inline style for the image and button to ensure they are centered
+    image_style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"
+    button_style = "display: block; margin: 20px auto; color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer; text-align: center;"
 
-    # Custom CSS scoped with a unique class to minimize impact on other elements
-    custom_css = f"""
-    <style>
-        .{unique_class_name} .caption {{
-            color: #00ff00;
-            font-style: italic;
-            text-align: center;
-        }}
-        .{unique_class_name} a:link, .{unique_class_name} a:visited {{
-            color: #dddddd;
-            background-color: transparent;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            margin: auto;
-        }}
-        .{unique_class_name} a:hover, .{unique_class_name} a:active {{
-            color: #bbbbbb;  /* Adjusted to avoid white color */
-            background-color: transparent;
-            text-decoration: underline;
-        }}
-        .{unique_class_name} .centered {{
-            text-align: center;
-        }}
-        .{unique_class_name} .button-container {{
-            text-align: center;
-        }}
-    </style>
-    """
-    st.markdown(custom_css, unsafe_allow_html=True)
-
-    # Use the unique class to wrap your function's content
-    st.markdown(f'<div class="{unique_class_name}">', unsafe_allow_html=True)
-
+    # Title for your link display with hacker aesthetic
     st.title('👾 Check Out My Web Editor! 👾')
 
+    # Description or any additional text you want to show
     st.markdown("""
     Dive into the world of coding with a design that resonates with **hacker vibes**. Click the link below to start your journey!
     """, unsafe_allow_html=True)
 
+    # Displaying the image with a hacker vibes design, reduced size and centered using inline style
     hacker_image_url = 'https://i.ibb.co/dWHhhxW/Screenshot-2024-02-06-at-1-25-29-PM.png'
-    st.markdown(f'<div class="centered"><img src="{hacker_image_url}" width="50%" alt="Hacker Vibes Design"></div>', unsafe_allow_html=True)
+    st.markdown(f'<img src="{hacker_image_url}" style="{image_style}" alt="Hacker Vibes Design">', unsafe_allow_html=True)
 
+    # Displaying the link to your web editor with a custom button, centered using inline style
     editor_link = 'http://codesage.pythonanywhere.com'
-    st.markdown(f'<div class="button-container"><a href="{editor_link}" target="_blank"><button style="color: #0f0f0f; background-color: #00ff00; border: none; border-radius: 4px; padding: 10px 24px; font-size: 20px; cursor: pointer;">Visit My Web Editor</button></a></div>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{editor_link}" target="_blank"><button style="{button_style}">Visit My Web Editor</button></a>', unsafe_allow_html=True)
 
-    # Adding related links
+    # Adding related links with blue color for links
     st.markdown("""
     ### Related Links
     - [imgbb.com](https://imgbb.com)
     - [translate.google.com](https://translate.google.com)
     """, unsafe_allow_html=True)
 
-    # Close the unique class container
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Manually set link colors to blue for this section
+    st.markdown('<style>a { color: blue; }</style>', unsafe_allow_html=True)
+
+
 
     
 # Function to display courses
