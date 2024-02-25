@@ -216,11 +216,11 @@ def display_homework():
         with col2:
             if i+1 < len(df):
                 st.image(df.loc[i+1, 'Image Link'], caption=df.loc[i+1, 'Name'], use_column_width=True)
-                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
+                st.markdown(f"Code Link {df.loc[i+1, 'Code Link']}")
         with col3:
             if i+2 < len(df):
                 st.image(df.loc[i+2, 'Image Link'], caption=df.loc[i+2, 'Name'], use_column_width=True)
-                st.markdown(f"Code Link {df.loc[i, 'Code Link']}")
+                st.markdown(f"Code Link {df.loc[i+2, 'Code Link']}")
 
 # Function for Python code editor
 def python_editor():
@@ -305,9 +305,20 @@ def display_courses():
 
 
 
-# Main app layout with tabs
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor Simple", "Web Editor Ultimate"])
+def display_home():
+    st.markdown("""
+    <h2>প্রিয় অভিভাবকগণ,</h2>
+    <p>আমরা আপনাদের সন্তানের শিক্ষার যাত্রায় আপনাদের সঙ্গে কাজ করতে পেরে গর্বিত এবং কৃতজ্ঞ। শিক্ষা একটি মূল্যবান উপহার, এবং আমরা আপনার সন্তানকে সর্বোত্তম শিক্ষা প্রদানের লক্ষ্যে নিবেদিত।</p>
+    <p>আমাদের সকলের প্রতি, আমি একটি গুরুত্বপূর্ণ অনুরোধ রাখতে চাই। আপনার সন্তানের মাসিক শিক্ষা ফি নির্দিষ্ট সময়ের মধ্যে পরিশোধ করা আমাদের প্রতিষ্ঠানের নিয়মিত পরিচালনা এবং উচ্চ মানের শিক্ষা প্রদানে অপরিহার্য। সময়মত পেমেন্ট আমাদেরকে আপনার সন্তানের জন্য আরও ভাল শিক্ষাগত অভিজ্ঞতা এবং সুবিধা নিশ্চিত করতে সাহায্য করে।</p>
+    <p>ধন্যবাদান্তে,<br>
+    [আপনার প্রতিষ্ঠানের নাম/আপনার নাম]</p>
+    """, unsafe_allow_html=True)
 
+# Main app layout with tabs including the new "Home" tab
+tab_home, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Home", "Schedule", "Homework", "Python Editor", "Turtle Graphics", "Web Editor Simple", "Web Editor Ultimate"])
+
+with tab_home:
+    display_home()
 with tab1:
     display_schedule()
 
