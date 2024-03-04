@@ -349,7 +349,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # YouTube Channel Link
-youtube_url = "https://youtube.com/mhridoy"
+youtube_url = "https://www.youtube.com/channel/UCVA18H_acEpB2CedTfvPzrQ"
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
