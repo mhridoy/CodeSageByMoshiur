@@ -5,7 +5,7 @@ import io
 from streamlit_ace import st_ace
 # Function to load schedule data from the Excel file
 def load_schedule():
-    sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_id = "1yxo6vjhTtsFrvwy-rApeEsE3I7Jpl5RMp-eZnAMnwjU"
     sheet_name = "sheet"
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
     df = pd.read_csv(url, dtype=str).fillna("")
@@ -154,21 +154,21 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1> Dreamers Academy - Track 3 | Programmers 🤗 </h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
 # Function to display class schedule
 def display_schedule():
     # Connect to the first Google Sheet
-    sheet_id1 = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_id1 = "1yxo6vjhTtsFrvwy-rApeEsE3I7Jpl5RMp-eZnAMnwjU"
     sheet_name1 = "sheet01"
     url1 = f"https://docs.google.com/spreadsheets/d/{sheet_id1}/gviz/tq?tqx=out:csv&sheet={sheet_name1}"
     df1 = pd.read_csv(url1, dtype=str).fillna("")
     selected_schedule_df1 = df1.iloc[:, :3]
 
     # Connect to the second Google Sheet
-    sheet_id2 = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_id2 = "1yxo6vjhTtsFrvwy-rApeEsE3I7Jpl5RMp-eZnAMnwjU"
     sheet_name2 = "sheet02"
     url2 = f"https://docs.google.com/spreadsheets/d/{sheet_id2}/gviz/tq?tqx=out:csv&sheet={sheet_name2}"
     df2 = pd.read_csv(url2, dtype=str).fillna("")
@@ -196,7 +196,7 @@ def display_schedule():
 # Function to display best homework
 def display_homework():
     # Connect to the Google Sheet
-    sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
+    sheet_id = "1yxo6vjhTtsFrvwy-rApeEsE3I7Jpl5RMp-eZnAMnwjU"
     sheet_name = "sheet03"
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
     df = pd.read_csv(url, dtype=str).fillna("")
@@ -349,7 +349,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # YouTube Channel Link
-youtube_url = "https://youtube.com/mhridoy"
+youtube_url = "https://www.youtube.com/channel/UCVA18H_acEpB2CedTfvPzrQ"
 st.markdown(f"""
 <div class="custom-section">
     <h2>Explore our YouTube Channel 🎥</h2>
