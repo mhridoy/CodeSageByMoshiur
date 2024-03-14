@@ -224,23 +224,51 @@ def display_homework():
 
 # Function for Python code editor
 def python_editor():
-    st.markdown("## Python Code Editor")
-    user_code = st_ace(language='python', theme='monokai', key='code-editor')
+    st.markdown("## Python Code Editor", unsafe_allow_html=True)
+    
+    # Custom styles for the code editor and output area
+    st.markdown("""
+    <style>
+        .stTextArea {
+            height: 150px;
+        }
+        .stButton > button {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #4C5270;
+            background-color: #F67280;
+            color: white;
+            padding: 10px 24px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .stButton > button:hover {
+            background-color: #C06C84;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=200)
     user_input = st.text_input("Enter input (like a command-line)", key='user-input')
+    
     if st.button("Run Code"):
+        # Use a safe namespace for execution
+        safe_globals = {"__builtins__": {}}
+        # Optionally, add some built-ins back in if needed
+        # safe_globals["print"] = print
+        
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
+        
         try:
-            if user_input:
-                exec(f"user_input = '{user_input}'\n{user_code}", globals())
-            else:
-                exec(user_code)
+            # Executing the user code with limited globals
+            exec(user_code, safe_globals, safe_globals)
+            output = redirected_output.getvalue()
+            st.text_area("Output:", value=output, height=300, key='output')
         except Exception as e:
             st.error(f"Error: {e}")
         finally:
             sys.stdout = old_stdout
-        output = redirected_output.getvalue()
-        st.text_area("Output:", value=output, height=300)
 
 # Function for Python Turtle Graphics (assuming you have a way to embed this)
 def python_turtle_graphics():
