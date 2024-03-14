@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import io
 from streamlit_ace import st_ace
+@st.cache(ttl=600)  # Cache for 600 seconds (10 minutes)
 # Function to load schedule data from the Excel file
 def load_schedule():
     sheet_id = "1yxo6vjhTtsFrvwy-rApeEsE3I7Jpl5RMp-eZnAMnwjU"
