@@ -226,14 +226,11 @@ def display_homework():
 def python_editor():
     st.markdown("## Python Code Editor", unsafe_allow_html=True)
     
-    # Custom styles for the code editor and output area
+    # Custom styles for aesthetics
     st.markdown("""
     <style>
-        .stTextArea {
-            height: 150px;
-        }
         .stButton > button {
-            width: 100%;
+            width: 100px;
             border-radius: 20px;
             border: 1px solid #4C5270;
             background-color: #F67280;
@@ -241,6 +238,8 @@ def python_editor():
             padding: 10px 24px;
             font-size: 16px;
             cursor: pointer;
+            display: block;
+            margin: 20px auto;
         }
         .stButton > button:hover {
             background-color: #C06C84;
@@ -248,27 +247,35 @@ def python_editor():
     </style>
     """, unsafe_allow_html=True)
 
-    user_code = st_ace(language='python', theme='monokai', key='code-editor', height=200)
-    user_input = st.text_input("Enter input (like a command-line)", key='user-input')
+    col1, col2 = st.columns(2)
     
+    with col1:
+        st.markdown("### Code Editor")
+        user_code = st_ace(language='python', theme='monokai', key='code-editor', height=300)
+    
+    with col2:
+        st.markdown("### Output")
+        user_input = st.text_input("Enter input (like a command-line)", "", key='user-input')
+        output_placeholder = st.empty()
+
     if st.button("Run Code"):
-        # Use a safe namespace for execution
-        safe_globals = {"__builtins__": {}}
-        # Optionally, add some built-ins back in if needed
-        # safe_globals["print"] = print
+        # Use a safe namespace for execution, limited environment
+        safe_globals = {}
         
         old_stdout = sys.stdout
         redirected_output = sys.stdout = io.StringIO()
         
         try:
-            # Executing the user code with limited globals
+            # Preparing the user input to be accessible in the executed code
+            exec(f"user_input = '{user_input}'", safe_globals)
             exec(user_code, safe_globals, safe_globals)
             output = redirected_output.getvalue()
-            st.text_area("Output:", value=output, height=300, key='output')
+            output_placeholder.text_area("Output:", value=output, height=250, key='output')
         except Exception as e:
-            st.error(f"Error: {e}")
+            output_placeholder.error(f"Error: {e}")
         finally:
             sys.stdout = old_stdout
+
 
 # Function for Python Turtle Graphics (assuming you have a way to embed this)
 def python_turtle_graphics():
