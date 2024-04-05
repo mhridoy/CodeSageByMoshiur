@@ -36,7 +36,25 @@ colors = {
     'footer_bg': '#7B2CBF',   # Deep purple for the footer
     'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
-
+# Popup HTML + JS
+popup_html = """
+<div id="popup" class="popup-container" style="display:block; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div class="popup-content" style="position: relative; background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 300px;">
+        <span class="close-button" onclick="document.getElementById('popup').style.display='none'" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+        <img src="https://i.ibb.co/8DnB4Sk/Whats-App-Image-2024-04-05-at-00-32-15.jpg" alt="Popup Image" style="width:100%;">
+    </div>
+</div>
+<script>
+// Close popup if user clicks outside of it
+window.onclick = function(event) {
+    var popup = document.getElementById('popup');
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+</script>
+"""
+st.markdown(popup_html, unsafe_allow_html=True)
 # Custom styles
 st.markdown(f"""
 <style>
