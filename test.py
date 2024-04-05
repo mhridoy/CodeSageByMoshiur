@@ -36,28 +36,9 @@ colors = {
     'footer_bg': '#7B2CBF',   # Deep purple for the footer
     'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
-# Popup HTML + JS
-popup_html = """
-<div id="popup" class="popup-container" style="display:block; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-    <div class="popup-content" style="position: relative; background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 300px;">
-        <span class="close-button" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
-        <img src="https://i.ibb.co/8DnB4Sk/Whats-App-Image-2024-04-05-at-00-32-15.jpg" alt="Popup Image" style="width:100%;">
-    </div>
-</div>
-"""
+if 'show_popup' not in st.session_state:
+    st.session_state.show_popup = True
 
-st.markdown(popup_html, unsafe_allow_html=True)
-
-# JavaScript to handle the closing of the popup
-st.markdown("""
-<script>
-const closeButton = document.querySelector('.close-button');
-const popup = document.getElementById('popup');
-closeButton.addEventListener('click', () => {
-    popup.style.display = 'none';
-});
-</script>
-""", unsafe_allow_html=True)
 
 
 # Custom styles
@@ -331,6 +312,7 @@ def display_courses():
 
 
 def display_home():
+    st.image("https://i.ibb.co/8DnB4Sk/Whats-App-Image-2024-04-05-at-00-32-15.jpg")
     st.markdown("""
     <h2>প্রিয় অভিভাবকগণ,</h2>
     <p>আমরা আপনাদের সন্তানের শিক্ষার যাত্রায় আপনাদের সঙ্গে কাজ করতে পেরে গর্বিত এবং কৃতজ্ঞ। শিক্ষা একটি মূল্যবান উপহার, এবং আমরা আপনার সন্তানকে সর্বোত্তম শিক্ষা প্রদানের লক্ষ্যে নিবেদিত।</p>
