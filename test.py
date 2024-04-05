@@ -312,13 +312,33 @@ def display_courses():
 
 
 def display_home():
-    st.image("https://i.ibb.co/8DnB4Sk/Whats-App-Image-2024-04-05-at-00-32-15.jpg")
+    # Container for the Eid Mubarak message
+    with st.container():
+        col1, col2 = st.columns([1, 2])
+        
+        # Column for the image
+        with col1:
+            st.image("https://i.ibb.co/8DnB4Sk/Whats-App-Image-2024-04-05-at-00-32-15.jpg", width=300)
+        
+        # Column for the text
+        with col2:
+            st.markdown("""
+            <div style="background-color: #F9EAC3; padding: 10px; border-radius: 10px; text-align: center;">
+                <h1 style="color: #8E3200; margin-bottom: 0px;">Eid Mubarak!</h1>
+                <p style="color: #4F2C1D;">Dreamers Academy sends warm wishes to you and your loved ones.</p>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    st.markdown("<hr>", unsafe_allow_html=True)
+    
+    # Welcome note to the guardians
     st.markdown("""
-    <h2>প্রিয় অভিভাবকগণ,</h2>
-    <p>আমরা আপনাদের সন্তানের শিক্ষার যাত্রায় আপনাদের সঙ্গে কাজ করতে পেরে গর্বিত এবং কৃতজ্ঞ। শিক্ষা একটি মূল্যবান উপহার, এবং আমরা আপনার সন্তানকে সর্বোত্তম শিক্ষা প্রদানের লক্ষ্যে নিবেদিত।</p>
-    <p>আপনাদের সকলের প্রতি, আমি একটি গুরুত্বপূর্ণ অনুরোধ রাখতে চাই। আপনার সন্তানের মাসিক কোর্স ফি নির্দিষ্ট সময়ের মধ্যে পরিশোধ করা আমাদের প্রতিষ্ঠানের নিয়মিত পরিচালনা এবং উচ্চ মানের শিক্ষা প্রদানে অপরিহার্য। সময়মত পেমেন্ট আমাদেরকে আপনার সন্তানের জন্য আরও ভাল শিক্ষাগত অভিজ্ঞতা এবং সুবিধা নিশ্চিত করতে সাহায্য করে।</p>
-    <p>ধন্যবাদান্তে,<br>
-    Dreamers Academy</p>
+    <div style="text-align: justify;">
+        <h2 style="color: #4F2C1D;">প্রিয় অভিভাবকগণ,</h2>
+        <p style="color: #4F2C1D;">আমরা আপনাদের সন্তানের শিক্ষার যাত্রায় আপনাদের সঙ্গে কাজ করতে পেরে গর্বিত এবং কৃতজ্ঞ। শিক্ষা একটি মূল্যবান উপহার, এবং আমরা আপনার সন্তানকে সর্বোত্তম শিক্ষা প্রদানের লক্ষ্যে নিবেদিত।</p>
+        <p style="color: #4F2C1D;">আপনাদের সকলের প্রতি, আমি একটি গুরুত্বপূর্ণ অনুরোধ রাখতে চাই। আপনার সন্তানের মাসিক কোর্স ফি নির্দিষ্ট সময়ের মধ্যে পরিশোধ করা আমাদের প্রতিষ্ঠানের নিয়মিত পরিচালনা এবং উচ্চ মানের শিক্ষা প্রদানে অপরিহার্য। সময়মত পেমেন্ট আমাদেরকে আপনার সন্তানের জন্য আরও ভাল শিক্ষাগত অভিজ্ঞতা এবং সুবিধা নিশ্চিত করতে সাহায্য করে।</p>
+        <p style="color: #4F2C1D;">ধন্যবাদান্তে,<br>Dreamers Academy</p>
+    </div>
     """, unsafe_allow_html=True)
 
 # Main app layout with tabs including the new "Home" tab
