@@ -36,8 +36,7 @@ colors = {
     'footer_bg': '#7B2CBF',   # Deep purple for the footer
     'footer_text': '#EDE9F4'  # Light purple text for the footer
 }
-if 'show_popup' not in st.session_state:
-    st.session_state.show_popup = True
+
 
 
 
