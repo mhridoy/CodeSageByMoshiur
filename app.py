@@ -154,7 +154,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown(f'<h1> Dreamers Academy - Track 3 | CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1>  CodeSage By Moshiur</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
