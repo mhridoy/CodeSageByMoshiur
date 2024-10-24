@@ -3,18 +3,18 @@ import pandas as pd
 import sys
 import io
 from streamlit_ace import st_ace
+
 # Function to load schedule data from the Excel file
 def load_schedule():
     sheet_id = "1MyF5yRHgvu1JqqJljTQSo6GDhvpPcezU_aSrXYd90aM"
     sheet_name = "sheet"
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
     df = pd.read_csv(url, dtype=str).fillna("")
-    #file_path = 'schedule04.xlsx'  # Ensure this path is correct
     return df
 
 # Page configuration
 st.set_page_config(
-    page_title='CodeSage By Moshiur',
+    page_title='NextGen Programmer',
     layout='wide',
     page_icon='🦋',
     menu_items={
@@ -26,13 +26,13 @@ st.set_page_config(
 
 # Define a creative and soothing light purple color scheme
 colors = {
-    'background': '#FAF4FF',  # A very light purple for a serene background
-    'primary': '#7B2CBF',     # A deep purple for contrast
-    'secondary': '#9D4EDD',   # A softer purple for secondary elements
-    'accent': '#CDB4DB',      # A gentle lavender for highlights
-    'text': '#4A2040',        # A darker purple for text
-    'footer_bg': '#7B2CBF',   # Deep purple for the footer
-    'footer_text': '#EDE9F4'  # Light purple text for the footer
+    'background': '#FAF4FF',
+    'primary': '#7B2CBF',
+    'secondary': '#9D4EDD',
+    'accent': '#CDB4DB',
+    'text': '#4A2040',
+    'footer_bg': '#7B2CBF',
+    'footer_text': '#EDE9F4'
 }
 
 # Custom styles
@@ -154,10 +154,11 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown(f'<h1>  CodeSage By Moshiur</h1>', unsafe_allow_html=True)
+st.markdown(f'<h1>NextGen Programmer</h1>', unsafe_allow_html=True)
 
 # Load the schedule data
 schedule_df = load_schedule()
+
 # Function to display class schedule
 def display_schedule():
     # Connect to the first Google Sheet
@@ -283,9 +284,11 @@ def python_turtle_graphics():
 
     trinket_embed_url = "https://trinket.io/embed/python/f3311da13d"
     st.components.v1.iframe(trinket_embed_url, height=1000, scrolling=False)
+
 def web_editor():
     web_editor_url = "https://moshiur.pythonanywhere.com"
     st.components.v1.iframe(web_editor_url, height=1000, scrolling=True)
+
 def web01():
     # Inline style for the image and button to ensure they are centered
     image_style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"
@@ -317,9 +320,6 @@ def web01():
     # Manually set link colors to blue for this section
     st.markdown('<style>a { color: blue; }</style>', unsafe_allow_html=True)
 
-
-
-    
 # Function to display courses
 def display_courses():
     courses = [
@@ -339,14 +339,13 @@ def display_courses():
         """, unsafe_allow_html=True)
 
 
-
 def display_home():
     st.markdown("""
     <h2>প্রিয় অভিভাবকগণ,</h2>
     <p>আমরা আপনাদের সন্তানের শিক্ষার যাত্রায় আপনাদের সঙ্গে কাজ করতে পেরে গর্বিত এবং কৃতজ্ঞ। শিক্ষা একটি মূল্যবান উপহার, এবং আমরা আপনার সন্তানকে সর্বোত্তম শিক্ষা প্রদানের লক্ষ্যে নিবেদিত।</p>
     <p>আপনাদের সকলের প্রতি, আমি একটি গুরুত্বপূর্ণ অনুরোধ রাখতে চাই। আপনার সন্তানের মাসিক কোর্স ফি নির্দিষ্ট সময়ের মধ্যে পরিশোধ করা আমাদের প্রতিষ্ঠানের নিয়মিত পরিচালনা এবং উচ্চ মানের শিক্ষা প্রদানে অপরিহার্য। সময়মত পেমেন্ট আমাদেরকে আপনার সন্তানের জন্য আরও ভাল শিক্ষাগত অভিজ্ঞতা এবং সুবিধা নিশ্চিত করতে সাহায্য করে।</p>
     <p>ধন্যবাদান্তে,<br>
-    Dreamers Academy</p>
+    NextGen Programmer</p>
     """, unsafe_allow_html=True)
 
 # Main app layout with tabs including the new "Home" tab
@@ -375,11 +374,12 @@ st.write("\n")
 st.write("\n")
 st.write("\n")
 st.write("\n")
-# Dreamers Academy Mention
+
+# NextGen Programmer Mention
 st.markdown(f"""
 <div class="custom-section">
-    <h2>Dreamers Academy Collaboration 🎓</h2>
-    <p>Join us at <a href="https://dreamersacademy.com.bd/" target="_blank">Dreamers Academy</a> and start your journey with Python programming. It's a perfect place to turn curiosity into creativity!</p>
+    <h2>NextGen Programmer Collaboration 🎓</h2>
+    <p>Join us at <a href="https://nextgenprogrammer.com" target="_blank">NextGen Programmer</a> and start your journey with Python programming. It's a perfect place to turn curiosity into creativity!</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -395,6 +395,6 @@ st.markdown(f"""
 # Footer
 st.markdown(f"""
 <div class="footer">
-    © 2024 CodeSage By Moshiur. All Rights Reserved.
+    © 2024 NextGen Programmer. All Rights Reserved.
 </div>
 """, unsafe_allow_html=True)
